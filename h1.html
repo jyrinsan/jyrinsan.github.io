@@ -1,0 +1,220 @@
+<html>
+    <head>
+        <title>Linux palvelimet, Harjoitus H1</title>
+    </head>
+    <body>
+        <h1>Harjoitus H1</h1>
+
+        <h2>z) Tiivistelmä linkkimateriaaleista</h2>
+
+        <a href="https://www.gnu.org/philosophy/free-sw.html">FSF Free Software Definition</a>
+        <a href="https://terokarvinen.com/2021/install-debian-on-virtualbox/">Install Debian on Virtualbox</a>
+        <a href="https://terokarvinen.com/2006/raportin-kirjoittaminen-4/">Raportin kirjoittaminen</a>
+        <a href="http://lib.tkk.fi/Diss/2005/isbn9529187793/isbn9529187793.pdf">Rise of Open Source: 5 Open Source Licenses as Alternative Governance Mechanisms: 5.1.1 - 5.1.4 (sivu 113 - 121)</a>
+
+        <h2>a) Linuxin asennus VirtulBoxiin</h2>
+
+        Käytin asennusohjetta https://terokarvinen.com/2021/install-debian-on-virtualbox/
+
+        <ul>
+            <li>Latasin Debianin ISO-kuvan <a href="https://cdimage.debian.org/images/unofficial/non-free/images-including-firmware/current-live/amd64/iso-hybrid/debian-live-11.2.0-amd64-xfce+nonfree.iso">täältä</a></li>
+            <li>Asensin VirtualBoxin Windows-koneelleni <a href="https://www.virtualbox.org/wiki/Downloads">täältä</a></li>
+            <li>Käynnistin VirtualBoxin ja lisäsin siihen uuden virtuaalikone ylävalikosta Machine -> New </li>
+        </ul>
+
+        <img style="max-height: 300px; border:1px solid" src="h1_images/addNewVirtialMachine1.png" />
+        <img style="max-height: 300px; border:1px solid" src="h1_images/addNewVirtialMachine2.png" />
+        <img style="max-height: 300px; border:1px solid" src="h1_images/addNewVirtialMachine3.png" />
+        
+        <ul>
+            <li>Lisäsin virtuaalikoneeseeni aiemmin lataamani ISO-kuvan (klikkasin hiiren oikealla virtuaalikonetta ja Storage -> Empty -> Optical Drive ja CD-levyn kuva oikealla)
+        </ul>
+        <img style="max-height: 300px; border:1px solid" src="h1_images/addNewVirtialMachine4.png" />
+
+        <ul>
+            <li>Buuttasin Linuxiin tuplaklikkaamalla virtuaalikonetta VirtualBoxissa</li>
+        </ul>
+        <img style="max-height: 300px; border:1px solid" src="h1_images/bootingLinux1.png" />
+        <ul>
+            <li>Valitsin Liven eli ylimmän vaihtoehdon, avautuu Debian</li>
+        </ul>
+        <img style="max-height: 300px; border:1px solid" src="h1_images/bootingLinux2.png" />
+        <ul>
+            <li>Testasin toimintaa avaamalla selaimen Applications->Web Browser, hain googlen sivulta omalla nimelläni, ja pääsin Twitter-sivulleni</li>
+        </ul>
+        <img style="max-height: 300px; border:1px solid" src="h1_images/bootingLinux3.png" />
+
+        <h4>Debianin asennus Installerilla</h4>
+
+        <ul>
+            <li>Tuplaklikkaa työpöydältä Install Debian, Valitse Americal English</li>
+            <li>Location: Valitse kartalta Helsinki klikkaamalla Suomea</li>
+            <li>Keyboard: Valitse Finnish, Default</li>
+            <li>Partitions: Valitse Erase disk, No encrypt, Boot loader location oletusarvossa Master Boot Record</li>
+            <li>Users, kirjoita nimi, käyttäjätunnus, koneennimi ja salasana, ota talteen tunnus ja salasana</li>
+            <li>Summary, Install</li>   
+        </ul>
+        <img style="max-height: 300px; border:1px solid" src="h1_images/installingDebian.png" />
+        <ul>
+            <li>Loggaa sisään syöttämällä edellisellä kohdassa luomasi tunnus ja salasana</li>  
+            <li>Testataan selaimella, että kaikki toimii, Applications->Web Browser, hae googlella jokin sivu, ja avaa saatu hakutulos </li> 
+            <li>Pääsin sivulle https://terokarvinen.com/books</li>  
+        </ul>
+        <img style="max-height: 300px; border:1px solid" src="h1_images/installingDebian2.png" />
+    </body>
+    <h4>Sovellusten päivitys ja palomuurin asennus</h4>
+    <ul>
+        <li>Avataan Debianin alapalkista komentokehoite ja päivitetään asennettavien ohjelmien lista sudo apt-get update</li>  
+    </ul>
+    <img style="max-height: 300px; border:1px solid" src="h1_images/paivitys1.png" />
+    <ul>  
+        <li>Päivitetään kaikkien sovellusten versiot sudo apt-get -y dist-upgrade, -y vastaa valmiiksi kaikkiin kysymyksiin yes</li>  
+    </ul>
+    <img style="max-height: 300px; border:1px solid" src="h1_images/paivitys2.png" />
+    <ul>  
+        <li>Asennetaan palomuuri sudo apt-get -y install ufw</li>  
+        <li>Enabloidaan palomuuri sudo ufw enable</li>  
+        <li>Restartataan Applications->Logout->Restart</li>
+    </ul>
+    <h4>Guest additions</h4>
+    <ul>  
+        <li>Lisätään ylävalikosta Devices->Insert Quest Additions CD Image...</li>  
+        <li>Sain virheilmoituksen: Unable to insert the virtual optical disk C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso into the machine DebianSanna.
+            Could not mount the media/drive 'C:\Program Files\Oracle\VirtualBox/VBoxGuestAdditions.iso' (VERR_PDM_MEDIA_LOCKED).            
+        </li>
+        <li>Huomasin kuitenkin, että Guest Additions oli työpöydällä, oikealla napilla mount</li>  
+        <li>Applications->Terminal Emulator, siirrytään guest additionsin hakemistoon cd /media/*/VBox*</li>  
+        <li>listataan hakemiston sisältö ls</li>
+        <li>ajetaan guest additions sudo bash VBoxLinuxAdditions.run</li>
+        <li>Restartataan Applications->Log out->Restart => saadaan näyttö koko ruudun koolle</li>
+    </ul>
+    <img style="max-height: 300px; border:1px solid" src="h1_images/guestaddition1.png" />
+    <img style="max-height: 300px; border:1px solid" src="h1_images/guestaddition2.png" />
+
+    <ul>  
+        <li>Asetetaan windowsille ja debianille jaettu leikepöytä Devices->Shared Clipboard: Bidirectional</li>
+        <li>Otetaan Snapshot asennuksesta Machine->Snapshot</li>  
+    </ul>
+    <img style="max-height: 300px; border:1px solid" src="h1_images/snapshot.png" />
+
+    <h2>b) Listataan koneeni rauta</h2>
+    <ul>  
+        <li>ohjeessasudo lshw -short -sanitize, käskyä ei kuitenkaan löyty, joten asennetaan lshw ohjelma</li>
+        <pre><font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$
+            $ sudo apt-get install lshw
+            Reading package lists... Done
+            Building dependency tree... Done
+            Reading state information... Done
+            The following NEW packages will be installed:
+              lshw
+            0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+            Need to get 279 kB of archives.
+            After this operation, 870 kB of additional disk space will be used.
+            Get:1 http://deb.debian.org/debian bullseye/main amd64 lshw amd64 02.18.85-0.7 [279 kB]
+            Fetched 279 kB in 0s (1 453 kB/s)
+            Selecting previously unselected package lshw.
+            (Reading database ... 226451 files and directories currently installed.)
+            Preparing to unpack .../lshw_02.18.85-0.7_amd64.deb ...
+            Unpacking lshw (02.18.85-0.7) ...
+            Setting up lshw (02.18.85-0.7) ...
+            Processing triggers for man-db (2.9.4-2) ...
+            <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$
+        </pre>
+        <li>sudo lshw -short -sanitize</li>
+        <pre><font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo lshw -short -sanitize
+                H/W path            Device      Class       Description
+                =======================================================
+                                                system      VirtualBox
+                /0                              bus         VirtualBox
+                /0/0                            memory      128KiB BIOS
+                /0/1                            memory      4GiB System memory
+                /0/2                            processor   Intel(R) Core(TM) i7-6500U CPU @ 2.5
+                /0/100                          bridge      440FX - 82441FX PMC [Natoma]
+                /0/100/1                        bridge      82371SB PIIX3 ISA [Natoma/Triton II]
+                /0/100/1.1          scsi1       storage     82371AB/EB/MB PIIX4 IDE
+                /0/100/1.1/0.0.0    /dev/cdrom  disk        CD-ROM
+                /0/100/1.1/0.0.0/0  /dev/cdrom  disk        
+                /0/100/2                        display     SVGA II Adapter
+                /0/100/3            enp0s3      network     82540EM Gigabit Ethernet Controller
+                /0/100/4                        generic     VirtualBox Guest Service
+                /0/100/5                        multimedia  82801AA AC&apos;97 Audio Controller
+                /0/100/6                        bus         KeyLargo/Intrepid USB
+                /0/100/6/1          usb1        bus         OHCI PCI host controller
+                /0/100/6/1/1                    input       USB Tablet
+                /0/100/7                        bridge      82371AB/EB/MB PIIX4 ACPI
+                /0/100/d            scsi2       storage     82801HM/HEM (ICH8M/ICH8M-E) SATA Con
+                /0/100/d/0.0.0      /dev/sda    disk        64GB VBOX HARDDISK
+                /0/100/d/0.0.0/1    /dev/sda1   volume      51GiB EXT4 volume
+                /0/100/d/0.0.0/2    /dev/sda2   volume      8438MiB Linux swap volume
+                /0/3                            input       PnP device PNP0303
+                /0/4                            input       PnP device PNP0f03
+                <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$</pre>
+        <li>Tulokset näyttävät koneen raudan tiedot, eli aivan kuin kone olisi oikealla raudalla. 
+            Prosessori on tietokoneeni prosessi, RAM-muistin määrä ja kovalevyn määrä ovat tässä niitä, jotka virtuaalikonetta
+        luodessa varasin virtuaalikoneen käyttöön. Eli virtuaalikone ei näe virtuaalikoneen ulkopuolelle vaan vain ne resurssit, 
+        jotka sille on varattu.</li>
+    </ul>
+
+    <h2>c) ohjelmien asennus</h2>
+
+    <h3>Git</h3>
+    <ul>
+        <li>apt-get install git
+        <pre><font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt-get install git
+        [sudo] password for jyrinsan: 
+        Reading package lists... Done
+        Building dependency tree... Done
+        Reading state information... Done
+        The following additional packages will be installed:
+          git-man libcbor0 liberror-perl libfido2-1 openssh-client
+        Suggested packages:
+          git-daemon-run | git-daemon-sysvinit git-doc git-el git-email git-gui gitk
+          gitweb git-cvs git-mediawiki git-svn keychain libpam-ssh monkeysphere
+          ssh-askpass
+        The following NEW packages will be installed:
+          git git-man libcbor0 liberror-perl libfido2-1 openssh-client
+        0 upgraded, 6 newly installed, 0 to remove and 0 not upgraded.
+        Need to get 8 393 kB of archives.
+        After this operation, 42,6 MB of additional disk space will be used.
+        Do you want to continue? [Y/n] Y
+        Get:1 http://deb.debian.org/debian bullseye/main amd64 libcbor0 amd64 0.5.0+dfsg-2 [24,0 kB]
+        Get:2 http://deb.debian.org/debian bullseye/main amd64 libfido2-1 amd64 1.6.0-2 [53,3 kB]
+        Get:3 http://deb.debian.org/debian bullseye/main amd64 openssh-client amd64 1:8.4p1-5 [929 kB]
+        Get:4 http://deb.debian.org/debian bullseye/main amd64 liberror-perl all 0.17029-1 [31,0 kB]
+        Get:5 http://deb.debian.org/debian bullseye/main amd64 git-man all 1:2.30.2-1 [1 827 kB]
+        Get:6 http://deb.debian.org/debian bullseye/main amd64 git amd64 1:2.30.2-1 [5 527 kB]
+        Fetched 8 393 kB in 2s (3 616 kB/s)  
+        Selecting previously unselected package libcbor0:amd64.
+        (Reading database ... 226458 files and directories currently installed.)
+        Preparing to unpack .../0-libcbor0_0.5.0+dfsg-2_amd64.deb ...
+        Unpacking libcbor0:amd64 (0.5.0+dfsg-2) ...
+        Selecting previously unselected package libfido2-1:amd64.
+        Preparing to unpack .../1-libfido2-1_1.6.0-2_amd64.deb ...
+        Unpacking libfido2-1:amd64 (1.6.0-2) ...
+        Selecting previously unselected package openssh-client.
+        Preparing to unpack .../2-openssh-client_1%3a8.4p1-5_amd64.deb ...
+        Unpacking openssh-client (1:8.4p1-5) ...
+        Selecting previously unselected package liberror-perl.
+        Preparing to unpack .../3-liberror-perl_0.17029-1_all.deb ...
+        Unpacking liberror-perl (0.17029-1) ...
+        Selecting previously unselected package git-man.
+        Preparing to unpack .../4-git-man_1%3a2.30.2-1_all.deb ...
+        Unpacking git-man (1:2.30.2-1) ...
+        Selecting previously unselected package git.
+        Preparing to unpack .../5-git_1%3a2.30.2-1_amd64.deb ...
+        Unpacking git (1:2.30.2-1) ...
+        Setting up libcbor0:amd64 (0.5.0+dfsg-2) ...
+        Setting up liberror-perl (0.17029-1) ...
+        Setting up git-man (1:2.30.2-1) ...
+        Setting up libfido2-1:amd64 (1.6.0-2) ...
+        Setting up openssh-client (1:8.4p1-5) ...
+        Setting up git (1:2.30.2-1) ...
+        Processing triggers for man-db (2.9.4-2) ...
+        Processing triggers for libc-bin (2.31-13+deb11u2) ...
+        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ 
+        </pre>
+        </li>
+        <li>asennetun gitin käyttö, kloonataan githubista reposiroty, jossa mm. tämä raportti sijaitsee</li>
+        <li>git clone https://github.com/jyrinsan/sannajyrinki.github.io.git</li>
+    </ul>
+</html>
