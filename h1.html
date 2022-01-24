@@ -7,19 +7,29 @@
 
         <h2>z) Tiivistelmä linkkimateriaaleista</h2>
 
-        <a href="https://www.gnu.org/philosophy/free-sw.html">FSF Free Software Definition</a>
-        <a href="https://terokarvinen.com/2021/install-debian-on-virtualbox/">Install Debian on Virtualbox</a>
-        <a href="https://terokarvinen.com/2006/raportin-kirjoittaminen-4/">Raportin kirjoittaminen</a>
-        <a href="http://lib.tkk.fi/Diss/2005/isbn9529187793/isbn9529187793.pdf">Rise of Open Source: 5 Open Source Licenses as Alternative Governance Mechanisms: 5.1.1 - 5.1.4 (sivu 113 - 121)</a>
+        <a href="https://www.gnu.org/philosophy/free-sw.html">FSF Free Software Definition</a><br>
+        <li>Sivu kertoo, mitä tarkoittaa vapaa ohjelmisto eli 'free software'</li>
+        <li>Se tarkoittaa, että sovellusta saa vapaasti ajaa, kopioida, jakaa, opiskella, muuttaa ja parantaa</li>
+        <a href="https://terokarvinen.com/2021/install-debian-on-virtualbox/">Install Debian on Virtualbox</a><br>
+        <li>Sivu opastaa miten Debianin saa asennettua VirtualBoxiin</li>
+        <li>Tätä ohjetta noudatin itse asentaessani Debianin</li>
+        <li>Asennusohje sisältää mm. Debianin ISO-kuvan latauksen, virtuaalikoneen luonnin, ISO-kuvan lataamisen virtuaalikoneeseen,
+            Debianin asennuksen Installerilla, Quest Additionsin asennuksen ja Snapshotin oton
+        </li>
+        <a href="https://terokarvinen.com/2006/raportin-kirjoittaminen-4/">Raportin kirjoittaminen</a><br>
+        <li>Tero Karvinen opastaa hyviä käytäntöjä raportin kirjoittamiseen</li>
+        <li>Ohje on hyvä lukaista mm. tällä kurssilla vaaditun raportin kirjoittamiseen</li>
+        <a href="http://lib.tkk.fi/Diss/2005/isbn9529187793/isbn9529187793.pdf">Rise of Open Source: 5 Open Source Licenses as Alternative Governance Mechanisms: 5.1.1 - 5.1.4 (sivu 113 - 121)</a><br>
+        <li>Väitöskirja Open Source lisensseistä</li>
 
         <h2>a) Linuxin asennus VirtulBoxiin</h2>
 
-        Käytin asennusohjetta https://terokarvinen.com/2021/install-debian-on-virtualbox/
+        Käytin asennusohjetta <a href="https://terokarvinen.com/2021/install-debian-on-virtualbox/">Asennusohje</a>
 
         <ul>
             <li>Latasin Debianin ISO-kuvan <a href="https://cdimage.debian.org/images/unofficial/non-free/images-including-firmware/current-live/amd64/iso-hybrid/debian-live-11.2.0-amd64-xfce+nonfree.iso">täältä</a></li>
             <li>Asensin VirtualBoxin Windows-koneelleni <a href="https://www.virtualbox.org/wiki/Downloads">täältä</a></li>
-            <li>Käynnistin VirtualBoxin ja lisäsin siihen uuden virtuaalikone ylävalikosta Machine -> New </li>
+            <li>Käynnistin VirtualBoxin ja lisäsin siihen uuden virtuaalikoneen ylävalikosta Machine -> New </li>
         </ul>
 
         <img style="max-height: 300px; border:1px solid" src="h1_images/addNewVirtialMachine1.png" />
@@ -120,7 +130,7 @@
             Processing triggers for man-db (2.9.4-2) ...
             <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$
         </pre>
-        <li>sudo lshw -short -sanitize</li>
+        <li>nyt käsky toimii eli sudo lshw -short -sanitize</li>
         <pre><font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo lshw -short -sanitize
                 H/W path            Device      Class       Description
                 =======================================================
@@ -157,64 +167,223 @@
 
     <h2>c) ohjelmien asennus</h2>
 
-    <h3>Git</h3>
+    <h3>Thunderbird sähköpostiohjelma</h3>
     <ul>
-        <li>apt-get install git
-        <pre><font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt-get install git
+        <li>Asennus: sudo apt-get install thunderbird
+        </li>
+        <li>Tarkistetaan versio
+            <pre><font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ thunderbird --version
+            Thunderbird 91.5.0
+           <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ 
+           </pre></li>
+        <li>Käynnistetään sovellus thunderbird</li>
+        <li>Asetetaan konfigurointin haluttu sähköposti salasanoineen</li>
+        <li>Päästää gmail sähköpostiini</li>
+        <img style="max-height: 300px; border:1px solid" src="h1_images/thunderbird.png" />
+   </ul>
+
+   <h3>VLC media player</h3>
+   <ul>
+   <li>Asennus: sudo apt-get install vlc</li>
+   <li>Tarkistetaan versio
+    <pre><font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ vlc --version
+        VLC media player 3.0.16 Vetinari (revision 3.0.13-8-g41878ff4f2)
+        VLC version 3.0.16 Vetinari (3.0.13-8-g41878ff4f2)
+        Compiled by buildd on x86-csail-01.debian.org (Jun 21 2021 19:07:16)
+        Compiler: gcc version 10.2.1 20210110 (Debian 10.2.1-6)
+        This program comes with NO WARRANTY, to the extent permitted by law.
+        You may redistribute it under the terms of the GNU General Public License;
+        see the file named COPYING for details.
+        Written by the VideoLAN team; see the AUTHORS file.
+        </pre>
+   <li>Käynnistetään sovellus vlc</li>
+   <li>Ladataan netistä Kaija Koon vapaa biisi</li>
+   <li>Avataan sovellukseen ja soitetaan (ääni kuuluu :))</li>
+   <img style="max-height: 300px; border:1px solid" src="h1_images/vlcplayer.png" />
+    </ul>
+
+    <h3>Visual Studio Code</h3>
+    <ul>
+    <li>Asennetaan tämän ohjeen mukaan https://linuxize.com/post/how-to-install-visual-studio-code-on-debian-10/</li>
+    <pre><font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt update
         [sudo] password for jyrinsan: 
+        Get:1 http://security.debian.org/debian-security bullseye-security InRelease [44,1 kB]
+        Hit:2 http://deb.debian.org/debian bullseye InRelease      
+        Get:3 http://deb.debian.org/debian bullseye-updates InRelease [39,4 kB]
+        Get:4 http://security.debian.org/debian-security bullseye-security/main Sources [94,1 kB]
+        Get:5 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [113 kB]
+        Get:6 http://security.debian.org/debian-security bullseye-security/main Translation-en [73,2 kB]
+        Fetched 364 kB in 1s (385 kB/s)<font color="#AA5500">                           </font>
         Reading package lists... Done
         Building dependency tree... Done
         Reading state information... Done
+        13 packages can be upgraded. Run &apos;apt list --upgradable&apos; to see them.
+        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt install gnupg2 software-properties-common apt-transport-https curl
+        Reading package lists... Done
+        Building dependency tree... Done
+        Reading state information... Done
+        curl is already the newest version (7.74.0-1.3+deb11u1).
+        curl set to manually installed.
         The following additional packages will be installed:
-          git-man libcbor0 liberror-perl libfido2-1 openssh-client
+          distro-info-data lsb-release python-apt-common python3-apt
+          python3-distro-info python3-pycurl python3-software-properties
+          unattended-upgrades
         Suggested packages:
-          git-daemon-run | git-daemon-sysvinit git-doc git-el git-email git-gui gitk
-          gitweb git-cvs git-mediawiki git-svn keychain libpam-ssh monkeysphere
-          ssh-askpass
+          python3-apt-dbg python-apt-doc libcurl4-gnutls-dev python-pycurl-doc
+          python3-pycurl-dbg bsd-mailx needrestart
         The following NEW packages will be installed:
-          git git-man libcbor0 liberror-perl libfido2-1 openssh-client
-        0 upgraded, 6 newly installed, 0 to remove and 0 not upgraded.
-        Need to get 8 393 kB of archives.
-        After this operation, 42,6 MB of additional disk space will be used.
+          apt-transport-https distro-info-data gnupg2 lsb-release python-apt-common
+          python3-apt python3-distro-info python3-pycurl python3-software-properties
+          software-properties-common unattended-upgrades
+        0 upgraded, 11 newly installed, 0 to remove and 13 not upgraded.
+        Need to get 1 215 kB of archives.
+        After this operation, 3 152 kB of additional disk space will be used.
         Do you want to continue? [Y/n] Y
-        Get:1 http://deb.debian.org/debian bullseye/main amd64 libcbor0 amd64 0.5.0+dfsg-2 [24,0 kB]
-        Get:2 http://deb.debian.org/debian bullseye/main amd64 libfido2-1 amd64 1.6.0-2 [53,3 kB]
-        Get:3 http://deb.debian.org/debian bullseye/main amd64 openssh-client amd64 1:8.4p1-5 [929 kB]
-        Get:4 http://deb.debian.org/debian bullseye/main amd64 liberror-perl all 0.17029-1 [31,0 kB]
-        Get:5 http://deb.debian.org/debian bullseye/main amd64 git-man all 1:2.30.2-1 [1 827 kB]
-        Get:6 http://deb.debian.org/debian bullseye/main amd64 git amd64 1:2.30.2-1 [5 527 kB]
-        Fetched 8 393 kB in 2s (3 616 kB/s)  
-        Selecting previously unselected package libcbor0:amd64.
-        (Reading database ... 226458 files and directories currently installed.)
-        Preparing to unpack .../0-libcbor0_0.5.0+dfsg-2_amd64.deb ...
-        Unpacking libcbor0:amd64 (0.5.0+dfsg-2) ...
-        Selecting previously unselected package libfido2-1:amd64.
-        Preparing to unpack .../1-libfido2-1_1.6.0-2_amd64.deb ...
-        Unpacking libfido2-1:amd64 (1.6.0-2) ...
-        Selecting previously unselected package openssh-client.
-        Preparing to unpack .../2-openssh-client_1%3a8.4p1-5_amd64.deb ...
-        Unpacking openssh-client (1:8.4p1-5) ...
-        Selecting previously unselected package liberror-perl.
-        Preparing to unpack .../3-liberror-perl_0.17029-1_all.deb ...
-        Unpacking liberror-perl (0.17029-1) ...
-        Selecting previously unselected package git-man.
-        Preparing to unpack .../4-git-man_1%3a2.30.2-1_all.deb ...
-        Unpacking git-man (1:2.30.2-1) ...
-        Selecting previously unselected package git.
-        Preparing to unpack .../5-git_1%3a2.30.2-1_amd64.deb ...
-        Unpacking git (1:2.30.2-1) ...
-        Setting up libcbor0:amd64 (0.5.0+dfsg-2) ...
-        Setting up liberror-perl (0.17029-1) ...
-        Setting up git-man (1:2.30.2-1) ...
-        Setting up libfido2-1:amd64 (1.6.0-2) ...
-        Setting up openssh-client (1:8.4p1-5) ...
-        Setting up git (1:2.30.2-1) ...
+        Get:1 http://deb.debian.org/debian bullseye/main amd64 apt-transport-https all 2.2.4 [160 kB]
+        Get:2 http://deb.debian.org/debian bullseye/main amd64 distro-info-data all 0.51+deb11u1 [7 624 B]
+        Get:3 http://deb.debian.org/debian bullseye/main amd64 gnupg2 all 2.2.27-2 [434 kB]
+        Get:4 http://deb.debian.org/debian bullseye/main amd64 lsb-release all 11.1.0 [27,9 kB]
+        Get:5 http://deb.debian.org/debian bullseye/main amd64 python-apt-common all 2.2.1 [96,5 kB]
+        Get:6 http://deb.debian.org/debian bullseye/main amd64 python3-apt amd64 2.2.1 [190 kB]
+        Get:7 http://deb.debian.org/debian bullseye/main amd64 python3-distro-info all 1.0 [8 720 B]
+        Get:8 http://deb.debian.org/debian bullseye/main amd64 python3-pycurl amd64 7.43.0.6-5 [68,8 kB]
+        Get:9 http://deb.debian.org/debian bullseye/main amd64 python3-software-properties all 0.96.20.2-2.1 [49,7 kB]
+        Get:10 http://deb.debian.org/debian bullseye/main amd64 software-properties-common all 0.96.20.2-2.1 [83,4 kB]
+        Get:11 http://deb.debian.org/debian bullseye/main amd64 unattended-upgrades all 2.8 [88,6 kB]
+        Fetched 1 215 kB in 0s (2 697 kB/s)<font color="#AA5500">        </font>
+        Preconfiguring packages ...
+        Selecting previously unselected package apt-transport-https.
+        (Reading database ... 228650 files and directories currently installed.)
+        Preparing to unpack .../00-apt-transport-https_2.2.4_all.deb ...
+        Unpacking apt-transport-https (2.2.4) ...
+        Selecting previously unselected package distro-info-data.
+        Preparing to unpack .../01-distro-info-data_0.51+deb11u1_all.deb ...
+        Unpacking distro-info-data (0.51+deb11u1) ...
+        Selecting previously unselected package gnupg2.
+        Preparing to unpack .../02-gnupg2_2.2.27-2_all.deb ...
+        Unpacking gnupg2 (2.2.27-2) ...
+        Selecting previously unselected package lsb-release.
+        Preparing to unpack .../03-lsb-release_11.1.0_all.deb ...
+        Unpacking lsb-release (11.1.0) ...
+        Selecting previously unselected package python-apt-common.
+        Preparing to unpack .../04-python-apt-common_2.2.1_all.deb ...
+        Unpacking python-apt-common (2.2.1) ...
+        Selecting previously unselected package python3-apt.
+        Preparing to unpack .../05-python3-apt_2.2.1_amd64.deb ...
+        Unpacking python3-apt (2.2.1) ...
+        Selecting previously unselected package python3-distro-info.
+        Preparing to unpack .../06-python3-distro-info_1.0_all.deb ...
+        Unpacking python3-distro-info (1.0) ...
+        Selecting previously unselected package python3-pycurl.
+        Preparing to unpack .../07-python3-pycurl_7.43.0.6-5_amd64.deb ...
+        Unpacking python3-pycurl (7.43.0.6-5) ...
+        Selecting previously unselected package python3-software-properties.
+        Preparing to unpack .../08-python3-software-properties_0.96.20.2-2.1_all.deb ...
+        Unpacking python3-software-properties (0.96.20.2-2.1) ...
+        Selecting previously unselected package software-properties-common.
+        Preparing to unpack .../09-software-properties-common_0.96.20.2-2.1_all.deb ...
+        Unpacking software-properties-common (0.96.20.2-2.1) ...
+        Selecting previously unselected package unattended-upgrades.
+        Preparing to unpack .../10-unattended-upgrades_2.8_all.deb ...
+        Unpacking unattended-upgrades (2.8) ...
+        Setting up gnupg2 (2.2.27-2) ...
+        Setting up apt-transport-https (2.2.4) ...
+        Setting up distro-info-data (0.51+deb11u1) ...
+        Setting up python3-pycurl (7.43.0.6-5) ...
+        Setting up python-apt-common (2.2.1) ...
+        Setting up lsb-release (11.1.0) ...
+        Setting up python3-distro-info (1.0) ...
+        Setting up python3-apt (2.2.1) ...
+        Setting up unattended-upgrades (2.8) ...
+        
+        Creating config file /etc/apt/apt.conf.d/20auto-upgrades with new version
+        
+        Creating config file /etc/apt/apt.conf.d/50unattended-upgrades with new version
+        Created symlink /etc/systemd/system/multi-user.target.wants/unattended-upgrades.
+        service → /lib/systemd/system/unattended-upgrades.service.
+        Synchronizing state of unattended-upgrades.service with SysV service script with
+         /lib/systemd/systemd-sysv-install.
+        Executing: /lib/systemd/systemd-sysv-install enable unattended-upgrades
+        /usr/sbin/policy-rc.d returned 101, not running &apos;start unattended-upgrades.servi
+        ce&apos;
+        Setting up python3-software-properties (0.96.20.2-2.1) ...
+        Setting up software-properties-common (0.96.20.2-2.1) ...
         Processing triggers for man-db (2.9.4-2) ...
-        Processing triggers for libc-bin (2.31-13+deb11u2) ...
-        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ 
-        </pre>
-        </li>
-        <li>asennetun gitin käyttö, kloonataan githubista reposiroty, jossa mm. tämä raportti sijaitsee</li>
-        <li>git clone https://github.com/jyrinsan/sannajyrinki.github.io.git</li>
+        Processing triggers for dbus (1.12.20-2) ...
+        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+        Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+        OK
+        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo add-apt-repository &quot;deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main&quot;
+        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt update
+        Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+        Hit:2 http://deb.debian.org/debian bullseye InRelease                         
+        Hit:3 http://deb.debian.org/debian bullseye-updates InRelease                 
+        Get:4 https://packages.microsoft.com/repos/vscode stable InRelease [3 959 B]<font color="#AA5500">  </font>
+        Get:5 https://packages.microsoft.com/repos/vscode stable/main amd64 Packages [280 kB]
+        Fetched 284 kB in 2s (168 kB/s)<font color="#AA5500">   </font>
+        Reading package lists... Done
+        Building dependency tree... Done
+        Reading state information... Done
+        13 packages can be upgraded. Run &apos;apt list --upgradable&apos; to see them.
+        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt install code
+        Reading package lists... Done
+        Building dependency tree... Done
+        Reading state information... Done
+        The following NEW packages will be installed:
+          code
+        0 upgraded, 1 newly installed, 0 to remove and 13 not upgraded.
+        Need to get 81,1 MB of archives.
+        After this operation, 339 MB of additional disk space will be used.
+        Get:1 https://packages.microsoft.com/repos/vscode stable/main amd64 code amd64 1.63.2-1639562499 [81,1 MB]
+        Fetched 81,1 MB in 21s (3 898 kB/s)                                            
+        Selecting previously unselected package code.
+        (Reading database ... 228947 files and directories currently installed.)
+        Preparing to unpack .../code_1.63.2-1639562499_amd64.deb ...
+        Unpacking code (1.63.2-1639562499) ...
+        Setting up code (1.63.2-1639562499) ...
+        Processing triggers for shared-mime-info (2.0-1) ...
+        Processing triggers for desktop-file-utils (0.26-1) ...
+        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$</pre>
+    <li>Käynnistetään sovellus Applications->Development->Visual Studio Code</li>
+    <img style="max-height: 300px; border:1px solid" src="h1_images/visualstudiocode1.png" />
+    <li>Avataan ohjelmaan hakemisto, jossa on muokattavia tiedostoja, ts. gitilla kloonaamani hakemisto tästä materiaalista</li>
+    <img style="max-height: 300px; border:1px solid" src="h1_images/visualstudiocode2.png" />
+     </ul>
+
+     <h2>d) Asennettujen ohjelmien lisenssit</h2>
+     <h3>Thunderbird</h3>
+     <ul>
+         <li>Lähdekoodi on avointa ja open sourcea</li>
+         <li>Suurin osa ohjelmakoodista on  Mozilla Public License 2.0 lisenssin alaista, monia muitakin lisenssejä on mukana</li>
+         <li>Lähdekoodi on vapaata ja avointa lähdekoodia. Muuttamattomana sitä saa vapaasti käyttää ja jakaa eteenpäin</li>
+         <li>Voit muuttaa myös softaa ja jaella eteenpäin, mutta uuden softasi pitää myös olla saman lisenssin alaista, ja se pitää tuoda vastaanottajille ilmi</li>
+     </ul>
+     <h3>VLC Media Player</h3>
+     <ul>
+        <li>Lisenssi GNU GENERAL PUBLIC LICENSE</li>
+        <li>Vapaa oikeus käyttää, jakaa ja muuttaa ohjelmaa</li>
+        <li>Velvollisuutesi on, että jos muutat ohjelmaa, myös muutetun ohjelman käyttäjillä on samat oikeudet</li>
+    </ul>
+     <h3>Visual Studio Code</h3>
+     <ul>
+        <li>Lisenssi MIT License</li>
+        <li>Vapaa oikeus käyttää, jakaa ja muuttaa ohjelmaa</li>
+    </ul>
+
+    <h2>e) Käyttämieni windows-ohjelmien vastaavat Linux-ohjelmat</h2>
+    <ul>
+        <li>Microsot Word - LibreOffice Writer</li>
+        <li>Microsoft Excel - LibreOffice Calc</li>
+        <li>MicroSoft PowerPoint - LibreOffice Impress</li>
+        <li>Acrobat Reader - </li>
+    </ul>
+    <h2>f) Varmuuskopiointi</h2>
+    <ul>
+        <li>Avataan VirtualBox</li>
+        <li>File -> Export Appliance</li>
+        <li>DebianSanna -> Next</li>
+        <img style="max-height: 300px; border:1px solid" src="varmuuskopio1.png" />
+        <li>Windowsiin syntyi koko virtuaalikoneese tiedostoja</li>
+        <li>Siirretään ulkoiselle kovalevylle</li>
     </ul>
 </html>
