@@ -60,7 +60,7 @@
 
             <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Tehtävä z</h5>
+                  <h5 class="card-title">Tehtävä z, tiivistelmät artikkeleista</h5>
                   
                   <h6 class="card-subtitle mb-2 text-muted">Karvinen 2020: <a href="https://terokarvinen.com/2020/command-line-basics-revisited/">
                     Command Line Basics Revisited</a></h6>
@@ -154,11 +154,11 @@
 
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Tehtävä b, CLI ohjelmien asennus</h5>
+                  <h5 class="card-title">Tehtävä b, komentorivi-ohjelmien asennus</h5>
                   <p>Tämän tehtävän suurin ongelma oli, että koska linux ei ole minun tuttu, en tunne sen ohjelmia, ja niiden etsiminen
-                      tuntui hankalalta. Monet peruskäskyihin liittyvät ohjelmat olivat vakiona ja näitä oli vaikea etsiä tuntematta ollenkaan tarpeita.
+                      tuntui hankalalta. Monet peruskäskyihin liittyvät ohjelmat olivat vakiona ja lisää ohjelmia oli vaikea etsiä tuntematta ollenkaan tarpeita.
                       Windows-käyttäjänä oli vaikea ajatella komentorivi ohjelmien tarpeita. Siispä asentelin linuxiin niitä windowsissa tutuksi tulleita 
-                      sovelluskehittäjän välineitä, joita olen tottunut windowsissa käyttämään.
+                      sovelluskehittäjän välineitä, joita olen tottunut windowsissa käyttämään komentoriviltä.
                   </p>
                 </div>
                 <div class="card-body">
@@ -167,7 +167,9 @@
                         Mm. tämä raportti, jota luet, majailee GitHubissa, jonne olen pushannut windowsissa Git:lla. Asennampa siis Git:n linuxiini, jonka
                         jälkeen pystyn kokonaan kirjoittamaan raporttiani Linuxissa ja pushaamaan GitHubiin suoraan Linuxista.
                         <div>Asennus <pre>sudo apt-get -y install git</pre></div>
-                        <div>Esimerkkinä kloonataan repository GitHubista <pre>git clone https://github.com/jyrinsan/jyrinsan.github.io.git</pre></div>
+                        <div>Esimerkkinä kloonataan repository GitHubista <pre>git clone https://github.com/jyrinsan/jyrinsan.github.io.git</pre> 
+                            Alla näkyy kuinka sen hetkinen ko. repositoryn sisältö githubista kopioitui koneelleni.</div>
+                    
                     </p>
                     <img class="card-img-bottom" src="h2_images/b_1.PNG" class="img-fluid" alt="Responsive image">
                   </div>
@@ -213,26 +215,54 @@
 
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Tehtävä c</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Tukki. Aiheuta lokiin kaksi eri tapahtumaa: yksi esimerkki onnistuneesta ja yksi esimerkki epäonnistuneesta tai kielletystä toimenpiteestä. Analysoi rivit yksityiskohtaisesti.</h6>
+                    <h5 class="card-title">Tehtävä c, merkinnät lokeille</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Tapaus 1: kielletty toimenpide, virheellinen salasana</h6>
+                        
+                    <p>Yritän asentaa paketinhallinnalla ohjelmaa ja annan 3 kertaa väärän salasanan. Ohjelma on kuvitteellinen, mutta se ei haittaa, koska virhe tulee jo sudotuksen yhteydessä.
+                        <pre>sudo -k apt-get install töttöröö</pre>
+                        Lokin loppua katson komennolla <pre>sudo tail -f auth.log</pre>
+                        Ensimmäinen lokimerkintä tuli, kun ensimmäisen kerran syötin virheellisen salasanan.
+                        Loki kertoo, että käyttäjän yrittämä sudo-käskyn autentikointi epäonnistui.
+                        Toinen lokimerkintä tuli, kun olin 3 kertaa syöttänyt virheellisen salasanan, ja kysyminen loppui.
+                        Siinä käskyä apt-get töttöröö ei pystytty käyttäjänä ROOT suorittamaan /home/jyrinsan hakemistossa,
+                         koska oli 3 virheellistä salasanan yritystä.
+                        
+                        <img class="card-img-bottom" src="h2_images/c_1.PNG" class="img-fluid" alt="Responsive image">
+                    </p>
+                    <h6 class="card-subtitle mb-2 text-muted">Tapaus 2: sallittu toimenpide, oikea salasana</h6>
+                        
+                    <p>Päivitän sovellukset ja annan oikean salasanani
+                        <pre>sudo -k apt-get update</pre>
+                        Lokin loppua katson komennolla <pre>sudo tail -f auth.log</pre>
+                        Loki kertoo, että jyrinsan on suorittanut hakemistossa /home/jyrinsan sudo-käskyllä ROOT käyttäjänä apt-get update komennon.
+                        
+                        <img class="card-img-bottom" src="h2_images/c_2.PNG" class="img-fluid" alt="Responsive image">
+                    </p>
+
                 </div>
               </div>
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Tehtävä d</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">The Friendly M. Näytä 2-3 kuvaavaa esimerkkiä grep-komennon käytöstä. Ohjeita löytyy 'man grep' ja tietysti verkosta.</h6>
+                  <h5 class="card-title">Tehtävä d, grep käskyn käyttöesimerkkejä</h5>
+                  etsii auth.log tiedostostosta rivit, joissa esiintyy jyrinsan (pienellä kirjoitettuna)
+                  <pre>grep jyrinsan auth.log</pre>
+                  
+                  etsii auth.log tiedostostosta rivit, joissa esiintyy jyrinsan (kirjasinkoolla ei merkitystä)
+                  <pre>grep JyrINSAN -i auth.log</pre>
                 </div>
               </div>
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Tehtävä e</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Pwnkit. Päivitä kaikki Linux-ohjelmat ja asenna tietoturvapäivitykset.</h6>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Tehtävä g</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Sshecrets. Vaikeampi vapaaehtoinen bonuskohta, ei ole opetettu vielä: Asenna SSH-demoni. Kokeile omalla ssh-palvelimellasi jotain seuraavista: ssh-copy-id, sshfs, scp tai git. (Helpoin lienee scp: ‘scp foo.txt tero@example.com:’)</h6>
+                  <h5 class="card-title">Tehtävä e, sovellusten päivitys</h5>
+                  <p>Päivitetään sovellusten rekisterilistaan löytyvät päivitykset
+                    <pre>sudo apt-get update</pre>
+                    <img class="card-img-bottom" src="h2_images/e_1.PNG" class="img-fluid" alt="Responsive image">
+                  </p>
+
+                  <p>Suoritetaan varsinainen päivitykset, tällä kertaa kuitenkaan mitään ei päivittynyt, miksiköhän?
+                    <pre>sudo apt-get dist-upgrade</pre>
+                    <img class="card-img-bottom" src="h2_images/e_2.PNG" class="img-fluid" alt="Responsive image">
+                  </p>
                 </div>
               </div>
     </div>
