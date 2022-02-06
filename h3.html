@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <title>Linux palvelimet</title>
+    </head>
+    <body>
+        <nav class="nav nav-tabs">
+            <a class="nav-link" href="index.html">Etusivu</a>
+            <a class="nav-link" href="h1.html">H1</a>
+            <a class="nav-link" href="h2.html">H2</a>
+            <a class="nav-link" active>H3</a>
+            <a class="nav-link" href="h4.html">H4</a>
+            <a class="nav-link" href="h5.html">H5</a>
+            <a class="nav-link" href="h6.html">H6</a>
+        </nav>
+
+        <div class="jumbotron" style="padding-top: 20px;">           
+            <h1>Harjoitus H3</h1>
+
+            <div class="container" style="padding-top: 20px;">
+                <div class="row">
+                    <div class="col-3">Nimi</div>
+                    <div class="col">Sanna Jyrinki</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Oppilaitos</div>
+                    <div class="col">Haaga-Helian ammattikorkeakoulu</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Kurssi</div>
+                    <div class="col">
+                        <a href="https://terokarvinen.com/2021/linux-palvelimet-ict4tn021-3018/">linux-palvelimet-ict4tn021-3018</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Opettaja</div>
+                    <div class="col">Tero Karvinen</div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 20px;">
+                <div class="row">
+                    <div class="col-3">Tietokoneena</div>
+                    <div class="col">Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Käyttöjärjestelmä</div>
+                    <div class="col">Windows 10 Home, Versio 20H2</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Linux</div>
+                    <div class="col">Virtual Box 6.1, Debian 11.2</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Lähteet</h5>
+                    <p>Karvinen, T. 2008. Install Apache Web Server on Ubuntu. Luettavissa 
+                    <a href="https://terokarvinen.com/2008/install-apache-web-server-on-ubuntu-4/">https://terokarvinen.com/2008/install-apache-web-server-on-ubuntu-4/</a>.
+                    Luettu 6.2.2022.
+                    </p>
+                    <p>Kaufman, L. 2017. How to Uninstall Software Using the Command Line in Linux. Luettavissa 
+                    <a href="https://www.howtogeek.com/229699/how-to-uninstall-software-using-the-command-line-in-linux/">https://www.howtogeek.com/229699/how-to-uninstall-software-using-the-command-line-in-linux/</a>.
+                    Luettu 6.2.2022.
+                    </p>
+                    <p>W3C. n.a. Markup Validation Service. Luettavissa 
+                        <a href="https://validator.w3.org/">https://validator.w3.org/</a>.
+                        Luettu 6.2.2022.
+                    </p>
+                    <p>Wikipedia. n.a. Luettelo HTTP-tilakoodeista. Luettavissa 
+                        <a href="https://fi.wikipedia.org/wiki/Luettelo_HTTP-tilakoodeista">https://fi.wikipedia.org/wiki/Luettelo_HTTP-tilakoodeista</a>.
+                        Luettu 6.2.2022.
+                    </p>
+                    
+                    <h5 class="card-title">Tehtävä a, apache asennus</h5>
+                  
+                    <p><h6 class="card-subtitle mb-2 text-muted">Apachen poisto</h6></p>
+                    
+                    <p>Viime tunnilla asennettiin apache ja laitettiin oma webbisivu toimimaan, mutta koska olen epävarma osaanko hoitaa homman
+                    uudelleen, päätin aloittaa alusta. Ensin poistin apachen, googlaamalla löysin Kaufmanin (2017) ohjeen tähän, käytin --purge vipua, joka poistaa myös 
+                    konfigurointitiedostot. 
+                    </p>
+                    <pre>
+                    sudo apt-get --purge remove apache2
+                    </pre>
+
+                    <p>Käskyn ajaminen ilmoitti lopussa</p>
+                    <pre>
+                    dpkg: warning: while removing apache2, directory '/var/www/html' not empty so not removed
+                    </pre>
+                    <p>Joten poistin vielä html-hakemiston</p>
+                    <pre>
+                    cd /var/www 
+                    sudo rm -r html
+                    </pre>
+                    <p>Testasin, ettei selaimessa localhost löydy</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h3_images/a_1.PNG" alt="Responsive image">
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Asennus</h6></p>
+                    <p>Asennuksessa seurasin Karvisen (2007) ohjetta.
+                        Apachen asennus onnistuu seuraavasti</p>
+                    <pre>
+                        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt-get -y install apache2
+                        Reading package lists... Done
+                        Building dependency tree... Done
+                        Reading state information... Done
+                        The following packages were automatically installed and are no longer required:
+                          libc-ares2 libjs-highlight.js
+                        Use &apos;sudo apt autoremove&apos; to remove them.
+                        Suggested packages:
+                          apache2-doc apache2-suexec-pristine | apache2-suexec-custom
+                        The following NEW packages will be installed:
+                          apache2
+                        0 upgraded, 1 newly installed, 0 to remove and 3 not upgraded.
+                        Need to get 0 B/272 kB of archives.
+                        After this operation, 635 kB of additional disk space will be used.
+                        Selecting previously unselected package apache2.
+                        (Reading database ... 244128 files and directories currently installed.)
+                        Preparing to unpack .../apache2_2.4.52-1~deb11u2_amd64.deb ...
+                        Unpacking apache2 (2.4.52-1~deb11u2) ...
+                        Setting up apache2 (2.4.52-1~deb11u2) ...
+                        Enabling module mpm_event.
+                        Enabling module authz_core.
+                        Enabling module authz_host.
+                        Enabling module authn_core.
+                        Enabling module auth_basic.
+                        Enabling module access_compat.
+                        Enabling module authn_file.
+                        Enabling module authz_user.
+                        Enabling module alias.
+                        Enabling module dir.
+                        Enabling module autoindex.
+                        Enabling module env.
+                        Enabling module mime.
+                        Enabling module negotiation.
+                        Enabling module setenvif.
+                        Enabling module filter.
+                        Enabling module deflate.
+                        Enabling module status.
+                        Enabling module reqtimeout.
+                        Enabling conf charset.
+                        Enabling conf localized-error-pages.
+                        Enabling conf other-vhosts-access-log.
+                        Enabling conf security.
+                        Enabling conf serve-cgi-bin.
+                        Enabling site 000-default.
+                        invoke-rc.d: policy-rc.d denied execution of start.
+                        Created symlink /etc/systemd/system/multi-user.target.wants/apache2.service → /lib/systemd/system/apache2.service.
+                        /usr/sbin/policy-rc.d returned 101, not running &apos;start apache2.service&apos;
+                        Created symlink /etc/systemd/system/multi-user.target.wants/apache-htcacheclean.service → /lib/systemd/system/apache-htcacheclean.service.
+                        /usr/sbin/policy-rc.d returned 101, not running &apos;start apache-htcacheclean.service&apos;
+                        Processing triggers for man-db (2.9.4-2) ...
+                        <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ 
+                        </pre>
+                        <p>Lopusta selviää, ettei apache ole jostain syystä käynnistynyt itsestään, eikä selain näytä edelleen mitään localhostissa.
+                            Kokeilen buutata debianin. Buuttaamisen jälkeen apachen testisivu näkyy hienosti selaimen localhost osoitteessa
+                        </p>
+                        <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h3_images/a_2.PNG" alt="Responsive image">
+                     
+                        <p><h5 class="card-title">Tehtävä b, oma kotisivu</h5></p>
+                        
+                        <p><h6 class="card-subtitle mb-2 text-muted">Teen itselleni kotisivun http://localhost/~jyrinsan osoitteeseen</h6>
+                            </p>
+                        <p>Luon hakemiston kotisivulleni omaan kotihakemistooni</p>
+                        <pre>
+                            <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ mkdir public_html
+                            <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cd public_html/
+                            <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/public_html</b></font>$ micro index.html  
+                        </pre>
+                        <p>index.html sisältö</p>
+                        <pre>
+                        &lt;html&gt;
+                            &lt;head&gt;	
+                                &lt;title&gt;Sannan kotisivu&lt;/title&gt;
+                            &lt;/head&gt;
+                            &lt;body&gt;
+                            &lt;h1&gt;Moi, olen Sanna&lt;/h1&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                        </pre>
+                        <p>Kotisivu ei kuitenkaan vielä näy http://localhost/~jyrinsan osoitteessa</p>
+                        <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h3_images/b_1.PNG" alt="Responsive image">
+                        <p>Huomasin Karvisen (2007) ohjeesta, että pitää ajaa seuraavat käskyt, jotta userdir module aktivoituu</p>
+                        <pre>
+                        sudo a2enmod userdir
+                        sudo service apache2 restart
+                        </pre>
+                        <p>Näiden jälkeen kotisivuni näkyy</p>
+                        <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h3_images/b_2.PNG" alt="Responsive image">
+                    
+                        <p><h5 class="card-title">Tehtävä c, muokataan sivu validiksi</h5></p>
+                        <p>Testataan tekemäni html sivun validisuus W3C:n validaattorilla</p>
+                        <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h3_images/c_1.PNG" alt="Responsive image">
+                        <p>Korjataan sivu tulosten perusteella seuraavanlaiseksi</p>
+                        <pre>
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang=&quot;fi&quot;&gt;
+                                &lt;head&gt;	
+                                    &lt;title&gt;Sannan kotisivu&lt;/title&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                &lt;h1&gt;Moi, olen Sanna&lt;/h1&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                            </pre>
+                        <p>Nyt sivu läpäisee validaattorin</p>
+                        <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h3_images/c_2.PNG" alt="Responsive image">
+                    
+                        <p><h5 class="card-title">Tehtävä d, tutkitaan apachen lokeja</h5></p>
+                        <p>Apachen lokit löytyvät täältä</p>
+                        <pre>
+                        cd /var/log
+                        sudo su
+                        cd apache2
+                        </pre>
+                        <p>access.log lokilla näkyy tekemiäni pyyntöjä</p>
+                        <pre>
+                        127.0.0.1 - - [06/Feb/2022:13:45:08 +0200] &quot;GET / HTTP/1.1&quot; 200 682 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0&quot;
+                        127.0.0.1 - - [06/Feb/2022:13:45:37 +0200] &quot;GET /~jyrinsan/ HTTP/1.1&quot; 200 461 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0&quot;
+                        127.0.0.1 - - [06/Feb/2022:13:45:53 +0200] &quot;GET /~jyrinsan/index.html HTTP/1.1&quot; 200 461 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0&quot;
+                        127.0.0.1 - - [06/Feb/2022:13:46:15 +0200] &quot;GET /~jyrinsan/sivu.html HTTP/1.1&quot; 404 488 &quot;-&quot; &quot;Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0&quot;
+                        </pre>
+                        <p> Tein pyynnöt järjestyksessä
+                        </p>
+                        <ul>
+                            <li>http://localhost</li>
+                            <li>http://localhost/~jyrinsan</li>
+                            <li>http://localhost/~jyrinsan/index.html</li>
+                            <li>http://localhost/~jyrinsan/sivu.html</li>
+                        </ul>
+                        Lokissa näkyy, että kolme ylintä pyyntöä on onnistunut, sivut ovat olemassa. 
+                        Kaikissa pyynnöissä on tehty HTTP GET pyyntö, ja lokissa näkyy mihin endpointtiin pyyntö on tehty, esim
+                        kolmannessa rivissä /~jyrinsan/index.html.
+                        Onnistuneissa pyynnöissä palautuu HTTP statuskoodi 200, joka tarkoittaa ok vastausta.
+                        Alin pyyntö on tehty sivu.html sivulle, jota ei ole olemassa, silloin saadaan vastaukseksi statuskoodi 404, joka tarkoittaa, ettei resurssia löydy.
+                        Jokaisessa rivissä myös näkyy, että pyynnöt ovat tulleet Mozilla Firefox selaimen Linux versiolta.
+                        Pyynnöissä näkyy localhost ip, päivämäärä ja kellonaika, jotka vastaavat kellonaikaa, jolloin tein pyynnöt.
+                    
+                        <p>
+                        <h5 class="card-title">Tehtävä e, apachen testisivun muokkaus</h5>
+                        </p>
+                        <p>Muokkaan sivua täältä</p>
+                        <pre>
+                        cd /var/www/html
+                        sudo micro index.html
+                        </pre>
+                        <p>Sivun html muokkauksen jälkeen</p>
+                        <pre>
+                            <font color="#55FF55"><b>jyrinsan@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/var/www/html</b></font>$ cat index.html 
+                            &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+                            &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+                              &lt;head&gt;
+                                &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+                                &lt;title&gt;Apache2 Debian sivu&lt;/title&gt;
+                                &lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;
+                              body, html {
+                                padding: 3px 3px 3px 3px;
+                            
+                                font-family: Verdana, sans-serif;
+                                font-size: 11pt;
+                              }
+                                &lt;/style&gt;
+                              &lt;/head&gt;
+                              &lt;body&gt;
+                                &lt;h1&gt;DebianSanna sivu
+                              &lt;/body&gt;
+                            &lt;/html&gt;
+                            </pre>
+                        <p>Nyt muokkaamani sivu näkyy localhost osoitteessa</p>
+                        <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h3_images/e_1.PNG" alt="Responsive image">
+                        
+                    </div>
+             </div>
+		</div>
+    </div>
+</html>
