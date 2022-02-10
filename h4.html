@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <title>Linux palvelimet</title>
+    </head>
+    <body>
+        <nav class="nav nav-tabs">
+            <a class="nav-link" href="index.html">Etusivu</a>
+            <a class="nav-link" href="h1.html">H1</a>
+            <a class="nav-link" href="h2.html">H2</a>
+            <a class="nav-link" href="h3.html">H3</a>
+            <a class="nav-link" active>H4</a>
+            <a class="nav-link" href="h5.html">H5</a>
+            <a class="nav-link" href="h6.html">H6</a>
+        </nav>
+
+        <div class="jumbotron" style="padding-top: 20px;">           
+            <h1>Harjoitus H4</h1>
+
+            <div class="container" style="padding-top: 20px;">
+                <div class="row">
+                    <div class="col-3">Nimi</div>
+                    <div class="col">Sanna Jyrinki</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Oppilaitos</div>
+                    <div class="col">Haaga-Helian ammattikorkeakoulu</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Kurssi</div>
+                    <div class="col">
+                        <a href="https://terokarvinen.com/2021/linux-palvelimet-ict4tn021-3018/">linux-palvelimet-ict4tn021-3018</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Opettaja</div>
+                    <div class="col">Tero Karvinen</div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 20px;">
+                <div class="row">
+                    <div class="col-3">Tietokoneena</div>
+                    <div class="col">Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Käyttöjärjestelmä</div>
+                    <div class="col">Windows 10 Home, Versio 20H2</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Linux</div>
+                    <div class="col">Virtual Box 6.1, Debian 11.2</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Lähteet</h5>
+                    <p>Karvinen, T. 2017. First Steps on a New Virtual Private Server – an Example on DigitalOcean and Ubuntu 16.04 LTS. 
+                        Luettavissa 
+                    <a href="https://terokarvinen.com/2017/first-steps-on-a-new-virtual-private-server-an-example-on-digitalocean/?fromSearch=first%20steps">
+                        https://terokarvinen.com/2017/first-steps-on-a-new-virtual-private-server-an-example-on-digitalocean/?fromSearch=first%20steps
+                    </a>. Luettu 10.2.2022.
+                    </p>
+                    <p>Karvinen, T. 2018. Name Based Virtual Hosts on Apache – Multiple Websites to Single IP Address 
+                        Luettavissa 
+                    <a href="https://terokarvinen.com/2018/name-based-virtual-hosts-on-apache-multiple-websites-to-single-ip-address/?fromSearch=name%20based%20virtual">
+                        https://terokarvinen.com/2018/name-based-virtual-hosts-on-apache-multiple-websites-to-single-ip-address/?fromSearch=name%20based%20virtual
+                    </a>. Luettu 10.2.2022.
+                    </p>
+
+                    
+                    <h5 class="card-title">Tehtävä z, tiivistelmä artikkeleista</h5>
+                  
+                    <p><h6 class="card-subtitle mb-2 text-muted">Karvinen, 2017: First Steps on a New Virtual Private Server – an Example on DigitalOcean and Ubuntu 16.04 LTS</h6></p>
+                    
+                        <ul>
+                            <li>Artikkeli kertoo kuinka vuokraat virtuaalipalvelimen DigitalOceanilta ja vuokraat nimipalvelun NameCheap:lta</li>
+                            <li>Opiskelija saat GitHub Education paketin ja saat ilmaisen .me päätteisen osoitteen</li>
+                            <li>Muitakin paikkoja on, esim. Linode ja Gandi</li>
+                        </ul>
+                    
+                    <p><h6 class="card-subtitle mb-2 text-muted">Karvinen, 2018: Name Based Virtual Hosts on Apache – Multiple Websites to Single IP Address</h6></p>
+     
+                    <ul>
+                        <li>Artikkeli opastaa, miten asennat Apache webbiserverin virtuaalipalvelimeesi</li>
+                        <li>On myös kerrottu, miten teet yksinkertaisen ensimmäisen oman html-sivun palvelimelle</li>
+                    </ul>
+
+                    <h5 class="card-title">Tehtävä a, palvelin pilveen</h5>
+
+                    <p>Ennen oppintuntia olin jo vuokrannut nimen jyrinki.com Gandilta ja virtuaalipalvelintilan UpCloud:lta. En ollut vielä asentanut palvelinta.
+                        Kirjauduin saamillani tunnuksilla UpCloadin konsolille osoitteeseen https://hub.upcloud.com/.
+                    </p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h4_images/a_1.PNG" alt="Responsive image">
+                
+                    <p>Lisäsin palvelimen, valitsin sijainniksi suomi ja otin halvimman paketin 
+                        <pre>
+                            1 core
+                            1 GB memory
+                            25 GB storage
+                            1 TB transfer.
+                        </pre>
+                        Valitsin käyttöjärjestelmäksi Debian GNU/Linux 11 (Bullseye) ja sisäänkirjautumistavaksi One time passwprd.
+                        Muuten menin oletusasetuksilla.
+                    </p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h4_images/a_2.PNG" alt="Responsive image">
+                
+                    <p>Sähköpostiini tuli ilmoitus palvelimen perustamisesta, palvelimen ip-osoite ja root-tunnuksen salasana.
+                        Kirjaudun windowsin komentokehotteella ssh:lla palvelimelle <pre>ssh root@iposoite</pre>
+                    </p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h4_images/a_3.PNG" alt="Responsive image">
+                
+                    <h5 class="card-title">Tehtävä d, tulimuuri</h5>
+
+                    <p>Asennetaan tulimuuri. Jotta tämä onnistuu, pitää kuitenkin ensin asentaa ufw, eli tehdään</p>
+                    <pre>
+                        sudo apt-get update
+                        sudo apt-get -y install ufw
+                    </pre>
+                    <p>Tehdään ensin tulimuuriin reikä ssh-yhteydelle, jotta palvelimelle kirjautuminen jatkossakin onnistuu</p>
+                    <pre>
+                        sudo ufw allow 22/tcp
+                    </pre>
+                    <p>Laitetaan tulimuuri päälle</p>
+                    <pre>
+                        sudo ufw enable
+                    </pre> 
+                    <p>Saadaan ilmoitus 'Firewall is active and enabled on system startup'. </p>
+
+                    <p>Vaikkei tässä tehtävässä pyydetty, niin luodaan oma käyttäjätunnus sanna ja annetaan sille sudo oikeus</p>
+                    <pre>
+                        sudo adduser sanna
+                        sudo adduser sanna sudo
+                        sudo adduser sanna adm
+                    </pre>
+
+                    <p>Avataan toinen konsoli, ja kokeillaan nyt, että sanna tunnuksella kirjautuminen onnistuu</p>
+                    <pre>ssh sanna@iposoite</pre>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h4_images/d_1.PNG" alt="Responsive image">
+                
+                    <p>Suljetaan vielä root tunnus, jatkossa kirjaudutaan omalla sanna-tunnuksella</p>
+                    <pre>sudo usermod --lock root</pre>
+
+                    <p>Estetään kokonaan root tunnuksella kirjautuminen muokkaamalla</p>
+                    <pre>sudoedit /etc/ssh/sshd_config</pre>
+                    <p>muutetaan siinä 'PermitRootLogin no'</p>
+                    <p>Startataan ssh</p>
+                    <pre>sudo service ssh restart</pre>
+
+                    <h5 class="card-title">Tehtävä e, Apache asennus</h5>
+                    <p>Aluksi päivitetään 'sudo apt-get update', tämä yritetään muistaa aina ennen asennuksia tms.</p>
+                    <p>Asennetaan Apache2</p>
+                    <pre>sudo apt-get -y install apache2</pre>
+                    <p>Korvataan testisivu</p>
+                    <pre>echo "Default"|sudo tee /var/www/html/index.html</pre>
+                    <p>Avataan tulimuuriin reikä apachen portille</p>
+                    <pre>sudo ufw allow 80/tcp</pre>
+                    <p>Testataan, että testisivuni toimii</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h4_images/e_1.PNG" alt="Responsive image">
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">
+                        Käyttäjän omat kotisivut
+                    </h6></p>
+                    <p>Asennetaan tekstieditori micro, jota on mukava käyttää html tiedoston editointiin</p>
+                    <pre>sudo apt-get -y install micro</pre>
+                    <p>Tehdään kotihakemistoon public_html ja sen alle index.html</p></pZ>
+                    <pre>
+                        cd /home/sanna
+                        mkdir public_html
+                        cd public_html
+                        micro index.html
+                    </pre>
+                    <p>Editoin html koodin seuraavaksi</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h4_images/e_2.PNG" alt="Responsive image">
+                    <p>Testasin selaimessa sivua, muttei se vielä toimi, täytyy h3 tehtävän tapaan </p>
+                    <pre>
+                        sudo a2enmod userdir
+                        sudo service apache2 restart
+                    </pre>
+                    <p>Nyt sivuni näkyy</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h4_images/e_3.PNG" alt="Responsive image">
+                    <p>Testaan nyt myös kännykällä, että sivuni näkyy</p>
+                    <img style="border: solid 1px; max-width: 20%;" class="card-img-left" src="h4_images/e_4.PNG" alt="Responsive image">
+                
+                    <p><h6 class="card-subtitle mb-2 text-muted">
+                        Domain nimi käyttöön
+                    </h6></p>
+                    <p>Aiemmin olen varannut gandi.net palvelusta domain nimen, konffataan se nyt palvelimen ip-osoitteeseen</p>
+                    <img style="border: solid 1px" class="card-img-left" src="h4_images/e_5.PNG" alt="Responsive image">
+                    <p>Siirrytään Domain -> DNS Records</p>
+                    <p>Otetaan ensin varmuuskopio alkuasetuksista, tämä onnistuu valitsemalla Text Mode ja kopioimalla sisältö omalle koneelle tekstitiedostoon</p>
+                    <p>Lisätään 2 DNS Recordia</p>
+                    <ul>
+                        <li>Name=@, Type=A-type, TTL=300, Value=palvelimen ip-osoite </li>
+                        <li>Name=www, Type=A-type, TTL=300, Value=palvelimen ip-osoite </li>
+                    </ul>
+                    <p>Poistetaan alkuperäinen @ A-type arvo, jonka ip oli 	217.70.184.38, joka ilmeisesti on jokin gandin palvelin</p>
+                    <p>Kokeillaan windowsista pingata 'ping jyrinki.com' eli domain nimi löytyy</p>
+                    <img style="border: solid 1px" class="card-img-left" src="h4_images/e_6.PNG" alt="Responsive image">
+
+                    <p>Testataan selaimella osoitetta jyrinki.com/~sanna</p>
+                    <img style="border: solid 1px" class="card-img-left" src="h4_images/e_6.PNG" alt="Responsive image">
+
+                    <p style="color: red;padding: 10px;">Jihuu, sivuni näkyvät domain nimelläni</p>
+
+                    <h5 class="card-title">Tehtävä f, päivitetään ohjelmat</h5>
+                    <p>Lopuksi vielä päivitin ohjelmat</p>
+                    <pre>
+                        sudo apt-get update
+                        sudo apt-get upgrade
+                    </pre>
+
+                    <h5 class="card-title">Tehtävä g, murtautumisyrityksiä lokeilla?</h5>
+                </div>
+            </div>
+		</div>
+    </div>
+</html>
