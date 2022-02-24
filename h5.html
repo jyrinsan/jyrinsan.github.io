@@ -334,6 +334,103 @@
                     <p>Nyt kirjojen tiedot näkyy listassa</p>
                     <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_9.PNG" alt="Responsive image">
 
+                    <h5 class="card-title">Tehtävä b, Django tuotantoasennus</h5>
+
+                    <p>Päätin tehdä Django tuotantoasennuksen virtuaalipalvelimellani, jonka asensin tehtävässä 4.
+                        Virtuaalipalvelimella on jo tehtävässä 4 asennettuna micro tekstieditori, sekä apache2.
+                        Tässä tehtävässä vielä korvaan apachen testisivun seuraavalla merkkijonolla.
+                    </p>
+                    <pre>
+                        $ echo "Welcome to jyrinki.com"|sudo tee /var/www/html/index.html
+                    </pre>
+
+                    <p>Apachen testisivu näkyy nyt osoitteessa http://jyrinki.com</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/b_1.PNG" alt="Responsive image">
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Staattinen sivu</h6></p>
+
+                    <p>Teen alkuun apt-get updaten</p>
+                    <pre>
+                        $ sudo apt-get update
+                    </pre>
+
+                    <p>Tehdään aluksi staattinen sivu kotihakemistoni alle</p>
+                    <pre>
+                        $ cd
+                        $ mkdir -p publicwsgi/sannandjango/static/
+                        $ echo "Statically see you at jyrinki.com."|tee publicwsgi/sannandjango/static/index.html
+                    </pre>
+
+                    <p>Tehdään uusi VirtualHost</p>
+                    <pre>
+                        $ sudoedit /etc/apache2/sites-available/sannandjango.conf
+                        &lt;VirtualHost *:80&gt;
+                            Alias /static/ /home/tero/publicwsgi/teroco/static/
+                            &lt;Directory /home/tero/publicwsgi/teroco/static/&gt;
+                                Require all granted
+                            &lt;/Directory&gt;
+                        &lt;/VirtualHost&gt;
+                    </pre>
+
+                    <p>Enabloidaan uusi web-sivu ja disabloidaan muut</p>
+                    <pre>
+                        $ sudo a2ensite sannandjango.conf
+                        $ sudo a2dissite 000-default.conf 
+                    </pre>
+                    <p>Testataan, saatiin virheilmoituksia, mutta lopussa teksti syntax ok, ilmeisesti homma ok</p>
+                    <pre>
+                        sanna@debian-1cpu-1gb-fi-hel1:~$ /sbin/apache2ctl configtest
+                        AH00557: apache2: apr_sockaddr_info_get() failed for debian-1cpu-1gb-fi-hel1
+                        AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
+                        Syntax OK
+                    </pre>
+                    
+                    <p>Käynnistetään apache uudelleen</p>
+                    <pre>
+                        $ sudo systemctl restart apache2
+                    </pre>
+
+                    <p>Testataan selaimella sivua http://jyrinki.com/static/, ja staattinen sivu näyttää toimivan</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/b_2.PNG" alt="Responsive image">
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Luodaan virtual env</h6></p>
+                    <pre>
+                        $ sudo apt-get -y install virtualenv
+
+                        $ cd
+                        $ cd publicwsgi/
+
+                        $ virtualenv -p python3 --system-site-packages env
+                    </pre>
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Asennetaan Django</h6></p>
+
+                    <p>Asennus tehdään kuten kehitysserverillä</p>
+                    <pre>
+                        $ source env/bin/activate
+                        $ which pip
+                        /home/sanna/publicwsgi/env/bin/pip
+                        $ micro requirements.txt
+                        django
+                        $ pip install -r requirements.txt
+                        Collecting django
+                          Using cached Django-4.0.2-py3-none-any.whl (8.0 MB)
+                        Collecting asgiref<4,>=3.4.1
+                          Using cached asgiref-3.5.0-py3-none-any.whl (22 kB)
+                        Collecting sqlparse>=0.2.2
+                          Using cached sqlparse-0.4.2-py3-none-any.whl (42 kB)
+                        Installing collected packages: sqlparse, asgiref, django
+                        Successfully installed asgiref-3.5.0 django-4.0.2 sqlparse-0.4.2
+                        $ django-admin --version
+                        4.0.2
+                    </pre>
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Luodaan projekti</h6></p>
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Yhdistetään Python Apacheen</h6></p>
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Disabloidaan DEBUG</h6></p>
+
                 </div>
             </div>
 		</div>
