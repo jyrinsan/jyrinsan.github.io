@@ -61,17 +61,17 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Lähteet</h5>
-                    <p>Karvinen, T. 2017. First Steps on a New Virtual Private Server – an Example on DigitalOcean and Ubuntu 16.04 LTS. 
+                    <p>Karvinen, T. 2022. Django 4 Instant Customer Database Tutorial. 
                         Luettavissa 
-                    <a href="https://terokarvinen.com/2017/first-steps-on-a-new-virtual-private-server-an-example-on-digitalocean/?fromSearch=first%20steps">
-                        https://terokarvinen.com/2017/first-steps-on-a-new-virtual-private-server-an-example-on-digitalocean/?fromSearch=first%20steps
-                    </a>. Luettu 10.2.2022.
+                    <a href="https://terokarvinen.com/2022/django-instant-crm-tutorial/">
+                        https://terokarvinen.com/2022/django-instant-crm-tutorial/    
+                    </a>. Luettu 24.2.2022.
                     </p>
-                    <p>Karvinen, T. 2018. Name Based Virtual Hosts on Apache – Multiple Websites to Single IP Address 
+                    <p>Karvinen, T. 2022. Deploy Django 4 - Production Install. 
                         Luettavissa 
-                    <a href="https://terokarvinen.com/2018/name-based-virtual-hosts-on-apache-multiple-websites-to-single-ip-address/?fromSearch=name%20based%20virtual">
-                        https://terokarvinen.com/2018/name-based-virtual-hosts-on-apache-multiple-websites-to-single-ip-address/?fromSearch=name%20based%20virtual
-                    </a>. Luettu 10.2.2022.
+                    <a href="https://terokarvinen.com/2022/deploy-django/">
+                        https://terokarvinen.com/2022/deploy-django/    
+                    </a>. Luettu 24.2.2022.
                     </p>
 
                     <h5 class="card-title">Tehtävä a, CRUD sovellus Django kehityspalvelimelle</h5>
@@ -80,45 +80,45 @@
                     
                     <p>Asennetaan virtualenv, jonka mukana tulee uusimmat python paketit, kuten Django</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt-get -y install virtualenv
+                        $ sudo apt-get -y install virtualenv
                     </pre>
 
                     <p>Luodaan /env hakemisto, jolla on käytössää uusimmat paketit ja python3</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ virtualenv --system-site-packages -p python3 env/
+                        $ virtualenv --system-site-packages -p python3 env/
                     </pre>
 
                     <p>Käytetään uutta virtual environmentia</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ source env/bin/activate
+                        $ source env/bin/activate
                     </pre>
 
                     <p>Tarkastetaan, että asennus menee virtuaaliseen ympäristöön</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ which pip
+                        $ which pip
                         /home/sanna/env/bin/pip
                     </pre>
 
-                    <p>asennetaan micro tekstieditori-ohjelma</p>
+                    <p>Asennetaan micro tekstieditori-ohjelma</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt-get install micro
+                        $ sudo apt-get install micro
                     </pre>
                     
                     <p>Luodaan requirements.txt tiedosto ja kirjoitetaan sinne ajettava käsky 'django'
                     </p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ micro requirements.txt # kirjoitettu sisällöksi django
+                        $ micro requirements.txt # kirjoitettu sisällöksi django
                     </pre>
                     
                     <p>Tarkastetaan sisältö</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cat requirements.txt 
+                        $ cat requirements.txt 
                         django
                     </pre>
                     
                     <p>Asennetaan django</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ pip install -r requirements.txt
+                        $ pip install -r requirements.txt
                         Collecting django
                           Downloading Django-4.0.2-py3-none-any.whl (8.0 MB)
                              |████████████████████████████████| 8.0 MB 1.0 MB/s 
@@ -133,7 +133,7 @@
                     
                     <p>Tarkastetaan asennuksen versio</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ django-admin --version
+                        $ django-admin --version
                         4.0.2
                     </pre>
 
@@ -141,13 +141,13 @@
                     
                     <p>Djangossa koko webbisivu on django-projekti, luodaan oma django-projekti nimeltään sannandjango</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ django-admin startproject sannandjango
+                        $ django-admin startproject sannandjango
                     </pre>
 
                     <p>Yritetään käynnistää projekti</p>
                     <pre>
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cd sannandjango/
-                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ ./manage.py runserver
+                        $ cd sannandjango/
+                        $ ./manage.py runserver
                         Watching for file changes with StatReloader
                         Performing system checks...
                         
@@ -159,95 +159,182 @@
                         Django version 4.0.2, using settings &apos;sannandjango.settings&apos;
                         Starting development server at http://127.0.0.1:8000/
                         Quit the server with CONTROL-C.
-                        </pre>
+                    </pre>
                 
-                        <p>Käynnistys valittaa migraatioiden puutteesta, muttei vielä välitetä tästä, vaan testataan selaimella http://127.0.0.1:8000/ osoitetta, asennus toimii!!</p>
-                        <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_1.PNG" alt="Responsive image">
+                    <p>Käynnistys valittaa migraatioiden puutteesta, muttei vielä välitetä tästä, vaan testataan selaimella http://127.0.0.1:8000/ osoitetta, asennus toimii!!</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_1.PNG" alt="Responsive image">
 
-                        <p><h6 class="card-subtitle mb-2 text-muted">Tehdään admin-käyttöliittymä</h6></p>
+                    <p><h6 class="card-subtitle mb-2 text-muted">Tehdään admin-käyttöliittymä</h6></p>
 
-                        <p>Admin käyttöliittymälle pääsee, muttei vielä ole tunnusta, joka toimisi</p>
-                        <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_2.PNG" alt="Responsive image">
+                    <p>Admin käyttöliittymälle pääsee, muttei vielä ole tunnusta, joka toimisi</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_2.PNG" alt="Responsive image">
 
-                        <p>Päivitetään djangon tietokannat</p>
-                        <pre>
-                            (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ ./manage.py makemigrations
-                            No changes detected
-                            (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ ./manage.py migrate
-                            <font color="#55FFFF"><b>Operations to perform:</b></font>
-                            <b>  Apply all migrations: </b>admin, auth, contenttypes, sessions
-                            <font color="#55FFFF"><b>Running migrations:</b></font>
-                              Applying contenttypes.0001_initial...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0001_initial...<font color="#55FF55"><b> OK</b></font>
-                              Applying admin.0001_initial...<font color="#55FF55"><b> OK</b></font>
-                              Applying admin.0002_logentry_remove_auto_add...<font color="#55FF55"><b> OK</b></font>
-                              Applying admin.0003_logentry_add_action_flag_choices...<font color="#55FF55"><b> OK</b></font>
-                              Applying contenttypes.0002_remove_content_type_name...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0002_alter_permission_name_max_length...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0003_alter_user_email_max_length...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0004_alter_user_username_opts...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0005_alter_user_last_login_null...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0006_require_contenttypes_0002...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0007_alter_validators_add_error_messages...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0008_alter_user_username_max_length...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0009_alter_user_last_name_max_length...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0010_alter_group_name_max_length...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0011_update_proxy_permissions...<font color="#55FF55"><b> OK</b></font>
-                              Applying auth.0012_alter_user_first_name_max_length...<font color="#55FF55"><b> OK</b></font>
-                              Applying sessions.0001_initial...<font color="#55FF55"><b> OK</b></font>
-                            </pre>
+                    <p>Päivitetään djangon tietokannat</p>
+                    <pre>
+                        $ ./manage.py makemigrations
+                        No changes detected
+                        $ ./manage.py migrate
+                        <font color="#55FFFF"><b>Operations to perform:</b></font>
+                        <b>  Apply all migrations: </b>admin, auth, contenttypes, sessions
+                        <font color="#55FFFF"><b>Running migrations:</b></font>
+                            Applying contenttypes.0001_initial...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0001_initial...<font color="#55FF55"><b> OK</b></font>
+                            Applying admin.0001_initial...<font color="#55FF55"><b> OK</b></font>
+                            Applying admin.0002_logentry_remove_auto_add...<font color="#55FF55"><b> OK</b></font>
+                            Applying admin.0003_logentry_add_action_flag_choices...<font color="#55FF55"><b> OK</b></font>
+                            Applying contenttypes.0002_remove_content_type_name...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0002_alter_permission_name_max_length...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0003_alter_user_email_max_length...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0004_alter_user_username_opts...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0005_alter_user_last_login_null...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0006_require_contenttypes_0002...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0007_alter_validators_add_error_messages...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0008_alter_user_username_max_length...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0009_alter_user_last_name_max_length...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0010_alter_group_name_max_length...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0011_update_proxy_permissions...<font color="#55FF55"><b> OK</b></font>
+                            Applying auth.0012_alter_user_first_name_max_length...<font color="#55FF55"><b> OK</b></font>
+                            Applying sessions.0001_initial...<font color="#55FF55"><b> OK</b></font>
+                    </pre>
 
-                            <p>Asennetaan pwgen ja luodaan sillä salasana</p>
-                            <pre>
-                                (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ sudo apt-get install pwgen
-                                [sudo] password for sanna: 
-                                Reading package lists... Done
-                                Building dependency tree... Done
-                                Reading state information... Done
-                                The following NEW packages will be installed:
-                                  pwgen
-                                0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
-                                Need to get 19,6 kB of archives.
-                                After this operation, 52,2 kB of additional disk space will be used.
-                                Get:1 http://deb.debian.org/debian bullseye/main amd64 pwgen amd64 2.08-2 [19,6 kB]
-                                Fetched 19,6 kB in 0s (59,6 kB/s)
-                                Selecting previously unselected package pwgen.
-                                (Reading database ... 230419 files and directories currently installed.)
-                                Preparing to unpack .../pwgen_2.08-2_amd64.deb ...
-                                Unpacking pwgen (2.08-2) ...
-                                Setting up pwgen (2.08-2) ...
-                                Processing triggers for man-db (2.9.4-2) ...
-                                (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ pwgen -s 20 1
-                                </pre>
+                    <p>Asennetaan pwgen ja luodaan sillä salasana</p>
+                    <pre>
+                        $ sudo apt-get install pwgen
+                        [sudo] password for sanna: 
+                        Reading package lists... Done
+                        Building dependency tree... Done
+                        Reading state information... Done
+                        The following NEW packages will be installed:
+                          pwgen
+                        0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+                        Need to get 19,6 kB of archives.
+                        After this operation, 52,2 kB of additional disk space will be used.
+                        Get:1 http://deb.debian.org/debian bullseye/main amd64 pwgen amd64 2.08-2 [19,6 kB]
+                        Fetched 19,6 kB in 0s (59,6 kB/s)
+                        Selecting previously unselected package pwgen.
+                        (Reading database ... 230419 files and directories currently installed.)
+                        Preparing to unpack .../pwgen_2.08-2_amd64.deb ...
+                        Unpacking pwgen (2.08-2) ...
+                        Setting up pwgen (2.08-2) ...
+                        Processing triggers for man-db (2.9.4-2) ...
+                        $ pwgen -s 20 1
+                    </pre>
                                 
-                                <p>Luodaan admin käyttäjä</p>
-                                <pre>
-                                    (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ ./manage.py createsuperuser
-                                    Username (leave blank to use &apos;sanna&apos;): 
-                                    Email address: 
-                                    Password: 
-                                    Password (again): 
-                                    Superuser created successfully.
-                                </pre>
+                    <p>Luodaan admin käyttäjä</p>
+                    <pre>
+                        $ ./manage.py createsuperuser
+                         Username (leave blank to use &apos;sanna&apos;): 
+                        Email address: 
+                        Password: 
+                        Password (again): 
+                        Superuser created successfully.
+                    </pre>
 
-                                <p>Käynnistetään kehityspalvelin uudelleen</p>
-                                <pre>
-                                    (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ ./manage.py runserver
-                                </pre>
+                    <p>Käynnistetään kehityspalvelin uudelleen</p>
+                    <pre>
+                        $ ./manage.py runserver
+                    </pre>
 
-                                <p>Nyt päästään luodulla tunnuksella ja salasanalla kirjautumaan admin-käyttöliittymään</p>
-                                <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_3.PNG" alt="Responsive image">
+                    <p>Nyt päästään luodulla tunnuksella ja salasanalla kirjautumaan admin-käyttöliittymään</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_3.PNG" alt="Responsive image">
 
-                                <p>Luodaan admin-käyttöliittymältä uusi käyttäjä minna</p>
-                                <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_4.PNG" alt="Responsive image">
-                                <p>Valitaan staff ja superuser status, jotta se saa samat admin-oikeudet</p>
-                                <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_5.PNG" alt="Responsive image">
+                    <p>Luodaan admin-käyttöliittymältä uusi käyttäjä minna</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_4.PNG" alt="Responsive image">
+                    
+                    <p>Valitaan staff ja superuser status, jotta se saa samat admin-oikeudet</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_5.PNG" alt="Responsive image">
 
-                                <p>Kirjaudutaan ulos sanna tunnuksesta ja kirjaudutaan uudelleen luodulla minna tunnuksella ja tarkistetaan, että kirjautuminen onnistuu, ja että minnalla on muyös oikeus lisätä uusia käyttäjiä</p>
-                                <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_6.PNG" alt="Responsive image">
+                    <p>Kirjaudutaan ulos sanna tunnuksesta ja kirjaudutaan uudelleen luodulla minna tunnuksella ja tarkistetaan, että kirjautuminen onnistuu, ja että minnalla on myös oikeus lisätä uusia käyttäjiä</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_6.PNG" alt="Responsive image">
 
+                    <p><h6 class="card-subtitle mb-2 text-muted">Luodaan Books sovellus</h6></p>
+                    <p>Tehdään Djangolla Books sovellus, joka on yrityksen sähköinen kirjahylly, josta työntekijät voivat ylläpitää yrityksen toimistolla olevaa kirjahyllyä, 
+                        ja merkitä onko kirja saatavilla vaiko lainattu.
+                    </p>
 
-                    </div>
+                    <p>Luodaan sovellus, tämä tekee sovellukselle bookcase-nimisen hakemiston</p>
+                    <pre>
+                        $ ./manage.py startapp bookcase
+                    </pre>
+
+                    <p>Lisätään sovellus sannandjango/settings.py asennettujen sovellusten listaan</p>
+                    <pre>
+                        $ micro sannandjango/settings.py
+                        ...
+                        INSTALLED_APPS = [
+                            &apos;django.contrib.admin&apos;,
+                            &apos;django.contrib.auth&apos;,
+                            &apos;django.contrib.contenttypes&apos;,
+                            &apos;django.contrib.sessions&apos;,
+                            &apos;django.contrib.messages&apos;,
+                            &apos;django.contrib.staticfiles&apos;,
+                            &apos;bookcase&apos; #lisäsin tämän rivin,
+                        ]
+                        ...
+                    </pre>
+
+                    <p>Lisätään modeliin Book</p>
+                    <pre>
+                        $ micro bookcase/models.py
+                        from django.db import models
+
+                        class Book(models.Model):
+                            author = models.CharField(max_length=300)
+                            title = models.CharField(max_length=300)
+                            available = models.BooleanField(default(default=True)
+                    </pre>
+
+                    <p>Ajetaan migraatiot, jolloin modeliin mukaan syntyy taulut tietokantaan</p>
+                    <pre>
+                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ ./manage.py makemigrations
+                        <font color="#55FFFF"><b>Migrations for &apos;bookcase&apos;:</b></font>
+                          <b>bookcase/migrations/0001_initial.py</b>
+                            - Create model Book
+                        (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/sannandjango</b></font>$ ./manage.py migrate
+                        <font color="#55FFFF"><b>Operations to perform:</b></font>
+                        <b>  Apply all migrations: </b>admin, auth, bookcase, contenttypes, sessions
+                        <font color="#55FFFF"><b>Running migrations:</b></font>
+                          Applying bookcase.0001_initial...<font color="#55FF55"><b> OK</b></font>
+                    </pre>
+
+                    <p>Jotta tietokanta näkyy /admin osoitteessa, se täytyy rekisteröidä</p>
+                    <pre>
+                        $ micro bookcase/admin.py
+                        from django.contrib import admin
+                        from . import models
+
+                        admin.site.register(models.Book)
+                    </pre>
+
+                    <p>Käynnistetään serveri ja testataan</p>
+                    <pre>
+                        $ ./manage.py runserver
+                    </pre>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_7.PNG" alt="Responsive image">
+
+                    <p>Lisätään admin käyttöliittymällä muutama kirja</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_8.PNG" alt="Responsive image">
+
+                    <p>Muokataan models.py tiedostoa siten, että admin-käyttöliittymässä näkyy kirjojen nimet</p>
+                    <pre>
+                        $ micro bookcase/models.py
+                        from django.db import models
+
+                        class Book(models.Model):
+                            author = models.CharField(max_length=300)
+                            title = models.CharField(max_length=300)
+                            available = models.BooleanField(default=True)
+                            
+                            def __str__(self):		# new
+                                if self.available:
+                                    return self.author + &apos; : &apos; + self.title
+                                else:
+                                    return self.author + &apos; : &apos; + self.title + &apos; (NOT AVAILABLE)&apos;	
+                    </pre>
+                    <p>Nyt kirjojen tiedot näkyy listassa</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_9.PNG" alt="Responsive image">
+
+                </div>
             </div>
 		</div>
     </div>
