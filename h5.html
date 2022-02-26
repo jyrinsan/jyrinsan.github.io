@@ -365,8 +365,8 @@
                     <pre>
                         $ sudoedit /etc/apache2/sites-available/sannandjango.conf
                         &lt;VirtualHost *:80&gt;
-                            Alias /static/ /home/tero/publicwsgi/teroco/static/
-                            &lt;Directory /home/tero/publicwsgi/teroco/static/&gt;
+                            Alias /static/ /home/sanna/publicwsgi/sannandjango/static/
+                            &lt;Directory /home/sanna/publicwsgi/sannandjango/static/&gt;
                                 Require all granted
                             &lt;/Directory&gt;
                         &lt;/VirtualHost&gt;
@@ -427,9 +427,240 @@
 
                     <p><h6 class="card-subtitle mb-2 text-muted">Luodaan projekti</h6></p>
 
+                    <p>Yritin luoda Django-projektin ohjeen mukaan. 
+                        Se ei kuitenkaan onnistunut, koska sannandjango-hakemisto oli jo luotu staattista sivua varten.
+                    </p>
+                    <pre>
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi$ django-admin startproject sannandjango
+                        CommandError: '/home/sanna/publicwsgi/sannandjango' already exists
+                    </pre>
+
+                    <p>Poistan sannandjango-hakemiston ja perustan projektin ja lisään sen jälkeen staattisen sivun uudelleen</p>
+                    <pre>
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi$ rm -r sannandjango/
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi$ django-admin startproject sannandjango
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi$ ls
+                        env  requirements.txt  sannandjango
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi$ mkdir -p publicwsgi/sannandjango/static/
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi$ echo "Statically see you at jyrinki.com."|tee publicwsgi/sannandjango/static/index.html
+                        Statically see you at jyrinki.com.
+                    </pre>
+
                     <p><h6 class="card-subtitle mb-2 text-muted">Yhdistetään Python Apacheen</h6></p>
 
+                    <p>Tehdään sannandjango.conf tiedosto ohjeen mallin mukaan</p>
+                    <pre>
+                        $ sudoedit /etc/apache2/sites-available/sannandjango.conf
+                    </pre>
+                    <p>sisältö</p>
+                    <pre>
+                        Define TDIR /home/sanna/publicwsgi/sannandjango
+                        Define TWSGI /home/sanna/publicwsgi/sannandjango/sannandjango/wsgi.py
+                        Define TUSER sanna
+                        Define TVENV /home/sanna/publicwsgi/env/lib/python3.9/site-packages
+
+                        &lt;VirtualHost *:80&gt;
+                            Alias /static/ ${TDIR}/static/
+                            &lt;Directory ${TDIR}/static/&gt;
+                                Require all granted
+                            &lt;/Directory&gt;
+
+                            WSGIDaemonProcess ${TUSER} user=${TUSER} group=${TUSER} threads=5 python-path="${TDIR}:${TVENV}"
+                            WSGIScriptAlias / ${TWSGI}
+                            &lt;Directory ${TDIR}&gt;
+                                WSGIProcessGroup ${TUSER}
+                                WSGIApplicationGroup %{GLOBAL}
+                                WSGIScriptReloading On
+                                &lt;Files wsgi.py&gt;
+                                    Require all granted
+                                &lt;/Files&gt;
+                            &lt;/Directory&gt;
+
+                        &lt;/VirtualHost&gt;
+
+                        Undefine TDIR
+                        Undefine TWSGI
+                        Undefine TUSER
+                        Undefine TVENV
+                    </pre>
+
+                    <p>Asennettetaan apachelle wsgi moduuli</p>
+                    <pre>
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi/sannandjango$ sudo apt-get -y install libapache2-mod-wsgi-py3
+                        sudo: unable to resolve host debian-1cpu-1gb-fi-hel1: Name or service not known
+                        Reading package lists... Done
+                        Building dependency tree... Done
+                        Reading state information... Done
+                        The following NEW packages will be installed:
+                          libapache2-mod-wsgi-py3
+                        0 upgraded, 1 newly installed, 0 to remove and 3 not upgraded.
+                        Need to get 99.7 kB of archives.
+                        After this operation, 293 kB of additional disk space will be used.
+                        Get:1 http://deb.debian.org/debian bullseye/main amd64 libapache2-mod-wsgi-py3 amd64 4.7.1-3+b1 [99.7 kB]
+                        Fetched 99.7 kB in 0s (8645 kB/s)
+                        Selecting previously unselected package libapache2-mod-wsgi-py3.
+                        (Reading database ... 38704 files and directories currently installed.)
+                        Preparing to unpack .../libapache2-mod-wsgi-py3_4.7.1-3+b1_amd64.deb ...
+                        Unpacking libapache2-mod-wsgi-py3 (4.7.1-3+b1) ...
+                        Setting up libapache2-mod-wsgi-py3 (4.7.1-3+b1) ...
+                        apache2_invoke: Enable module wsgi
+                    </pre>
+
+                    <p>Tarkistetaan syntaksi</p>
+                    <pre>
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi/sannandjango$ /sbin/apache2ctl configtest
+                        AH00557: apache2: apr_sockaddr_info_get() failed for debian-1cpu-1gb-fi-hel1
+                        AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message
+                        Syntax OK
+                    </pre>
+
+                    <p>Otetaan käyttöön</p>
+                    <pre>
+                        $ sudo systemctl restart apache2
+                    </pre>
+
+                    <p>Testataan, curl joudutaan välissä asentamaan, koska käskyä ei löydy</p>
+                    <pre>
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi/sannandjango$ curl -s localhost|grep title
+                        -bash: curl: command not found
+
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi/sannandjango$ sudo apt-get -y install curl
+                        sudo: unable to resolve host debian-1cpu-1gb-fi-hel1: Name or service not known
+                        Reading package lists... Done
+                        Building dependency tree... Done
+                        Reading state information... Done
+                        The following NEW packages will be installed:
+                          curl
+                        0 upgraded, 1 newly installed, 0 to remove and 3 not upgraded.
+                        Need to get 267 kB of archives.
+                        After this operation, 436 kB of additional disk space will be used.
+                        Get:1 http://deb.debian.org/debian bullseye/main amd64 curl amd64 7.74.0-1.3+deb11u1 [267 kB]
+                        Fetched 267 kB in 0s (16.1 MB/s)
+                        Selecting previously unselected package curl.
+                        (Reading database ... 38714 files and directories currently installed.)
+                        Preparing to unpack .../curl_7.74.0-1.3+deb11u1_amd64.deb ...
+                        Unpacking curl (7.74.0-1.3+deb11u1) ...
+                        Setting up curl (7.74.0-1.3+deb11u1) ...
+                        
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi$ curl -s jyrinki.com|grep title
+                        &lt;title&gt;DisallowedHost
+                                at /&lt;/title&gt;
+                          &lt;input type="hidden" name="title"
+                    </pre>
+                    <p>Sivu ei toimi kuten ohjeessa, jatketaan kuitenkin eteenpäin</p>
+
                     <p><h6 class="card-subtitle mb-2 text-muted">Disabloidaan DEBUG</h6></p>
+
+                    <p>Editoidaan settings.py tiedostoon DEBUG moodi false ja sallitut sivut</p>
+                    <pre>
+                        $ cd
+                        $ cd publicwsgi/sannandjango/
+                        $ micro sannandjango/settings.py 
+                        ...
+                        DEBUG = False
+                        ALLOWED_HOSTS = ["jyrinki.com"]
+
+                        $ touch sannandjango/wsgi.py
+                        $ sudo systemctl restart apache2
+
+                        curl -s jyrinki.com|grep title
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi/sannandjango$ curl -s jyrinki.com|grep title
+                        &lt;title&gt;Not Found&lt;/title&gt;
+                    </pre>
+                    <p>Nyt niinkuin pitääkin, ei jyrinki.com sivulla näy mitään sivua, koska sellaista ei ole tehty, eikä myöskään debug-sivua näy.
+                    </p>
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Nyt voidaan lähteä tekemään Django-sovellusta ja luoda käyttäjä kuten kehitysympäristössäkin</h6></p>
+
+                    <p>Admin sivu toimii, mutta sen tyylit ei toimi</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/b_3.PNG" alt="Responsive image">
+
+                    <p>Korjataan asia siirtämällä myös css-tyylisivut static hakemistoon.
+                        Muokataan settings.py tiedostoa.
+                    </p>
+                    <pre>
+                        $ cd
+                        $ cd publicwsgi/sannandjango/
+                        $ micro sannandjango/settings.py
+                    </pre>
+
+                    <p>Lisätään tiedostoon seuraavat rivit</p>
+                    <pre>
+                        import os
+                        STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+                    </pre>
+
+                    <p>Ajetaan tiedostot static hakemistoon</p>
+                    <pre>
+                        (env) sanna@debian-1cpu-1gb-fi-hel1:~/publicwsgi/sannandjango$ ./manage.py collectstatic
+
+                        You have requested to collect static files at the destination
+                        location as specified in your settings:
+                        
+                            /home/sanna/publicwsgi/sannandjango/static
+                        
+                        This will overwrite existing files!
+                        Are you sure you want to do this?
+                        
+                        Type 'yes' to continue, or 'no' to cancel: yes
+                        
+                        128 static files copied to '/home/sanna/publicwsgi/sannandjango/static'.
+                    </pre>
+
+                    <p>Nyt sisäännkirjautumissivulla näkyy tyylit</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/b_4.PNG" alt="Responsive image">
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Luodaan sovellus</h6></p>
+
+                    <p>Luodaan admin käyttäjä kuten kehitysserverilläkin</p>
+                    <pre>
+                        $ ./manage.py makemigrations
+                        $ ./manage.py migrate
+                        $ sudo apt-get install pwgen
+                        $ pwgen -s 20 1
+                        $ ./manage.py createsuperuser
+                    </pre>
+
+                    <p>Nyt päästään admin-käyttöliittymälle</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/b_5.PNG" alt="Responsive image">
+
+                    <p>Luodaan sovellus friends</p>
+                    <pre>
+                        $ ./manage.py startapp friend
+                        $ micro sannandjango/settings.py # lisätään asennettujen sovellusten listaan
+                    </pre>
+
+                    <p>Muokataan model</p>
+                    <pre>
+                        $ micro friend/models.py
+                        from django.db import models
+
+                        class Friend(models.Model):
+                            name = models.CharField(max_length = 300)
+                        
+                            def __str__(self):
+                                return self.name
+                    </pre>
+
+                    <p>Ajetaan migraatiot</p>
+                    <pre>
+                        $ ./manage.py makemigrations
+                        $ ./manage.py migrate  
+                    </pre>
+
+                    <p>Rekisteröidään tietokanta
+                    </p>
+                    <pre>
+                        $ micro friend/admin.py
+                        from django.contrib import admin
+                        from . import models
+
+                        admin.site.register(models.Friend)
+                    </pre>
+
+                    <p>Admin käyttöliittymältä nähdään nyt ystävät</p>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/b_6.PNG" alt="Responsive image">
+
 
                 </div>
             </div>
