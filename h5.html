@@ -83,7 +83,7 @@
                         $ sudo apt-get -y install virtualenv
                     </pre>
 
-                    <p>Luodaan /env hakemisto, jolla on käytössää uusimmat paketit ja python3</p>
+                    <p>Luodaan /env hakemisto, jolla on käytössä uusimmat paketit ja python3</p>
                     <pre>
                         $ virtualenv --system-site-packages -p python3 env/
                     </pre>
@@ -164,7 +164,7 @@
                     <p>Käynnistys valittaa migraatioiden puutteesta, muttei vielä välitetä tästä, vaan testataan selaimella http://127.0.0.1:8000/ osoitetta, asennus toimii!!</p>
                     <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_1.PNG" alt="Responsive image">
 
-                    <p><h6 class="card-subtitle mb-2 text-muted">Tehdään admin-käyttöliittymä</h6></p>
+                    <p><h6 class="card-subtitle mb-2 text-muted">Tehdään käyttäjät admin-käyttöliittymälle</h6></p>
 
                     <p>Admin käyttöliittymälle pääsee, muttei vielä ole tunnusta, joka toimisi</p>
                     <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/a_2.PNG" alt="Responsive image">
@@ -220,7 +220,7 @@
                         $ pwgen -s 20 1
                     </pre>
                                 
-                    <p>Luodaan admin käyttäjä</p>
+                    <p>Luodaan admin käyttäjä käyttäen luotua salasanaa</p>
                     <pre>
                         $ ./manage.py createsuperuser
                          Username (leave blank to use &apos;sanna&apos;): 
@@ -281,7 +281,7 @@
                         class Book(models.Model):
                             author = models.CharField(max_length=300)
                             title = models.CharField(max_length=300)
-                            available = models.BooleanField(default(default=True)
+                            available = models.BooleanField(default=True)
                     </pre>
 
                     <p>Ajetaan migraatiot, jolloin modeliin mukaan syntyy taulut tietokantaan</p>
@@ -624,7 +624,7 @@
                     <p>Nyt päästään admin-käyttöliittymälle</p>
                     <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h5_images/b_5.PNG" alt="Responsive image">
 
-                    <p>Luodaan sovellus friends</p>
+                    <p>Luodaan sovellus friend</p>
                     <pre>
                         $ ./manage.py startapp friend
                         $ micro sannandjango/settings.py # lisätään asennettujen sovellusten listaan
