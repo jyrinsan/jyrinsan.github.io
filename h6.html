@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <title>Linux palvelimet</title>
+    </head>
+    <body>
+        <nav class="nav nav-tabs">
+            <a class="nav-link" href="index.html">Etusivu</a>
+            <a class="nav-link" href="h1.html">H1</a>
+            <a class="nav-link" href="h2.html">H2</a>
+            <a class="nav-link" href="h3.html">H3</a>
+            <a class="nav-link" href="h4.html">H4</a>
+            <a class="nav-link" href="h4.html">H5</a>
+            <a class="nav-link" active>H6</a>
+        </nav>
+
+        <div class="jumbotron" style="padding-top: 20px;">           
+            <h1>Harjoitus H6 - Shell skriptejä ja vanha labratehtävä</h1>
+
+            <div class="container" style="padding-top: 20px;">
+                <div class="row">
+                    <div class="col-3">Nimi</div>
+                    <div class="col">Sanna Jyrinki</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Oppilaitos</div>
+                    <div class="col">Haaga-Helian ammattikorkeakoulu</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Kurssi</div>
+                    <div class="col">
+                        <a href="https://terokarvinen.com/2021/linux-palvelimet-ict4tn021-3018/">linux-palvelimet-ict4tn021-3018</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Opettaja</div>
+                    <div class="col">Tero Karvinen</div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 20px;">
+                <div class="row">
+                    <div class="col-3">Tietokoneena</div>
+                    <div class="col">Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Käyttöjärjestelmä</div>
+                    <div class="col">Windows 10 Home, Versio 20H2</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Linux</div>
+                    <div class="col">Virtual Box 6.1, Debian 11.2</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <p>Pikalinkit</p>
+                    <ul>
+                    <li><a href="#c">Tehtävä c</a></li>
+                    <li><a href="#d">Tehtävä d</a></li>
+                    <li><a href="#e">Tehtävä e</a></li>
+                    </ul>
+
+                    <h5 class="card-title">Lähteet</h5>
+                    <p>Cooper, M. 2014. Advanced Bash-Scripting Guide 
+                        Luettavissa 
+                    <a href="https://tldp.org/LDP/abs/html/">
+                        https://tldp.org/LDP/abs/html/    
+                    </a>. Luettu 13.3.2022.
+                    </p>
+                    <p>Karvinen, T. 2022. Linux palvelimet 2022. 
+                        Luettavissa 
+                    <a href="https://terokarvinen.com/2021/linux-palvelimet-ict4tn021-3018/">
+                        https://terokarvinen.com/2021/linux-palvelimet-ict4tn021-3018/    
+                    </a>. Luettu 13.3.2022.
+                    </p>
+                    <p>Karvinen, T. 2021. Final Lab for Linux Server Course 2021 Autumn 
+                        Luettavissa 
+                    <a href="https://terokarvinen.com/2021/final-lab-for-linux-server-course-linux-palvelimet-ict4tn021-3016/?fromSearch=arvioitava">
+                        https://terokarvinen.com/2021/final-lab-for-linux-server-course-linux-palvelimet-ict4tn021-3016/?fromSearch=arvioitava    
+                    </a>. Luettu 13.3.2022.
+                    </p>
+                    <p>Karvinen, T. 2018. Name Based Virtual Hosts on Apache – Multiple Websites to Single IP Address.
+                        Luettavissa <a href="https://terokarvinen.com/2018/name-based-virtual-hosts-on-apache-multiple-websites-to-single-ip-address/?fromSearch=hosts">
+                            https://terokarvinen.com/2018/name-based-virtual-hosts-on-apache-multiple-websites-to-single-ip-address/?fromSearch=hosts</a>. Luettu 13.3.2022.
+                    </p>
+                    <p>Karvinen, T. 2007. Shell Scripting 
+                        Luettavissa 
+                    <a href="https://terokarvinen.com/2007/shell-scripting-4/">
+                        https://terokarvinen.com/2007/shell-scripting-4/    
+                    </a>. Luettu 13.3.2022.
+                    </p>
+                    <p>Karvinen, T. 2006. about users 
+                        Luettavissa 
+                    <a href="https://terokarvinen.com/2006/aboutusers-4/">
+                        https://terokarvinen.com/2006/aboutusers-4/    
+                    </a>. Luettu 13.3.2022.
+                    </p>
+
+                    <h5 class="card-title" id="c">Tehtävä c, uusi komento Linuxiin</h5>
+
+                    <p>Lisätään uusi käyttäjä 'minna', jotta tämän tehtävän komentoa voidaan testata.
+                    Käyttäjää ei aseteta superuseriksi.
+                    </p>
+                    <pre>
+                        $ sudo adduser minna
+                    </pre>
+                  
+                    <p>Tehdään micro-editorilla uusi komento 'kayttajat'.</p>
+                    <pre>
+                        $ micro kayttajat
+                    </pre>
+                    <img style="border: solid 1px" class="card-img-bottom img-fluid" src="h6_images/c_1.PNG" alt="Responsive image">
+                    <p>Echo tulostaa. 
+                        For loopissa loopata kaikki hakemistot /home/ hakemiston alla eli käyttäjien kotihakemistot.
+                        Ekassa loopissa tutkitaan käyttäjät, jotka ovat edelleen sisäänkirjautuneita eli joille last käskyn ensimmäisessä rivissä esiintyy 'logged in'.
+                        Tulostetaan näiden käyttäjien tunnus ja viimeisin login rivi.
+                        Toisessa loopissa puolestaan tutkitaan ne käyttäjät, jotka eivät ole enää sisäänkirjautuneita, eli last käskyn
+                        uusin rivi näyttää merkin '-' eli myös loppuajan kirjautumiselle.
+                        Tulostetaan nämä käyttäjät. 
+                    </p>
+
+                    <p>Säädetään käyttöoikeudet niin, että kaikki voivat ajaa komentoa (a=all, x=execute).</p>
+                    <pre>
+                        $ chmod a+x kayttajat
+                    </pre>
+
+                    <p>Testataan omassa kotihakemistossani /home/sanna komentoa.</p>
+                    <pre>
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ pwd
+                        /home/sanna
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ ./kayttajat
+                        
+                        =====Sisäänkirjautuneet käyttäjät=====
+                        sanna Sun Mar 13 11:48 still logged in
+                        
+                        =====Uloskirjautuneet käyttäjät=====
+                        minna Sun Mar 13 11:47 - 11:48 (00:00)
+                        </pre>
+                    <p>Vaihdetaan hakemistoksi /home, jolloin komentoa ei enää löydy</p>
+                    <pre>
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/home</b></font>$ ./kayttajat
+                        bash: ./kayttajat: No such file or directory
+                    </pre>
+                    
+                    <p>Tehdään skripti kaikille käyttäjille kaikissa hakemistoissa toimivaksi kopioimalla se hakemistoon /usr/local/bin/
+                    <pre>
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo cp kayttajat /usr/local/bin/
+                    </pre>    
+                    <p>Nyt komento toimii muussakin hakemistossa</p>    
+                    <pre>
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cd /home
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/home</b></font>$ kayttajat
+                        
+                        =====Sisäänkirjautuneet käyttäjät=====
+                        sanna Sun Mar 13 11:48 still logged in
+                        
+                        =====Uloskirjautuneet käyttäjät=====
+                        minna Sun Mar 13 11:47 - 11:48 (00:00)
+                    </pre></p>
+
+                    <p>Kirjaudutaan käyttäjänä minna ja kokeillaan komentoa</p>
+                    <img style="border: solid 1px" class="card-img-left img-fluid" src="h6_images/c_2.PNG" alt="Responsive image">
+                    <img style="border: solid 1px" class="card-img-left img-fluid" src="h6_images/c_3.PNG" alt="Responsive image">
+                    <pre><font color="#55FF55"><b>minna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ kayttajat
+
+                        =====Sisäänkirjautuneet käyttäjät=====
+                        minna Sun Mar 13 15:27 still logged in
+                        sanna Sun Mar 13 11:48 still logged in
+                        
+                        =====Uloskirjautuneet käyttäjät=====
+                    </pre>   
+                    <h5 class="card-title" id="d">Tehtävä d, uusi komento Linuxiin parametrilla</h5>  
+                    <p>Tehdään uusi skripti 'moikkaa', vaiheet on muuten samat kuin edellisessä kohdassa, 
+                        mutta skriptin sisällä hyödynnetään parametria
+                    </p>
+                    <pre>
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ micro moikkaa
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cat moikkaa
+                        #!/bin/bash
+                        echo &quot;Moi vaan $1&quot;;
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ chmod a+x moikkaa
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ ./moikkaa timo
+                        Moi vaan timo
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo cp moikkaa /usr/local/bin/
+                        [sudo] password for sanna: 
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ moikkaa
+                        Moi vaan 
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ moikkaa paula
+                        Moi vaan paula
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cd /etc
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/etc</b></font>$ moikkaa sanna
+                        Moi vaan sanna
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/etc</b></font>$ 
+                    </pre>   
+                    <p>Skriptin sisällä parametri otetaan kiinni $1, jossa 1 viittaa ensimmäiseen parametriin.
+                        Jos parametreja olisi monta, olisi eka parametri $1, toka $2, kolmas $3 jne.
+                    </p>  
+                    
+                    <h5 class="card-title" id="e">Tehtävä e, vanha arvioitava laboratorioharjoitus</h5>  
+
+                    <p>Valitsin vanhan laboratorioharjoituksen syksyltä 2021, linkki tehtävään
+                        <a href="https://terokarvinen.com/2021/final-lab-for-linux-server-course-linux-palvelimet-ict4tn021-3016/?fromSearch=arvioitava">
+                            https://terokarvinen.com/2021/final-lab-for-linux-server-course-linux-palvelimet-ict4tn021-3016/?fromSearch=arvioitava    
+                        </a>
+
+                        <p><h6 class="card-subtitle mb-2 text-muted">Esivalmistelut</h6></p>
+
+                        <p>Aluksi loin uuden virtuaalikoneen VirtualBoxiin ja asensin siihen Debian11:n harjoituksen 1 ohjeella
+                            <a href="h1.html">H1</a>.
+                        En asentanut Debianiin mitään, vaan se oli puhdas asennus, ainostaan Guest Additionsin asensin, jotta näyttö skaalautuu koko ruudulle.
+                        </p>
+
+                        <p>Suoritin koneella seuraavat käskyt ohjeesta, jotka menivät ok</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt-get update
+                            [sudo] password for sanna: 
+                            Get:1 http://security.debian.org/debian-security bullseye-security InRelease [44,1 kB]
+                            Hit:2 http://deb.debian.org/debian bullseye InRelease  
+                            Get:3 http://deb.debian.org/debian bullseye-updates InRelease [39,4 kB]
+                            Get:4 http://deb.debian.org/debian bullseye/main Sources [8 626 kB]
+                            Get:5 http://security.debian.org/debian-security bullseye-security/main Sources [109 kB]
+                            Get:6 http://security.debian.org/debian-security bullseye-security/main amd64 Packages [121 kB]
+                            Get:7 http://security.debian.org/debian-security bullseye-security/main Translation-en [77,5 kB]
+                            Get:8 http://deb.debian.org/debian bullseye-updates/main Sources [1 868 B]  
+                            Get:9 http://deb.debian.org/debian bullseye-updates/main amd64 Packages [2 596 B]
+                            Get:10 http://deb.debian.org/debian bullseye-updates/main Translation-en [2 343 B]
+                            Fetched 9 025 kB in 2s (4 912 kB/s)                           
+                            Reading package lists... Done
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt-get -y install wget
+                            Reading package lists... Done
+                            Building dependency tree... Done
+                            Reading state information... Done
+                            The following NEW packages will be installed:
+                              wget
+                            0 upgraded, 1 newly installed, 0 to remove and 112 not upgraded.
+                            Need to get 964 kB of archives.
+                            After this operation, 3 559 kB of additional disk space will be used.
+                            Get:1 http://deb.debian.org/debian bullseye/main amd64 wget amd64 1.21-1+deb11u1 [964 kB]
+                            Fetched 964 kB in 0s (4 677 kB/s)
+                            Selecting previously unselected package wget.
+                            (Reading database ... 221561 files and directories currently installed.)
+                            Preparing to unpack .../wget_1.21-1+deb11u1_amd64.deb ...
+                            Unpacking wget (1.21-1+deb11u1) ...
+                            Setting up wget (1.21-1+deb11u1) ...
+                            Processing triggers for man-db (2.9.4-2) ...
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ wget https://terokarvinen.com/loota/ou8eem/leaf-private-installer
+                            --2022-03-13 17:12:59--  https://terokarvinen.com/loota/ou8eem/leaf-private-installer
+                            Resolving terokarvinen.com (terokarvinen.com)... 139.162.131.217
+                            Connecting to terokarvinen.com (terokarvinen.com)|139.162.131.217|:443... connected.
+                            HTTP request sent, awaiting response... 200 OK
+                            Length: 20779463 (20M)
+                            Saving to: ‘leaf-private-installer’
+                            
+                            leaf-private-instal 100%[================&gt;]  19,82M  11,7MB/s    in 1,7s    
+                            
+                            2022-03-13 17:13:01 (11,7 MB/s) - ‘leaf-private-installer’ saved [20779463/20779463]
+                            
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ chmod u+x leaf-private-installer
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo ./leaf-private-installer install
+                            <font color="#00AAAA">INFO</font>[0000] OK - Agent file bundle extracted to &quot;/opt/ccta/&quot;. 
+                            <font color="#00AAAA">INFO</font>[0000] OK - Updated agent binary - now 0.1.47-alpha-20211012-0721 (go1.15.2 x86_64 linux debian 11.2 virtual ) 
+                            <font color="#00AAAA">INFO</font>[0000] OK - Agent main PGP keypair generated.       
+                            <font color="#00AAAA">INFO</font>[0000] Apply result: 2-CHANGED - sanna-virtualbox - counter 40
+                              CHANGED - module agent
+                                  CHANGED file /etc/cron.d/ccta &quot;Created new file.\nUpdated contents.&quot;
+                                  CHANGED file /etc/conftero-managed &quot;Created new file.\nUpdated contents.&quot;
+                              CHANGED - module task
+                                  CHANGED file /tmp/task.txt &quot;Created new file.\nUpdated contents.&quot;
+                              OK - module tcollect 
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cat /tmp/task.txt 
+                            # Tervetuloa Kippo Oy:n tietohallintojohtajaksi!
+                            
+                            Onnea! Olet nyt Kippo Oy:n tietohallintojohtaja (ja -osasto). 
+                            
+                            ## Oma käyttäjä
+                            
+                            Tee järjestelmään oma käyttäjä, jolla on tiedoissa oma nimesi. Laita tälle 
+                            käyttäjälle ylläpito-oikeudet (sudo). 
+                            
+                            Laita tämän käyttäjäsi kotihakemistoon dokumentti &apos;lab.txt&apos;. Laita tiedoston 
+                            alkuun oma nimesi ja linkki kotitehtäväpakettiisi. 
+                            
+                            Laita tähän tiedot kaikista palveluista ja testit, joilla olet tarkistanut niiden 
+                            toimivuuden. Laita tiedostoon myös kaikki salasanat. 
+                            
+                            Suojaa tiedosto (chmodilla) niin, että ulkopuoliset käyttäjät eivät pysty lukemaan sitä. 
+                            
+                            Tiedoston nimen tulee olla oikein, eli se tulee löytyä &apos;ls /home/*/lab.txt&apos;.
+                            
+                            ## Turvallisesti etänä
+                            
+                            Aiot kuulemma siirtyä etätöihin Hawajille. Valmistaudu ylläpitämään konetta 
+                            ssh:lla. (Testaa paikallisesti, että SSH toimii). 
+                            
+                            Suojaa kone tulimuurilla.
+                            
+                            --
+                            
+                            Olet löytänyt ohjeen, joka päivittyy... Jos olet tehnyt kaikki tehtävät, 
+                            sano siitä ääneen ja chatissa. 
+                            
+                            http://TeroKarvinen.com
+                            </pre>
+                    </p>
+
+                    <p><h6 class="card-subtitle mb-2 text-muted">Oma käyttäjä</h6></p>
+
+                    <p>Aluksi luon uuden käyttäjän omalle nimelleni</p>
+                    <pre>
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo adduser sannaj
+                        [sudo] password for sanna: 
+                        Adding user `sannaj&apos; ...
+                        Adding new group `sannaj&apos; (1001) ...
+                        Adding new user `sannaj&apos; (1001) with group `sannaj&apos; ...
+                        Creating home directory `/home/sannaj&apos; ...
+                        Copying files from `/etc/skel&apos; ...
+                        New password: 
+                        Retype new password: 
+                        passwd: password updated successfully
+                        Changing the user information for sannaj
+                        Enter the new value, or press ENTER for the default
+                            Full Name []: Sanna Jyrinki
+                            Room Number []: 
+                            Work Phone []: 
+                            Home Phone []: 
+                            Other []: 
+                        Is the information correct? [Y/n] Y
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo adduser sannaj sudo
+                        Adding user `sannaj&apos; to group `sudo&apos; ...
+                        Adding user sannaj to group sudo
+                        Done.
+                        <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo adduser sannaj adm
+                        Adding user `sannaj&apos; to group `adm&apos; ...
+                        Adding user sannaj to group adm
+                        Done.
+                        </pre>
+
+                        <p>Luodaan käyttäjän kotihakemistoon tiedosto lab.txt</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ micro lab.txt
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cat lab.txt
+                            Sanna Jyrinki
+                            https://jyrinsan.github.io/
+                        </pre>
+
+                        <p>Muutetaan tiedoston oikeuksia, niin ettei muilla ole siihen oikeuksia</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ chmod o-r lab.txt
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ ls -la lab.txt
+                            -rw-r----- 1 sanna sanna 42 13. 3. 17:54 lab.txt
+                        </pre>
+
+                        <p><h6 class="card-subtitle mb-2 text-muted">Turvallisesti etänä</h6></p>
+
+                        <p>Asennetaan ssh</p>
+                        <pre>
+                            $ sudo apt-get update
+                            $ sudo apt install openssh-server
+                        </pre>
+                        <p>Testataanko onko ssh päällä -> ei ollut</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo systemctl status ssh
+                            ● ssh.service - OpenBSD Secure Shell server
+                                 Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: e<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                                 Active: inactive (dead)
+                                   Docs: man:sshd(8)
+                                         man:sshd_config(5)
+                        </pre>
+
+                        <p>Startataan ja testataan, nyt se käynnistyi ok</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo service ssh start
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo systemctl status ssh
+                            <font color="#55FF55"><b>●</b></font> ssh.service - OpenBSD Secure Shell server
+                                 Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: e<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                                 Active: <font color="#55FF55"><b>active (running)</b></font> since Sun 2022-03-13 18:28:49 EET; 2s ago
+                                   Docs: man:sshd(8)
+                                         man:sshd_config(5)
+                                Process: 10869 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCES<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                               Main PID: 10870 (sshd)
+                                  Tasks: 1 (limit: 4505)
+                                 Memory: 1.1M
+                                    CPU: 14ms
+                                 CGroup: /system.slice/ssh.service
+                                         └─10870 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+                            
+                            maalis 13 18:28:49 sanna-virtualbox systemd[1]: Starting OpenBSD Secure Shell s<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            maalis 13 18:28:49 sanna-virtualbox sshd[10870]: Server listening on 0.0.0.0 po<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            maalis 13 18:28:49 sanna-virtualbox sshd[10870]: Server listening on :: port 22.
+                            maalis 13 18:28:49 sanna-virtualbox systemd[1]: Started OpenBSD Secure Shell se<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                        </pre>
+
+                        <p>Kokeilen kirjautua luomallani sannaj tunnuksella paikallisesti, tämä onnistuu</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ ssh sannaj@localhost
+                            The authenticity of host &apos;localhost (::1)&apos; can&apos;t be established.
+                            ECDSA key fingerprint is SHA256:PgV7yWlHUTQZa0yRxwIRJ0zd4lNNWp3L9xjy0BQs708.
+                            Are you sure you want to continue connecting (yes/no/[fingerprint])? Y
+                            Please type &apos;yes&apos;, &apos;no&apos; or the fingerprint: yes
+                            Warning: Permanently added &apos;localhost&apos; (ECDSA) to the list of known hosts.
+                            sannaj@localhost&apos;s password: 
+                            Linux sanna-virtualbox 5.10.0-10-amd64 #1 SMP Debian 5.10.84-1 (2021-12-08) x86_64
+                            
+                            The programs included with the Debian GNU/Linux system are free software;
+                            the exact distribution terms for each program are described in the
+                            individual files in /usr/share/doc/*/copyright.
+                            
+                            Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+                            permitted by applicable law.
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ 
+                        </pre>
+
+                        <p>Asennan ja enabloin tulimuurin</p>
+                        <pre>
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo apt-get -y install ufw
+
+                            We trust you have received the usual lecture from the local System
+                            Administrator. It usually boils down to these three things:
+                            
+                                #1) Respect the privacy of others.
+                                #2) Think before you type.
+                                #3) With great power comes great responsibility.
+                            
+                            [sudo] password for sannaj: 
+                            Reading package lists... Done
+                            Building dependency tree... Done
+                            Reading state information... Done
+                            The following NEW packages will be installed:
+                              ufw
+                            0 upgraded, 1 newly installed, 0 to remove and 112 not upgraded.
+                            Need to get 167 kB of archives.
+                            After this operation, 857 kB of additional disk space will be used.
+                            Get:1 http://deb.debian.org/debian bullseye/main amd64 ufw all 0.36-7.1 [167 kB]
+                            Fetched 167 kB in 0s (1 032 kB/s)
+                            Preconfiguring packages ...
+                            Selecting previously unselected package ufw.
+                            (Reading database ... 221771 files and directories currently installed.)
+                            Preparing to unpack .../archives/ufw_0.36-7.1_all.deb ...
+                            Unpacking ufw (0.36-7.1) ...
+                            Setting up ufw (0.36-7.1) ...
+                            
+                            Creating config file /etc/ufw/before.rules with new version
+                            
+                            Creating config file /etc/ufw/before6.rules with new version
+                            
+                            Creating config file /etc/ufw/after.rules with new version
+                            
+                            Creating config file /etc/ufw/after6.rules with new version
+                            Created symlink /etc/systemd/system/multi-user.target.wants/ufw.service → /lib/systemd/system/ufw.service.
+                            Processing triggers for rsyslog (8.2102.0-2) ...
+                            invoke-rc.d: policy-rc.d denied execution of try-restart.
+                            Processing triggers for man-db (2.9.4-2) ...
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo ufw enable
+                            Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+                            Firewall is active and enabled on system startup
+                        </pre>
+
+                        <p>Restarttaan Debianin, jotta tulimuuri aktivoituu</p>
+
+                        <p><h6 class="card-subtitle mb-2 text-muted">Arvostetut asiantuntijamme</h6></p>
+
+                        <p>Loin tunnukset käyttäjille</p>
+                        <pre>
+                            $sudo adduser ossi
+                            ... 
+                        </pre>
+                        <p>Listasin tunnukset ja salasanat lab.txt tiedostoon</p>
+                        <pre>
+                            Sanna Jyrinki
+                            https://jyrinsan.github.io/
+                            
+                            ossi ossi123
+                            Ossi Otsomaja: user=ossi, password=ossi123
+                            Arnold Sjöbrengrörez: user=arnold, password=arnold123
+                            Einari Vähäkäähkö: user=einari, password=einari123
+                            Erkki Esimerkki: user=erkki, password=erkki123
+                            Maija Mallihenkilö: user=maija, password=maija123
+                        </pre>
+
+                        <p><h6 class="card-subtitle mb-2 text-muted">Mikä verkko, mikä meininki?</h6></p>
+
+                        <p>Teen microlla komennon netsee, säädän sen oikeudet ja teen sen kaikille käyttäjille</p>
+                        <pre>
+                            $ micro netsee
+                            $ chmod a+x netsee
+                            $ sudo cp netsee /usr/local/bin/
+                        </pre>
+                        <p>Tiedoston sisältö</p>
+                        <pre>
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ cat netsee
+                            echo &quot;Route&quot;
+                            ip route
+                            echo
+                            echo &quot;Ip&quot;
+                            ip -br address
+                        </pre>
+                        <p>Käsky toimii ja tulostaa reititys- ja ip tietoja</p>
+                        <pre>
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ netsee
+                            Route
+                            default via 10.0.2.2 dev enp0s3 proto dhcp metric 100 
+                            10.0.2.0/24 dev enp0s3 proto kernel scope link src 10.0.2.15 metric 100 
+                            169.254.0.0/16 dev enp0s3 scope link metric 1000 
+                            
+                            Ip
+                            lo               UNKNOWN        127.0.0.1/8 ::1/128 
+                            enp0s3           UP             10.0.2.15/24 fe80::52b6:edcd:f7a2:823a/64 
+                        </pre>
+
+                        <p><h6 class="card-subtitle mb-2 text-muted">Kippo webbipalvelu</h6></p>
+                        <p>Webbipalveluita varten tarvitaan tietysti webbiserveri eli apache2, noudatetaan Tero Karvisen sivulta löytyvää ohjetta</p>
+                        <p>Ohje <a href="https://terokarvinen.com/2018/name-based-virtual-hosts-on-apache-multiple-websites-to-single-ip-address/?fromSearch=hosts">
+                            Name Based Virtual Hosts on Apache – Multiple Websites to Single IP Address</a></p>
+                        
+                        <p>Asennetaan apache2 ja korvataan oletussivu</p>
+                        <pre>
+                            $ sudo apt-get -y install apache2
+                            $ echo "Default"|sudo tee /var/www/html/index.html
+                        </pre>
+
+                        <p>Apache ei ollut päällä, joten käynnistetään se ja testataan</p>
+                        <pre>
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo service apache2 start
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo systemctl status apache2
+                            <font color="#55FF55"><b>●</b></font> apache2.service - The Apache HTTP Server
+                                 Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor pr<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                                 Active: <font color="#55FF55"><b>active (running)</b></font> since Sun 2022-03-13 19:23:14 EET; 2s ago
+                                   Docs: https://httpd.apache.org/docs/2.4/
+                                Process: 7694 ExecStart=/usr/sbin/apachectl start (code=exited, status=0<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                               Main PID: 7705 (apache2)
+                                  Tasks: 55 (limit: 4505)
+                                 Memory: 8.7M
+                                    CPU: 22ms
+                                 CGroup: /system.slice/apache2.service
+                                         ├─7705 /usr/sbin/apache2 -k start
+                                         ├─7706 /usr/sbin/apache2 -k start
+                                         └─7707 /usr/sbin/apache2 -k start
+                            
+                            maalis 13 19:23:14 sanna-virtualbox systemd[1]: Starting The Apache HTTP Ser<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            maalis 13 19:23:14 sanna-virtualbox apachectl[7704]: AH00558: apache2: Could<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            maalis 13 19:23:14 sanna-virtualbox systemd[1]: Started The Apache HTTP Serv<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                        </pre>
+
+                        <p>Luodaan kippo.example.com:lle virtualhost</p>
+                        <pre>
+                            $ sudoedit /etc/apache2/sites-available/kippo.example.com.conf
+                            $ cat /etc/apache2/sites-available/kippo.example.com.conf
+                            &lt;VirtualHost *:80&gt;
+                             ServerName kippo.example.com
+                             ServerAlias www.kippo.example.com
+                             DocumentRoot /home/kippo/publicsites/kippo.example.com
+                             &lt;Directory /home/kippo/publicsites/kippo.example.com&gt;
+                               Require all granted
+                               &lt;/Directory>&gt;
+                               &lt;/VirtualHost&gt;
+                            $ sudo a2ensite kippo.example.com
+                            $ sudo systemctl restart apache2
+                        </pre>
+                        <p>luodaan sivu</p>
+                        <pre>
+                            $ sudo mkdir -p /home/kippo/publicsites/kippo.example.com/
+                            $ cd /home/kippo/publicsites/kippo.example.com
+                            $ sudo micro index.html
+                            $ cat index.html 
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang="fi"&gt;
+                                &lt;head&gt;
+                                    &lt;title&gt;Kippo webbosivu&lt;/title&gt;
+                                &lt;/head&gt;
+                                &lt;body>
+                                    &lt;h1&gt;Otsikko&lt;/h1&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </pre>
+                        <p>Simuloidaan nimipalvelinta ja laitetaan osoite tunnettujen hostien listalle</p>
+                        <pre>
+                            $ sudoedit /ets/hosts
+                            # Host addresses
+                            127.0.0.1  localhost
+                            127.0.1.1  sanna-virtualbox
+                            127.0.1.1  kippo.example.com
+                            ::1        localhost ip6-localhost ip6-loopback
+                            ff02::1    ip6-allnodes
+                            ff02::2    ip6-allrouters
+                        </pre>
+                        <p>Webbisivu kippo.example.com</p>
+                        <img style="border: solid 1px" class="card-img-left img-fluid" src="h6_images/e_1.PNG" alt="Responsive image">
+                
+                        <p>Tehdään kippo-webbisivun ylläpitoa varten webmasterille ryhmä kippo, 
+                            lisätään ossi siihen ja muokataan hakemiston ryhmäksi kippo. Säädetään hakemistoon ryhmän oikeudeksi write,
+                        jotta ossi saa muokata sen sisällä olevia webbisivuja.</p>
+                        <pre>
+                            $ sudo groupadd kippo
+                            $ sudo adduser ossi kippo
+                            $ sudo chgrp kippo kippo.example.com
+                            $ chmod g+w kippo.example.com/*
+                        </pre>
+                        <p>Kirjaudutaan ossina ja testataan, että ossi saa muokata sivua</p>
+                        <pre>
+                            <font color="#55FF55"><b>ossi@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/home/kippo/publicsites/kippo.example.com</b></font>$ micro index.html 
+                            <font color="#55FF55"><b>ossi@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/home/kippo/publicsites/kippo.example.com</b></font>$ cat index.html
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang=&quot;fi&quot;&gt;
+                                &lt;head&gt;	
+                                    &lt;title&gt;Kippo webbisivu&lt;/title&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;h1&gt;Ossin muokkaama otsikko&lt;/h1&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </pre>
+                        <img style="border: solid 1px" class="card-img-left img-fluid" src="h6_images/e_2.PNG" alt="Responsive image">
+
+                        <p><h6 class="card-subtitle mb-2 text-muted">Sanko webbipalvelu</h6></p>
+
+                        <p>Luodaan ryhmä sanko, ja lisätään siihen erkki ja einari</p>
+                        <pre>
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo groupadd sanko 
+                            [sudo] password for sannaj: 
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo adduser erkki sanko
+                            Adding user `erkki&apos; to group `sanko&apos; ...
+                            Adding user erkki to group sanko
+                            Done.
+                            <font color="#55FF55"><b>sannaj@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo adduser einari sanko
+                            Adding user `einari&apos; to group `sanko&apos; ...
+                            Adding user einari to group sanko
+                            Done.
+                        </pre>
+
+                        <p>Samaan tapaan kuin kippo, luodaan virtual host ja sivu</p>
+                        <pre>
+                            $ sudoedit /etc/apache2/sites-available/sanko.example.com.conf
+                            $ sudo a2ensite sanko.example.com
+                            $ sudo systemctl restart apache2
+                            
+                            $ sudo mkdir -p /home/sanko/publicsites/sanko.example.com/
+                            $ cd /home/sanko/publicsites/sanko.example.com
+                            $ sudo micro index.html
+                            
+                            $ sudoedit /ets/hosts
+                        </pre>
+                        <p>Tehdään ryhmä sanko ja lisätään siihen erkki ja einari, ja säädetään oikeudet</p>
+                        <pre>
+                            $ sudo groupadd sanko
+                            $ sudo adduser erkki sanko
+                            $ sudo adduser einari sanko
+                            $ sudo chgrp sanko sanko.example.com
+                            $ sudo chmod g+w sanko.example.com/*
+                        </pre>
+                        <p>Saatiin sanko.example.com webbisivu</p>
+                        <img style="border: solid 1px" class="card-img-left img-fluid" src="h6_images/e_3.PNG" alt="Responsive image">
+                
+                        <p>testataan, että erkki pystyy päivittämään sivua</p>
+                        <pre>
+                            <font color="#55FF55"><b>erkki@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/home/sanko/publicsites/sanko.example.com</b></font>$ micro index.html 
+                            <font color="#55FF55"><b>erkki@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/home/sanko/publicsites/sanko.example.com</b></font>$ cat index.html 
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang=&quot;fi&quot;&gt;
+                                &lt;head&gt;	
+                                    &lt;title&gt;Sanko webbisivu&lt;/title&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;h1&gt;Sanko otsikko - Erkki muokkasi&lt;/h1&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+                        </pre>
+                        <img style="border: solid 1px" class="card-img-left img-fluid" src="h6_images/e_4.PNG" alt="Responsive image">
+                
+                        <p><h6 class="card-subtitle mb-2 text-muted">ampari.example.com</h6></p>
+
+                        <p>Ajattelin korvata tämän tehtävän djangolla, mutta haasteeksi tuli, että djangolla olemme opetelleen tekemään valmiin djangon
+                            tarjoaman yrityksen sisäisen sivun esim. crm, mutta tässä olisi pitänyt tehdä html-sivu? Joten en osannut jatkaa tästä eteenpäin.
+                        </p>
+
+                    </div>
+            </div>
+		</div>
+    </div>
+</html>
