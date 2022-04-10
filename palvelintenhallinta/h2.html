@@ -205,57 +205,9 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title" id="a">Alkutoimet su 10.4.2022 13:01-</h5>
-
-                    <p>Loin aluksi uuden Debian virtuaalikoneen, koska halusin kokeilla hommaa alusta, 
-                        koska en ihan tarkkaan muistanut mitä tuli tunnilla tehtyä, ja halusin osata tehdä homman 
-                        ns. puhtaalta pöydältä.</p>
-
-                    <p>Asensin Debian-virtuaalikoneeseeni salt-masterin ja testasin:
-                    <pre>
-                        sudo apt-get -y install salt-master
-                        sudo systemctl start salt-master
-                    </pre>
-                    </p>
-
-                    <p>Selvitin koneen ip:n:
-                    <pre>
-                        hostname -I
-                        10.0.2.15
-                    </pre>
-                    </p>
-
-                    <p>Asensin Debian-virtuaalikoneeseeni salt-minionin:
-                    <pre>
-                        sudo apt-get -y install salt-minion
-                    </pre>
-                    </p>
-
-                    <p>Muokkasin minionin asetustiedostoon masterin ip:n sekä orjalle id:n:
-                    <pre>
-                        sudoedit /etc/salt/minion  
-                        master: 10.0.2.15
-                        id: orja
-                    </pre>
-                    </p>
-                    <p>Jotta muutos tulee voimaan, käynnistin minionin uudelleen
-                    <pre>
-                        sudo systemctl restart salt-minion.service
-                    </pre>
-                    </p>
-
-                    <p>Hyväksyin masterissa minion-koneen avaimen </p>
-                    <p>
-                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2a_1.PNG" alt="Responsive image">
-                    </p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-body">
                     <h5 class="card-title" id="a">Tehtävä a, Oletussivu su 10.4.2022 16:00-</h5>
 
-                <p>Asennan manuaalisesti vielä apachen (koska aloitin tyhjällä koneella uudelleen, ei koneellani vielä ollut apachea asennettuna)
+                <p>Asennan manuaalisesti vielä apachen (koska koneellani ei vielä ollut apachea)
                 <pre>
                     sudo apt-get install -y apache2
                 </pre>
@@ -361,6 +313,73 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title" id="c">Tehtävä c, Shh!</h5>
+
+                    <p>Asennetaan ensin ssh manuaalisesti
+                    <pre>
+                        sudo apt-get -y install openssh-server
+                    </pre>
+                    </p>
+                    <p>
+                        Ssh asentui ja konfiguraatiotiedosto löytyy osoitteesta /etc/ssh/sshd-config
+                    </p>
+                    <p>
+                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2c_1.PNG" alt="Responsive image">
+                    </p>
+
+                    <p>
+                        Luodaan ssh:lle oma ssh-tila ja init.sls. 
+                        Siinä salt asentaa openssh-server sovelluksen, 
+                        kopioi konfiguraatiotiedoston saltin alta ja 
+                        käynnistää serverin aina kun konfiguraatiomuutoksia tehdään.
+                    </p>
+                    <p>
+                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2c_2.PNG" alt="Responsive image">
+                    </p>
+
+                    <p>
+                        Lisätään ssh tila ajettavaksi top.sls tiedostoon
+                    </p>
+                    <p>
+                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2c_3.PNG" alt="Responsive image">
+                    </p>
+
+                    <p>
+                        Ajetaan saltin tilat, ssh käynnistyy, vielä ei muutettu porttia
+                    </p>
+                    <p>
+                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2c_4.PNG" alt="Responsive image">
+                    </p>
+
+                    <p>
+                        Testataan ssh:ta, jos porttia ei anneta, tai annetaan ssh:n oletusportti 22, homma toimii, muilla porteilla ei.
+                    </p>
+                    <p>
+                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2c_5.PNG" alt="Responsive image">
+                    </p>
+
+                    <p>
+                        Muokataan sshd_config tiedostoon portiksi 7373
+                    <pre>
+                        sudo micro sshd_config
+                    </pre>
+                    </p>
+                    <p>
+                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2c_6.PNG" alt="Responsive image">
+                    </p>
+
+                    <p>Ajetaan salt tilat, nyt konfiguraatiotiedosto kopioituu, koska siinä on muutos.
+                        Lisäksi ssh demoni käynnistyy uudelleen.
+                    </p>
+                    <p>
+                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2c_7.PNG" alt="Responsive image">
+                    </p>
+
+                    <p>Testataan, nyt kirjautumaan pääsee vain portissa 7373.
+                    </p>
+                    <p>
+                        <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2c_8.PNG" alt="Responsive image">
+                    </p>
+                    
                 </div>
             </div>
 
