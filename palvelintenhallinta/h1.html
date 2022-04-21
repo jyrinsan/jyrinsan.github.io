@@ -1161,20 +1161,468 @@
                                 <font color="#00AAAA">----------</font>
                         </pre>
 
-                        <p style="color: red;">Ti 5.4.2022 klo 8:57 aika loppui kesken...jatkan tätä myöhässä</p>
+                        <p style="color: red;">Ti 5.4.2022 klo 8:57 aika loppui kesken...tästä alaspäin on jatkettu vasta myöhässä</p>
 
-                        <h6>file</h6>
+                        <h6>file (tehty myöhässä 21.4.2022)</h6>
 
-                        <h6>service</h6>
+                        <p>Kopioidaan rekursiicisesti alihakemistoineen /srv/salt/kansio1 kansion sisältö juureen /salttilat/kansio1 alle</p>
+
+                        <p>Lähtötilanne /srv/salt hakemistossa</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/srv/salt</b></font>$ tree
+                            <font color="#5555FF"><b>.</b></font>
+                            ├── <font color="#5555FF"><b>apache</b></font>
+                            │   ├── default-index.html
+                            │   └── init.sls
+                            ├── <font color="#5555FF"><b>appikset</b></font>
+                            │   ├── Hello.java
+                            │   └── init.sls
+                            ├── <font color="#5555FF"><b>kansio1</b></font>
+                            │   ├── ekafile.txt
+                            │   └── <font color="#5555FF"><b>kansio2</b></font>
+                            │       └── tokafile.txt
+                            ├── <font color="#5555FF"><b>react</b></font>
+                            ├── <font color="#5555FF"><b>ssh</b></font>
+                            │   ├── init.sls
+                            │   └── sshd_config
+                            └── top.sls
+                            
+                            6 directories, 9 files
+                        </pre>
+
+                        <p>Ajetaan salt-käsky file.recurse</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/srv/salt</b></font>$ sudo salt-call --local -l info state.single file.recurse name=/salttilat/kansio1 source=salt://kansio1
+                            [INFO    ] Loading fresh modules for state activity
+                            [INFO    ] Running state [/salttilat/kansio1] at time 20:21:24.916281
+                            [INFO    ] Executing state file.recurse for [/salttilat/kansio1]
+                            [INFO    ] Fetching file from saltenv &apos;base&apos;, ** done ** &apos;kansio1/ekafile.txt&apos;
+                            [INFO    ] Fetching file from saltenv &apos;base&apos;, ** done ** &apos;kansio1/kansio2/tokafile.txt&apos;
+                            [INFO    ] {&apos;/salttilat/kansio1/kansio2&apos;: {&apos;/salttilat/kansio1/kansio2&apos;: &apos;New Dir&apos;}, &apos;/salttilat/kansio1/ekafile.txt&apos;: {&apos;diff&apos;: &apos;New file&apos;, &apos;mode&apos;: &apos;0644&apos;}, &apos;/salttilat/kansio1/kansio2/tokafile.txt&apos;: {&apos;diff&apos;: &apos;New file&apos;, &apos;mode&apos;: &apos;0644&apos;}}
+                            [INFO    ] Loading fresh modules for state activity
+                            [INFO    ] Completed state [/salttilat/kansio1] at time 20:21:25.024203 (duration_in_ms=107.922)
+                            <font color="#00AA00">local:</font>
+                            <font color="#00AAAA">----------</font>
+                                <font color="#00AAAA">      ID: /salttilat/kansio1</font>
+                                <font color="#00AAAA">Function: file.recurse</font>
+                                <font color="#00AAAA">  Result: True</font>
+                                <font color="#00AAAA"> Comment: Recursively updated /salttilat/kansio1</font>
+                                <font color="#00AAAA"> Started: 20:21:24.916281</font>
+                                <font color="#00AAAA">Duration: 107.922 ms</font>
+                            <font color="#00AAAA">     Changes:   </font>
+                            <font color="#00AAAA">              ----------</font>
+                                          <font color="#00AAAA">/salttilat/kansio1/ekafile.txt</font>:
+                                              <font color="#00AAAA">----------</font>
+                                              <font color="#00AAAA">diff</font>:
+                                                  <font color="#00AA00">New file</font>
+                                              <font color="#00AAAA">mode</font>:
+                                                  <font color="#00AA00">0644</font>
+                                          <font color="#00AAAA">/salttilat/kansio1/kansio2</font>:
+                                              <font color="#00AAAA">----------</font>
+                                              <font color="#00AAAA">/salttilat/kansio1/kansio2</font>:
+                                                  <font color="#00AA00">New Dir</font>
+                                          <font color="#00AAAA">/salttilat/kansio1/kansio2/tokafile.txt</font>:
+                                              <font color="#00AAAA">----------</font>
+                                              <font color="#00AAAA">diff</font>:
+                                                  <font color="#00AA00">New file</font>
+                                              <font color="#00AAAA">mode</font>:
+                                                  <font color="#00AA00">0644</font>
+                            
+                            <font color="#00AAAA">Summary for local</font>
+                            <font color="#00AAAA">------------</font>
+                            <font color="#00AA00">Succeeded: 1</font> (<font color="#00AA00">changed=1</font>)
+                            <font color="#00AAAA">Failed:    0</font>
+                            <font color="#00AAAA">------------</font>
+                            <font color="#00AAAA">Total states run:     1</font>
+                            <font color="#00AAAA">Total run time: 107.922 ms</font>
+                        </pre>
+
+                        <p>Testataan kohdehakemistossa, että hakemistot ja tiedostot ovat kopioituneet ok</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/srv/salt</b></font>$ cd /salttilat/
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>/salttilat</b></font>$ tree
+                            <font color="#5555FF"><b>.</b></font>
+                            └── <font color="#5555FF"><b>kansio1</b></font>
+                                ├── ekafile.txt
+                                └── <font color="#5555FF"><b>kansio2</b></font>
+                                    └── tokafile.txt
+                            
+                            2 directories, 2 files
+                        </pre>
+
+                        <h6>service (tehty myöhässä 21.4.2022)<h6>
+
+                        <p>service.dead varmistaa, että demoni on sammunut, ja jos ei ole, sammuttaa se sen</p>
+
+                        <p>Alussa testaan, että aiemmin asennettu apache on päällä</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo systemctl status apache2
+                            <font color="#55FF55"><b>●</b></font> apache2.service - The Apache HTTP Server
+                                 Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor prese<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                                 Active: <font color="#55FF55"><b>active (running)</b></font> since Thu 2022-04-21 21:09:10 EEST; 8s ago
+                                   Docs: https://httpd.apache.org/docs/2.4/
+                                Process: 20610 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/S<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                               Main PID: 20614 (apache2)
+                                  Tasks: 55 (limit: 4505)
+                                 Memory: 8.6M
+                                    CPU: 19ms
+                                 CGroup: /system.slice/apache2.service
+                                         ├─20614 /usr/sbin/apache2 -k start
+                                         ├─20615 /usr/sbin/apache2 -k start
+                                         └─20616 /usr/sbin/apache2 -k start
+                            
+                            huhti 21 21:09:10 sanna-virtualbox systemd[1]: Starting The Apache HTTP Server.<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            huhti 21 21:09:10 sanna-virtualbox apachectl[20613]: AH00558: apache2: Could no<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            huhti 21 21:09:10 sanna-virtualbox systemd[1]: Started The Apache HTTP Server.
+
+                        </pre>
+
+                        <p>Ajan service.dead, joka ilmoittaa, että service sammutettiin</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo salt-call --local -l info state.single service.dead apache2
+                            [INFO    ] Loading fresh modules for state activity
+                            [INFO    ] Running state [apache2] at time 21:09:28.631698
+                            [INFO    ] Executing state service.dead for [apache2]
+                            [INFO    ] Executing command systemctl in directory &apos;/root&apos;
+                            [INFO    ] Executing command systemctl in directory &apos;/root&apos;
+                            [INFO    ] Executing command systemctl in directory &apos;/root&apos;
+                            [INFO    ] Executing command systemd-run in directory &apos;/root&apos;
+                            [INFO    ] Executing command systemctl in directory &apos;/root&apos;
+                            [INFO    ] Executing command systemctl in directory &apos;/root&apos;
+                            [INFO    ] {&apos;apache2&apos;: False}
+                            [INFO    ] Completed state [apache2] at time 21:09:28.757677 (duration_in_ms=125.979)
+                            <font color="#00AA00">local:</font>
+                            <font color="#00AAAA">----------</font>
+                                <font color="#00AAAA">      ID: apache2</font>
+                                <font color="#00AAAA">Function: service.dead</font>
+                                <font color="#00AAAA">  Result: True</font>
+                                <font color="#00AAAA"> Comment: Service apache2 was killed</font>
+                                <font color="#00AAAA"> Started: 21:09:28.631698</font>
+                                <font color="#00AAAA">Duration: 125.979 ms</font>
+                            <font color="#00AAAA">     Changes:   </font>
+                            <font color="#00AAAA">              ----------</font>
+                                          <font color="#00AAAA">apache2</font>:
+                                              <font color="#FFFF55"><b>False</b></font>
+                            
+                            <font color="#00AAAA">Summary for local</font>
+                            <font color="#00AAAA">------------</font>
+                            <font color="#00AA00">Succeeded: 1</font> (<font color="#00AA00">changed=1</font>)
+                            <font color="#00AAAA">Failed:    0</font>
+                            <font color="#00AAAA">------------</font>
+                            <font color="#00AAAA">Total states run:     1</font>
+                            <font color="#00AAAA">Total run time: 125.979 ms</font>
+                        </pre>
+
+                        <p>Testaan vielä, että apache on todella sammunut</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo systemctl status apache2
+                            ● apache2.service - The Apache HTTP Server
+                                 Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor prese<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                                 Active: inactive (dead) since Thu 2022-04-21 21:09:28 EEST; 5s ago
+                                   Docs: https://httpd.apache.org/docs/2.4/
+                                Process: 20610 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/S<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                                Process: 20742 ExecStop=/usr/sbin/apachectl graceful-stop (code=exited, sta<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                               Main PID: 20614 (code=exited, status=0/SUCCESS)
+                                    CPU: 36ms
+                            
+                            huhti 21 21:09:10 sanna-virtualbox systemd[1]: Starting The Apache HTTP Server.<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            huhti 21 21:09:10 sanna-virtualbox apachectl[20613]: AH00558: apache2: Could no<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            huhti 21 21:09:10 sanna-virtualbox systemd[1]: Started The Apache HTTP Server.
+                            huhti 21 21:09:28 sanna-virtualbox systemd[1]: Stopping The Apache HTTP Server.<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            huhti 21 21:09:28 sanna-virtualbox apachectl[20744]: AH00558: apache2: Could no<span style="background-color:#FFFFFF"><font color="#000000">&gt;</font></span>
+                            huhti 21 21:09:28 sanna-virtualbox systemd[1]: apache2.service: Succeeded.
+                            huhti 21 21:09:28 sanna-virtualbox systemd[1]: Stopped The Apache HTTP Server.
+
+                        </pre>
+
+                        <p>Ajan uudestaan tilan, kun apache on jo valmiiksi sammunut. Salt kertoo, että service oli jo valmiiksi sammunut</p>
+                        <pre>
+                            <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo salt-call --local -l info state.single service.dead apache2
+                            [INFO    ] Loading fresh modules for state activity
+                            [INFO    ] Running state [apache2] at time 21:09:44.701897
+                            [INFO    ] Executing state service.dead for [apache2]
+                            [INFO    ] Executing command systemctl in directory &apos;/root&apos;
+                            [INFO    ] Executing command systemctl in directory &apos;/root&apos;
+                            [INFO    ] Executing command systemctl in directory &apos;/root&apos;
+                            [INFO    ] The service apache2 is already dead
+                            [INFO    ] Completed state [apache2] at time 21:09:44.742641 (duration_in_ms=40.743)
+                            <font color="#00AA00">local:</font>
+                            <font color="#00AA00">----------</font>
+                                <font color="#00AA00">      ID: apache2</font>
+                                <font color="#00AA00">Function: service.dead</font>
+                                <font color="#00AA00">  Result: True</font>
+                                <font color="#00AA00"> Comment: The service apache2 is already dead</font>
+                                <font color="#00AA00"> Started: 21:09:44.701898</font>
+                                <font color="#00AA00">Duration: 40.743 ms</font>
+                            <font color="#00AA00">     Changes:   </font>
+                            
+                            <font color="#00AAAA">Summary for local</font>
+                            <font color="#00AAAA">------------</font>
+                            <font color="#00AA00">Succeeded: 1</font>
+                            <font color="#00AAAA">Failed:    0</font>
+                            <font color="#00AAAA">------------</font>
+                            <font color="#00AAAA">Total states run:     1</font>
+                            <font color="#00AAAA">Total run time:  40.743 ms</font>
+                        </pre>
 
                         <h6>cmd</h6>
 
+                        <p>Normaalisti salt ajaa esim. cmd.run käskyn minionin /root hakemistossa, 
+                            käskylle voidaan kuitenkin antaa lisämääreemä hakemisto, jossa cmd.run ajaa käskyn</p>
+
+                        
+                            <pre>
+                                <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~</b></font>$ sudo salt-call --local -l info state.single cmd.run &apos;tree&apos; cwd=&apos;/home/sanna&apos;
+                                [INFO    ] Loading fresh modules for state activity
+                                [INFO    ] Running state [tree] at time 22:10:23.042354
+                                [INFO    ] Executing state cmd.run for [tree]
+                                [INFO    ] Executing command &apos;tree&apos; in directory &apos;/home/sanna&apos;
+                                [INFO    ] {&apos;pid&apos;: 25127, &apos;retcode&apos;: 0, &apos;stdout&apos;: &apos;.\n|-- Desktop\n|-- Documents\n|-- Downloads\n|-- Music\n|-- Pictures\n|-- Public\n|-- Templates\n|-- Videos\n|-- code-with-quarkus\n|   |-- README.md\n|   |-- mvnw\n|   |-- mvnw.cmd\n|   |-- pom.xml\n|   |-- src\n|   |   |-- main\n|   |   |   |-- docker\n|   |   |   |   |-- Dockerfile.jvm\n|   |   |   |   |-- Dockerfile.legacy-jar\n|   |   |   |   |-- Dockerfile.native\n|   |   |   |   `-- Dockerfile.native-micro\n|   |   |   |-- java\n|   |   |   |   `-- org\n|   |   |   |       `-- acme\n|   |   |   |           `-- GreetingResource.java\n|   |   |   `-- resources\n|   |   |       |-- META-INF\n|   |   |       |   `-- resources\n|   |   |       |       `-- index.html\n|   |   |       `-- application.properties\n|   |   `-- test\n|   |       `-- java\n|   |           `-- org\n|   |               `-- acme\n|   |                   |-- GreetingResourceIT.java\n|   |                   `-- GreetingResourceTest.java\n|   `-- target\n|       |-- classes\n|       |   |-- META-INF\n|       |   |   `-- resources\n|       |   |       `-- index.html\n|       |   |-- application.properties\n|       |   `-- org\n|       |       `-- acme\n|       |           `-- GreetingResource.class\n|       |-- code-with-quarkus-dev.jar\n|       |-- generated-sources\n|       |   `-- annotations\n|       |-- generated-test-sources\n|       |   `-- test-annotations\n|       |-- maven-status\n|       |   `-- maven-compiler-plugin\n|       |       |-- compile\n|       |       |   `-- null\n|       |       |       |-- createdFiles.lst\n|       |       |       `-- inputFiles.lst\n|       |       `-- testCompile\n|       |           `-- null\n|       |               |-- createdFiles.lst\n|       |               `-- inputFiles.lst\n|       |-- quarkus\n|       |   `-- bootstrap\n|       |       `-- dev-app-model.dat\n|       `-- test-classes\n|           `-- org\n|               `-- acme\n|                   |-- GreetingResourceIT.class\n|                   `-- GreetingResourceTest.class\n`-- git\n    `-- jyrinsan.github.io\n        |-- h1.html\n        |-- h1_images\n        |   |-- addNewVirtialMachine1.PNG\n        |   |-- addNewVirtialMachine2.PNG\n        |   |-- addNewVirtialMachine3.PNG\n        |   |-- addNewVirtialMachine4.PNG\n        |   |-- bootingLinux1.PNG\n        |   |-- bootingLinux2.PNG\n        |   |-- bootingLinux3.PNG\n        |   |-- guesadditionVirhe.PNG\n        |   |-- guestaddition1.PNG\n        |   |-- guestaddition2.PNG\n        |   |-- installingDebian.PNG\n        |   |-- installingDebian2.PNG\n        |   |-- paivitys1.PNG\n        |   |-- paivitys2.PNG\n        |   |-- snapshot.PNG\n        |   |-- thunderbird.PNG\n        |   |-- varmuuskopio1.PNG\n        |   |-- visualstudiocode1.PNG\n        |   |-- visualstudiocode2.PNG\n        |   `-- vlcplayer.PNG\n        |-- h2.html\n        |-- h2_images\n        |   |-- a_1.PNG\n        |   |-- a_2.PNG\n        |   |-- a_3.PNG\n        |   |-- a_4.PNG\n        |   |-- a_5.PNG\n        |   |-- a_6.PNG\n        |   |-- a_7.PNG\n        |   |-- a_8.PNG\n        |   |-- a_9.PNG\n        |   |-- b_1.PNG\n        |   |-- b_2.PNG\n        |   |-- b_3.PNG\n        |   |-- b_4.PNG\n        |   |-- c_1.PNG\n        |   |-- c_2.PNG\n        |   |-- e_1.PNG\n        |   `-- e_2.PNG\n        |-- h3.html\n        |-- h3_images\n        |   |-- a_1.PNG\n        |   |-- a_2.PNG\n        |   |-- b_1.PNG\n        |   |-- b_2.PNG\n        |   |-- c_1.PNG\n        |   |-- c_2.PNG\n        |   `-- e_1.PNG\n        |-- h4.html\n        |-- h4_images\n        |   |-- a_1.PNG\n        |   |-- a_2.PNG\n        |   |-- a_3.PNG\n        |   |-- d_1.PNG\n        |   |-- e_1.PNG\n        |   |-- e_2.PNG\n        |   |-- e_3.PNG\n        |   |-- e_4.png\n        |   |-- e_5.PNG\n        |   |-- e_6.PNG\n        |   `-- e_7.PNG\n        |-- h5.html\n        |-- h5_images\n        |   |-- a_1.PNG\n        |   |-- a_2.PNG\n        |   |-- a_3.PNG\n        |   |-- a_4.PNG\n        |   |-- a_5.PNG\n        |   |-- a_6.PNG\n        |   |-- a_7.PNG\n        |   |-- a_8.PNG\n        |   |-- a_9.PNG\n        |   |-- b_1.PNG\n        |   |-- b_2.PNG\n        |   |-- b_3.PNG\n        |   |-- b_4.PNG\n        |   |-- b_5.PNG\n        |   `-- b_6.PNG\n        |-- h6.html\n        |-- h6_images\n        |   |-- c_1.png\n        |   |-- c_2.png\n        |   |-- c_3.png\n        |   |-- e_1.png\n        |   |-- e_2.png\n        |   |-- e_3.png\n        |   `-- e_4.png\n        |-- index.html\n        `-- palvelintenhallinta\n            |-- h1.html\n            |-- h2.html\n            |-- h2_images\n            |   |-- h2a_1.PNG\n            |   |-- h2a_2.PNG\n            |   |-- h2a_3.PNG\n            |   |-- h2a_4.PNG\n            |   |-- h2a_5.PNG\n            |   |-- h2a_6.PNG\n            |   |-- h2a_7.PNG\n            |   |-- h2b_1.PNG\n            |   |-- h2b_2.PNG\n            |   |-- h2b_3.PNG\n            |   |-- h2b_4.PNG\n            |   |-- h2b_5.PNG\n            |   |-- h2b_6.PNG\n            |   |-- h2b_7.PNG\n            |   |-- h2c_1.PNG\n            |   |-- h2c_2.PNG\n            |   |-- h2c_3.PNG\n            |   |-- h2c_4.PNG\n            |   |-- h2c_5.PNG\n            |   |-- h2c_6.PNG\n            |   |-- h2c_7.PNG\n            |   `-- h2c_8.PNG\n            |-- h3.md\n            |-- h3_images\n            |   |-- h3_1.PNG\n            |   |-- h3_10.PNG\n            |   |-- h3_11.PNG\n            |   |-- h3_12.PNG\n            |   |-- h3_13.PNG\n            |   |-- h3_14.PNG\n            |   |-- h3_15.PNG\n            |   |-- h3_16.PNG\n            |   |-- h3_17.PNG\n            |   |-- h3_18.PNG\n            |   |-- h3_2.PNG\n            |   |-- h3_3.PNG\n            |   |-- h3_4.PNG\n            |   |-- h3_5.PNG\n            |   |-- h3_6.PNG\n            |   |-- h3_7.PNG\n            |   |-- h3_8.PNG\n            |   `-- h3_9.PNG\n            |-- h4.md\n            |-- h5.md\n            |-- h6.md\n            |-- h7.md\n            `-- index.html\n\n54 directories, 156 files&apos;, &apos;stderr&apos;: &apos;&apos;}
+                                [INFO    ] Completed state [tree] at time 22:10:23.055154 (duration_in_ms=12.8)
+                                <font color="#00AA00">local:</font>
+                                <font color="#00AAAA">----------</font>
+                                    <font color="#00AAAA">      ID: tree</font>
+                                    <font color="#00AAAA">Function: cmd.run</font>
+                                    <font color="#00AAAA">  Result: True</font>
+                                    <font color="#00AAAA"> Comment: Command &quot;tree&quot; run</font>
+                                    <font color="#00AAAA"> Started: 22:10:23.042354</font>
+                                    <font color="#00AAAA">Duration: 12.8 ms</font>
+                                <font color="#00AAAA">     Changes:   </font>
+                                <font color="#00AAAA">              ----------</font>
+                                              <font color="#00AAAA">pid</font>:
+                                                  <font color="#FFFF55"><b>25127</b></font>
+                                              <font color="#00AAAA">retcode</font>:
+                                                  <font color="#FFFF55"><b>0</b></font>
+                                              <font color="#00AAAA">stderr</font>:
+                                              <font color="#00AAAA">stdout</font>:
+                                                  <font color="#00AA00">.</font>
+                                                  <font color="#00AA00">|-- Desktop</font>
+                                                  <font color="#00AA00">|-- Documents</font>
+                                                  <font color="#00AA00">|-- Downloads</font>
+                                                  <font color="#00AA00">|-- Music</font>
+                                                  <font color="#00AA00">|-- Pictures</font>
+                                                  <font color="#00AA00">|-- Public</font>
+                                                  <font color="#00AA00">|-- Templates</font>
+                                                  <font color="#00AA00">|-- Videos</font>
+                                                  <font color="#00AA00">|-- code-with-quarkus</font>
+                                                  <font color="#00AA00">|   |-- README.md</font>
+                                                  <font color="#00AA00">|   |-- mvnw</font>
+                                                  <font color="#00AA00">|   |-- mvnw.cmd</font>
+                                                  <font color="#00AA00">|   |-- pom.xml</font>
+                                                  <font color="#00AA00">|   |-- src</font>
+                                                  <font color="#00AA00">|   |   |-- main</font>
+                                                  <font color="#00AA00">|   |   |   |-- docker</font>
+                                                  <font color="#00AA00">|   |   |   |   |-- Dockerfile.jvm</font>
+                                                  <font color="#00AA00">|   |   |   |   |-- Dockerfile.legacy-jar</font>
+                                                  <font color="#00AA00">|   |   |   |   |-- Dockerfile.native</font>
+                                                  <font color="#00AA00">|   |   |   |   `-- Dockerfile.native-micro</font>
+                                                  <font color="#00AA00">|   |   |   |-- java</font>
+                                                  <font color="#00AA00">|   |   |   |   `-- org</font>
+                                                  <font color="#00AA00">|   |   |   |       `-- acme</font>
+                                                  <font color="#00AA00">|   |   |   |           `-- GreetingResource.java</font>
+                                                  <font color="#00AA00">|   |   |   `-- resources</font>
+                                                  <font color="#00AA00">|   |   |       |-- META-INF</font>
+                                                  <font color="#00AA00">|   |   |       |   `-- resources</font>
+                                                  <font color="#00AA00">|   |   |       |       `-- index.html</font>
+                                                  <font color="#00AA00">|   |   |       `-- application.properties</font>
+                                                  <font color="#00AA00">|   |   `-- test</font>
+                                                  <font color="#00AA00">|   |       `-- java</font>
+                                                  <font color="#00AA00">|   |           `-- org</font>
+                                                  <font color="#00AA00">|   |               `-- acme</font>
+                                                  <font color="#00AA00">|   |                   |-- GreetingResourceIT.java</font>
+                                                  <font color="#00AA00">|   |                   `-- GreetingResourceTest.java</font>
+                                                  <font color="#00AA00">|   `-- target</font>
+                                                  <font color="#00AA00">|       |-- classes</font>
+                                                  <font color="#00AA00">|       |   |-- META-INF</font>
+                                                  <font color="#00AA00">|       |   |   `-- resources</font>
+                                                  <font color="#00AA00">|       |   |       `-- index.html</font>
+                                                  <font color="#00AA00">|       |   |-- application.properties</font>
+                                                  <font color="#00AA00">|       |   `-- org</font>
+                                                  <font color="#00AA00">|       |       `-- acme</font>
+                                                  <font color="#00AA00">|       |           `-- GreetingResource.class</font>
+                                                  <font color="#00AA00">|       |-- code-with-quarkus-dev.jar</font>
+                                                  <font color="#00AA00">|       |-- generated-sources</font>
+                                                  <font color="#00AA00">|       |   `-- annotations</font>
+                                                  <font color="#00AA00">|       |-- generated-test-sources</font>
+                                                  <font color="#00AA00">|       |   `-- test-annotations</font>
+                                                  <font color="#00AA00">|       |-- maven-status</font>
+                                                  <font color="#00AA00">|       |   `-- maven-compiler-plugin</font>
+                                                  <font color="#00AA00">|       |       |-- compile</font>
+                                                  <font color="#00AA00">|       |       |   `-- null</font>
+                                                  <font color="#00AA00">|       |       |       |-- createdFiles.lst</font>
+                                                  <font color="#00AA00">|       |       |       `-- inputFiles.lst</font>
+                                                  <font color="#00AA00">|       |       `-- testCompile</font>
+                                                  <font color="#00AA00">|       |           `-- null</font>
+                                                  <font color="#00AA00">|       |               |-- createdFiles.lst</font>
+                                                  <font color="#00AA00">|       |               `-- inputFiles.lst</font>
+                                                  <font color="#00AA00">|       |-- quarkus</font>
+                                                  <font color="#00AA00">|       |   `-- bootstrap</font>
+                                                  <font color="#00AA00">|       |       `-- dev-app-model.dat</font>
+                                                  <font color="#00AA00">|       `-- test-classes</font>
+                                                  <font color="#00AA00">|           `-- org</font>
+                                                  <font color="#00AA00">|               `-- acme</font>
+                                                  <font color="#00AA00">|                   |-- GreetingResourceIT.class</font>
+                                                  <font color="#00AA00">|                   `-- GreetingResourceTest.class</font>
+                                                  <font color="#00AA00">`-- git</font>
+                                                  <font color="#00AA00">    `-- jyrinsan.github.io</font>
+                                                  <font color="#00AA00">        |-- h1.html</font>
+                                                  <font color="#00AA00">        |-- h1_images</font>
+                                                  <font color="#00AA00">        |   |-- addNewVirtialMachine1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- addNewVirtialMachine2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- addNewVirtialMachine3.PNG</font>
+                                                  <font color="#00AA00">        |   |-- addNewVirtialMachine4.PNG</font>
+                                                  <font color="#00AA00">        |   |-- bootingLinux1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- bootingLinux2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- bootingLinux3.PNG</font>
+                                                  <font color="#00AA00">        |   |-- guesadditionVirhe.PNG</font>
+                                                  <font color="#00AA00">        |   |-- guestaddition1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- guestaddition2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- installingDebian.PNG</font>
+                                                  <font color="#00AA00">        |   |-- installingDebian2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- paivitys1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- paivitys2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- snapshot.PNG</font>
+                                                  <font color="#00AA00">        |   |-- thunderbird.PNG</font>
+                                                  <font color="#00AA00">        |   |-- varmuuskopio1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- visualstudiocode1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- visualstudiocode2.PNG</font>
+                                                  <font color="#00AA00">        |   `-- vlcplayer.PNG</font>
+                                                  <font color="#00AA00">        |-- h2.html</font>
+                                                  <font color="#00AA00">        |-- h2_images</font>
+                                                  <font color="#00AA00">        |   |-- a_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_3.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_4.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_5.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_6.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_7.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_8.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_9.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_3.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_4.PNG</font>
+                                                  <font color="#00AA00">        |   |-- c_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- c_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- e_1.PNG</font>
+                                                  <font color="#00AA00">        |   `-- e_2.PNG</font>
+                                                  <font color="#00AA00">        |-- h3.html</font>
+                                                  <font color="#00AA00">        |-- h3_images</font>
+                                                  <font color="#00AA00">        |   |-- a_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- c_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- c_2.PNG</font>
+                                                  <font color="#00AA00">        |   `-- e_1.PNG</font>
+                                                  <font color="#00AA00">        |-- h4.html</font>
+                                                  <font color="#00AA00">        |-- h4_images</font>
+                                                  <font color="#00AA00">        |   |-- a_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_3.PNG</font>
+                                                  <font color="#00AA00">        |   |-- d_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- e_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- e_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- e_3.PNG</font>
+                                                  <font color="#00AA00">        |   |-- e_4.png</font>
+                                                  <font color="#00AA00">        |   |-- e_5.PNG</font>
+                                                  <font color="#00AA00">        |   |-- e_6.PNG</font>
+                                                  <font color="#00AA00">        |   `-- e_7.PNG</font>
+                                                  <font color="#00AA00">        |-- h5.html</font>
+                                                  <font color="#00AA00">        |-- h5_images</font>
+                                                  <font color="#00AA00">        |   |-- a_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_3.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_4.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_5.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_6.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_7.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_8.PNG</font>
+                                                  <font color="#00AA00">        |   |-- a_9.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_1.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_2.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_3.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_4.PNG</font>
+                                                  <font color="#00AA00">        |   |-- b_5.PNG</font>
+                                                  <font color="#00AA00">        |   `-- b_6.PNG</font>
+                                                  <font color="#00AA00">        |-- h6.html</font>
+                                                  <font color="#00AA00">        |-- h6_images</font>
+                                                  <font color="#00AA00">        |   |-- c_1.png</font>
+                                                  <font color="#00AA00">        |   |-- c_2.png</font>
+                                                  <font color="#00AA00">        |   |-- c_3.png</font>
+                                                  <font color="#00AA00">        |   |-- e_1.png</font>
+                                                  <font color="#00AA00">        |   |-- e_2.png</font>
+                                                  <font color="#00AA00">        |   |-- e_3.png</font>
+                                                  <font color="#00AA00">        |   `-- e_4.png</font>
+                                                  <font color="#00AA00">        |-- index.html</font>
+                                                  <font color="#00AA00">        `-- palvelintenhallinta</font>
+                                                  <font color="#00AA00">            |-- h1.html</font>
+                                                  <font color="#00AA00">            |-- h2.html</font>
+                                                  <font color="#00AA00">            |-- h2_images</font>
+                                                  <font color="#00AA00">            |   |-- h2a_1.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2a_2.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2a_3.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2a_4.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2a_5.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2a_6.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2a_7.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2b_1.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2b_2.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2b_3.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2b_4.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2b_5.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2b_6.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2b_7.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2c_1.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2c_2.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2c_3.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2c_4.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2c_5.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2c_6.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h2c_7.PNG</font>
+                                                  <font color="#00AA00">            |   `-- h2c_8.PNG</font>
+                                                  <font color="#00AA00">            |-- h3.md</font>
+                                                  <font color="#00AA00">            |-- h3_images</font>
+                                                  <font color="#00AA00">            |   |-- h3_1.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_10.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_11.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_12.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_13.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_14.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_15.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_16.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_17.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_18.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_2.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_3.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_4.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_5.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_6.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_7.PNG</font>
+                                                  <font color="#00AA00">            |   |-- h3_8.PNG</font>
+                                                  <font color="#00AA00">            |   `-- h3_9.PNG</font>
+                                                  <font color="#00AA00">            |-- h4.md</font>
+                                                  <font color="#00AA00">            |-- h5.md</font>
+                                                  <font color="#00AA00">            |-- h6.md</font>
+                                                  <font color="#00AA00">            |-- h7.md</font>
+                                                  <font color="#00AA00">            `-- index.html</font>
+                                                  
+                                                  <font color="#00AA00">54 directories, 156 files</font>
+                                
+                                <font color="#00AAAA">Summary for local</font>
+                                <font color="#00AAAA">------------</font>
+                                <font color="#00AA00">Succeeded: 1</font> (<font color="#00AA00">changed=1</font>)
+                                <font color="#00AAAA">Failed:    0</font>
+                                <font color="#00AAAA">------------</font>
+                                <font color="#00AAAA">Total states run:     1</font>
+                                <font color="#00AAAA">Total run time:  12.800 ms</font>
+                            </pre>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title" id="f">Tehtävä f, Herra ja orja (tehty vasta oppitunnin jälkeen 10.4.2022)</h5>
+                        <h5 class="card-title" id="f">Tehtävä f, Herra ja orja (tehty vasta myöhässä 10.4.2022)</h5>
 
                         <p>Loin aluksi uuden Debian virtuaalikoneen, koska halusin kokeilla hommaa alusta, 
                             koska en ihan tarkkaan muistanut mitä tuli tunnilla tehtyä, ja halusin osata tehdä homman 
@@ -1218,7 +1666,7 @@
                             <img width="50%" style="border: solid 1px" class="card-img-left img-fluid" src="h2_images/h2a_1.PNG" alt="Responsive image">
                         </p>
 
-                        <p>Annoin saltin avulla orjalle komennon pwd, ennen tätä ajoin normaalisti pwd-komennon, joka tulosti hakemuiston,
+                        <p>Annoin saltin avulla orjalle komennon pwd, ennen tätä ajoin normaalisti pwd-komennon, joka tulosti hakemiston,
                             jossa sillä hetkellä olin, orjakoneella salt on kuitenkin /root hakemistossa.
                         </p>
                         <pre>
