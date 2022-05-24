@@ -147,17 +147,18 @@ mkdir bookstore/templates/bookstore
 ```
 
 Loin html-templaten `micro bookstore/templates/bookstore/book_list.html`
-```
-<h1>My books</h1>
+<pre>
+&lt;h1&gt;My books&lt;/h1&gt;
 
 {% for book in object_list %}
-    <li>{{ book.author }} {{ book.name }} {{ book.pubYear }}
+    &lt;li&gt;{{ book.author }} {{ book.name }} {{ book.pubYear }}
+{% empty %}
+	No books yet.
 {% endfor %}
-
-```
+</pre>
 
 Restarttaan kehitysserverin `./managepy runserver`
 
-Lopussa vielä testasin toimiiko sivu (oikeastihan tein muutokset sivuun yksi kerrallaan ja testasin mikä muuttuu)
+Lopussa vielä testasin toimiiko sivu (testasin kyllä jo aiemmin aina muutos kerrallaan, mutta tässä lopputulos testattuna)
 
 <kbd><img src="pw2_images/pw2_img4.PNG" /></kbd>
