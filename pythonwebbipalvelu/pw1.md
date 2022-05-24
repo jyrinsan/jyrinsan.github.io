@@ -122,7 +122,7 @@ No changes detected
   Applying sessions.0001_initial...<font color="#55FF55"><b> OK</b></font>
 </pre>
 
-Luon superuserin, jotta päästään kirjautumaan admin-käyttöliittymään
+Loin superuserin, jotta päästään kirjautumaan admin-käyttöliittymään
 <pre>(env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django/jyrinkicom</b></font>$ pwgen -s 20 1
 
 (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django/jyrinkicom</b></font>$ ./manage.py createsuperuser

@@ -146,7 +146,7 @@ mkdir bookstore/templates
 mkdir bookstore/templates/bookstore
 ```
 
-Luodaan html-template `micro bookstore/templates/bookstore/book_list.html`
+Loin html-templaten `micro bookstore/templates/bookstore/book_list.html`
 ```
 <h1>My books</h1>
 
@@ -158,7 +158,7 @@ Luodaan html-template `micro bookstore/templates/bookstore/book_list.html`
 
 ```
 
-Restartataan kehitysserveri `./managepy runserver`
+Restarttaan kehitysserveri `./managepy runserver`
 
 Lopussa vielä testasin toimiiko sivu (oikeastihan tein muutokset sivuun yksi kerrallaan ja testasin mikä muuttuu)
 
