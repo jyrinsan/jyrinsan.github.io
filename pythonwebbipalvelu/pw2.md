@@ -158,7 +158,7 @@ Loin html-templaten `micro bookstore/templates/bookstore/book_list.html`
 
 ```
 
-Restarttaan kehitysserveri `./managepy runserver`
+Restarttaan kehitysserverin `./managepy runserver`
 
 Lopussa vielä testasin toimiiko sivu (oikeastihan tein muutokset sivuun yksi kerrallaan ja testasin mikä muuttuu)
 
