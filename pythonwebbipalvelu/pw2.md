@@ -148,12 +148,14 @@ mkdir bookstore/templates/bookstore
 
 Loin html-templaten `micro bookstore/templates/bookstore/book_list.html`
 <pre>
-&lt;h1&gt;My books&lt;/h1&gt;
+```
+<h1>My books</h1>
 
 {% for book in object_list %}
-    &lt;li&gt;{{ book.author }} {{ book.name }} {{ book.pubYear }}
+    <li>{{ book.author }} {{ book.name }} {{ book.pubYear }}
 {% endfor %}
-</pre>
+
+```
 
 Restarttaan kehitysserverin `./managepy runserver`
 
