@@ -68,7 +68,7 @@ pwgen -s 20 1
 
 Käynnistin serverin `./manage.py runserver`
 
-Testasin djangon testisivun `http://127.0.0.1:800` selaimella 
+Testasin djangon testisivun `http://127.0.0.1:8000` selaimella 
 <kbd><img src="pw2_images/pw2_img1.PNG" /></kbd>
  
 Testasin djangon admin-sivun `http://127.0.0.1:8000/admin` selaimella
