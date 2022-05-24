@@ -5,7 +5,6 @@
 &emsp;[PW4](pw4.html)
 &emsp;[PW5](pw5.html)
 &emsp;[PW6](pw6.html)
-&emsp;[PW7](pw7.html)
 
 # Harjoitus 1 - Hello DJ A
 
@@ -21,9 +20,13 @@ Linux             Oracle Virtual Box 6.1, Debian 11.3
 
 ## Lähteet
 
+Django Contributors. n.a. Model field reference. Luettavissa [https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types](https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types). Luettu 24.5.2022. 
+
 Karvinen, T. 2022a. Python Web Service From Idea to Production. Luettavissa [https://terokarvinen.com/2021/python-web-service-from-idea-to-production-2022/](https://terokarvinen.com/2021/python-web-service-from-idea-to-production-2022/). Luettu 23.5.2022.
 
 Karvinen, T. 2022b. Django 4 Instant Customer Database Tutorial. Luettavissa [https://terokarvinen.com/2022/django-instant-crm-tutorial/](https://terokarvinen.com/2022/django-instant-crm-tutorial/). Luettu 23.5.2022.
+
+MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models). Luettu 24.5.2022.
 
 ## a) Asenna Django-kehitysympäristö.
 
@@ -43,7 +46,7 @@ Asensin virtualenv paketin paketinhallinnasta
 Loin uuden virtualenv:n nimeltään env
 <pre><font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django</b></font>$ virtualenv --system-site-packages -p python3 env</pre>
 
-Otin käyttöön uuden env-ympäristön ja tarkistin, että python löytyy luodusta virtualenv:stä eikä debianin oletussijainnista.
+Otin käyttöön uuden env-ympäristön ja tarkistin, että python löytyy luodusta virtualenv:stä eikä debianin oletussijainnista. Djangon asennuksessa on tarkoitus käyttää pythonia nimenomaan asennetun virtualenvin sisältä.
 <pre><font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django</b></font>$ source env/bin/activate
 (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django</b></font>$ which pip
 /home/sanna/django/env/bin/pip
@@ -79,7 +82,7 @@ Syntyi hakemisto
 └── <font color="#55FF55"><b>manage.py</b></font>
 </pre>
 
-Käynnistän kehitysserverin, tulee varoitus ettei migraatioita ole tehty
+Käynnistän kehitysserverin, tulee varoitus ettei migraatioita ole tehty.
 <pre>(env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django/jyrinkicom</b></font>$ ./manage.py runserver
 Watching for file changes with StatReloader
 Performing system checks...
@@ -94,7 +97,7 @@ Starting development server at http://127.0.0.1:8000/
 </pre>
 
 Djangon testisivu käynnistyy kuitenkin ko. urlin osoitteessa
-![Image](pw1_images/pw1_img1.PNG)
+<kbd><img src="pw1_images/pw1_img1.PNG" /></kbd>
 
 Ajan migraatiot
 <pre>(env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django/jyrinkicom</b></font>$ ./manage.py makemigrations

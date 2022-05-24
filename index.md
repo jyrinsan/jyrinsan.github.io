@@ -6,6 +6,7 @@
 
 ## Haaga-helian kurssit
 
+- [Python weppipalvelu - ideasta tuotantoon](pythonwebbipalvelu/index.html) kevät 2022 <span style="color:red">KURSSI TYÖN ALLA</span>
 - [Palvelinten hallinta](palvelintenhallinta/index.html) kevät 2022
 - [Linux palvelimet](linuxpalvelimet/index.html) kevät 2022
 - [Mobiiliohjelmointi](https://github.com/jyrinsan/hh_mobiiliohjelmointi) syksy 2021
