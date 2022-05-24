@@ -20,13 +20,9 @@ Linux             Oracle Virtual Box 6.1, Debian 11.3
 
 ## Lähteet
 
-Django Contributors. n.a. Model field reference. Luettavissa [https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types](https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types). Luettu 24.5.2022. 
-
 Karvinen, T. 2022a. Python Web Service From Idea to Production. Luettavissa [https://terokarvinen.com/2021/python-web-service-from-idea-to-production-2022/](https://terokarvinen.com/2021/python-web-service-from-idea-to-production-2022/). Luettu 23.5.2022.
 
 Karvinen, T. 2022b. Django 4 Instant Customer Database Tutorial. Luettavissa [https://terokarvinen.com/2022/django-instant-crm-tutorial/](https://terokarvinen.com/2022/django-instant-crm-tutorial/). Luettu 23.5.2022.
-
-MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models). Luettu 24.5.2022.
 
 ## a) Asenna Django-kehitysympäristö.
 
@@ -43,7 +39,7 @@ Asensin virtualenv paketin paketinhallinnasta
 <pre><font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django</b></font>$ sudo apt-get -y install virtualenv
 </pre>
 
-Loin uuden virtualenv:n nimeltään env
+Loin uuden virtualenv:n nimeltään env. 
 <pre><font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django</b></font>$ virtualenv --system-site-packages -p python3 env</pre>
 
 Otin käyttöön uuden env-ympäristön ja tarkistin, että python löytyy luodusta virtualenv:stä eikä debianin oletussijainnista. Djangon asennuksessa on tarkoitus käyttää pythonia nimenomaan asennetun virtualenvin sisältä.
@@ -99,7 +95,7 @@ Starting development server at http://127.0.0.1:8000/
 Djangon testisivu käynnistyy kuitenkin ko. urlin osoitteessa
 <kbd><img src="pw1_images/pw1_img1.PNG" /></kbd>
 
-Ajan migraatiot
+Ajan migraatiot. Migraatiot muokkaavat djangon tietokannan mallien(models) mukaiseksi.
 <pre>(env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django/jyrinkicom</b></font>$ ./manage.py makemigrations
 No changes detected
 (env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django/jyrinkicom</b></font>$ ./manage.py migrate
@@ -139,8 +135,8 @@ Superuser created successfully.
 
 Käynnistän uudelleen kehitysserverin (./manage.py runserver) ja kirjaudun admin käyttöliittymään laittamalla urlin perään /admin.
 
-![Image](pw1_images/pw1_img2.PNG)
-![Image](pw1_images/pw1_img3.PNG)
+<kbd><img src="pw1_images/pw1_img2.PNG" /></kbd>
+<kbd><img src="pw1_images/pw1_img3.PNG" /></kbd>
 
 ## b) Lisää omia kenttiä malliin.
 
@@ -160,7 +156,7 @@ Lisään oman sovelluksen `crm`
 1 directory, 7 files
 </pre>
 
-Lisään jyrinkicom/settings.py tiedostoon sovelluksen nimi `crm` asennetuihin sovelluksiin viimeiseksi riviksi
+Lisään jyrinkicom/settings.py tiedostoon sovelluksen nimi `crm` asennetuihin sovelluksiin viimeiseksi riviksi.
 ```
 ...
 INSTALLED_APPS = [
@@ -183,7 +179,7 @@ class Customer(models.Model):
 	name = models.CharField(max_length=300)
 </pre>
 
-Ajan migraatiot
+Ajan migraatiot, jotta malli siirtyy tietokannan tauluksi.
 <pre>env) <font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django/jyrinkicom</b></font>$ ./manage.py makemigrations
 <font color="#55FFFF"><b>Migrations for &apos;crm&apos;:</b></font>
   <b>crm/migrations/0001_initial.py</b>
@@ -204,18 +200,32 @@ admin.site.register(models.Customer)
 </pre>
 
 Testaan
-![Image](pw1_images/pw1_img4.PNG)
+<kbd><img src="pw1_images/pw1_img4.PNG" /></kbd>
 
 Lisään muutaman testiasiakkaan
-![Image](pw1_images/pw1_img5.PNG)
+<kbd><img src="pw1_images/pw1_img5.PNG" /></kbd>
 
 Muokkaan vielä mallia, niin että asiakkaan nimet tulostuvat listaan
-![Image](pw1_images/pw1_img6.PNG)
+<pre><font color="#55FF55"><b>sanna@sanna-virtualbox</b></font>:<font color="#5555FF"><b>~/django/jyrinkicom/crm</b></font>$ cat models.py 
+from django.db import models
+
+class Customer(models.Model):
+	name = models.CharField(max_length=300)
+	email = models.EmailField(default=&quot;&quot;)
+	premium = models.BooleanField(default=False)
+	
+
+	def __str__(self):
+		return self.name
+</pre>
+
+Ajan taas migraatiot ja testaan, että muutos näkyy käyttöliittymässä
+<kbd><img src="pw1_images/pw1_img6.PNG" /></kbd>
 
 ## c) Tee lisää käyttäjiä, jotka saavat kirjautua Djangon adminiin
 
-Teen admin-käyttöliittymän Users-Add toiminnolla vielä 2 uutta käyttäjää minna ja jonna, säädän kaikille käyttäjille superuser oikeudet
-![Image](pw1_images/pw1_img7.PNG)
+Tein admin-käyttöliittymän Users-Add toiminnolla vielä 2 uutta käyttäjää minna ja jonna, säädän kaikille käyttäjille superuser oikeudet
+<kbd><img src="pw1_images/pw1_img7.PNG" /></kbd>
 
-Kirjaudun sisään minnana ja onnistuu, yläpalkissa näkyy kirjautuneen käyttäjän tunnuksena minna
-![Image](pw1_images/pw1_img8.PNG)
+Kirjauduin sisään minnana ja onnistuu, yläpalkissa näkyy kirjautuneen käyttäjän tunnuksena minna
+<kbd><img src="pw1_images/pw1_img8.PNG" /></kbd>

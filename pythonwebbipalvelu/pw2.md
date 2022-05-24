@@ -49,39 +49,40 @@ source env/bin/activate
 which pip # tarkastetaan, että polku env:n sisällä
 ```
 
-Asennetaan django 
+Asensin djangon 
 ```
 micro requirements.txt # sisällöksi django==3.2
 pip install -r requirements.txt
 django-admin --version # tarkistetaan asennus
 ```
 
-Perustetaan projekti, ajetaan migraatiot
+Loin django-projektin, ajoin migraatiot, loin superuserin
 ```
 django-admin startproject jyrinkicom
 cd jyrinki.com
 ./manage.py makemigrations
-./manage.py migrate
-./manage.py runserver 
+./manage.py migrate 
 pwgen -s 20 1
 /manage.py createsuperuser
-# # testaus http://127.0.0.1:8000/admin
 ```
 
-Testaus selaimella 
-- http://127.0.0.1:8000
+Käynnistin serverin `./manage.py runserver`
+
+Testasin djangon testisivun `http://127.0.0.1:800` selaimella 
 <kbd><img src="pw2_images/pw2_img1.PNG" /></kbd>
-- http://127.0.0.1:8000/admin
+ 
+ Testasin djangon admin-sivun `http://127.0.0.1:8000/admin` selaimella
 <kbd><img src="pw2_images/pw2_img2.PNG" /></kbd>
 
 ### bookstore sovellus
-Luon `bookstore` sovelluksen
+
+Loin `bookstore` sovelluksen
 ```
 ./manage.py startapp bookstore
 micro jyrinkicom/settings.py # lisätään sovellus INSTALLED_APPS kohtaan
 ```
 
-Luodaan model `micro bookstore/models.py`
+Loin kantamallin `micro bookstore/models.py`. Sovelluksessa luodaan kirjoja, joilla on nimi, kirjailija ja julkaisuvuosi.
 ```
 from django.db import models
 
@@ -94,13 +95,13 @@ class Book(models.Model):
 		return self.name
 ```
 
-Tehdään migraatiot
+Ajoin migraatiot, joka tekee mallin mukaan tietokantamuutokset
 ```
 ./manage.py makemigrations
 ./manage.py migrate
 ```
 
-Rekisteröidään tietokanta `micro bookstore/admin.py`
+Rekisteröin tietokannan `micro bookstore/admin.py`, jotta django tunnistaa sen
 ```
 from django.contrib import admin
 from . import models
@@ -108,11 +109,17 @@ from . import models
 admin.site.register(models.Book)
 ```
 
-Testataan lisätä pari kirjaa admin-käyttöliittymällä
+Testatasin lisätä pari kirjaa admin-käyttöliittymällä
 <kbd><img src="pw2_images/pw2_img3.PNG" /></kbd>
 
 ### webbisivu 
-Muokataan `micro jyrinki.com/urls.py`
+
+Webbisivun teko koostui kolmesta osasta:
+- sivun url-polun lisäys urls.py tiedostoon
+- sivun listanäkymän määrittely views.py tiedostoon
+- sivun ulkoasun teko html-template pohjana
+
+Määrittelin polun sivulle `micro jyrinki.com/urls.py` lisäämällä pathin books
 ```
 from django.contrib import admin
 from django.urls import path
@@ -124,7 +131,7 @@ urlpatterns = [
 ]
 ```
 
-Muokataan `micro bookstore/views.py`
+Määrittelin kirja-näkymälle ListView:n `micro bookstore/views.py`. Django näyttää nyt pathin polussa Book-modelin kirjoja.
 ```
 from django.views.generic import ListView
 from . import models
@@ -133,15 +140,26 @@ class BookListView(ListView):
 	model = models.Book
 ```
 
-Tehdään hakemisto html-templatelle
+Tein hakemistpm html-sivulle (template)
 ```
 mkdir bookstore/templates
 mkdir bookstore/templates/bookstore
 ```
 
+Luodaan html-template `micro bookstore/templates/bookstore/book_list.html`
+```
+<h1>My books</h1>
+
+{% for book in object_list %}
+    <li>{{ book.author }} {{ book.name }} {{ book.pubYear }}
+{% empty %}
+	No books yet.
+{% endfor %}
+
+```
+
 Restartataan kehitysserveri `./managepy runserver`
 
-Muokataan `micro bookstore/templates/bookstore/book_list.html`
-```
+Lopussa vielä testasin toimiiko sivu (oikeastihan tein muutokset sivuun yksi kerrallaan ja testasin mikä muuttuu)
 
-```
+<kbd><img src="pw2_images/pw2_img4.PNG" /></kbd>
