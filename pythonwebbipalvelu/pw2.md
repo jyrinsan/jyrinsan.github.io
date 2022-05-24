@@ -36,28 +36,28 @@ Tehtävänanto löytyy Tero Karvisen kurssimateriaalista (Karvinen, 2022a).
 Asensin django ympäristön samaan tapaan kuin edellisessä tehtävässä [pw1](pw1.md).
 
 Loin kotihakemistossani hakemiston uudelle projektille `bookstore`
-```
+```bash
 cd
 mkdir bookstore
 cd bookstore
 ```
 
 Loin env-virtuaaliympäristön
-```
+```bash
 virtualenv --system-site-packages -p python3 env
 source env/bin/activate
 which pip # tarkastetaan, että polku env:n sisällä
 ```
 
 Asensin djangon 
-```
+```bash
 micro requirements.txt # sisällöksi django==3.2
 pip install -r requirements.txt
 django-admin --version # tarkistetaan asennus
 ```
 
 Loin django-projektin, ajoin migraatiot, loin superuserin
-```
+```bash
 django-admin startproject jyrinkicom
 cd jyrinki.com
 ./manage.py makemigrations
@@ -77,13 +77,13 @@ Testasin djangon admin-sivun `http://127.0.0.1:8000/admin` selaimella
 ### bookstore sovellus
 
 Loin `bookstore` sovelluksen
-```
+```bash
 ./manage.py startapp bookstore
 micro jyrinkicom/settings.py # lisätään sovellus INSTALLED_APPS kohtaan
 ```
 
 Loin kantamallin `micro bookstore/models.py`. Sovelluksessa luodaan kirjoja, joilla on nimi, kirjailija ja julkaisuvuosi.
-```
+```python
 from django.db import models
 
 class Book(models.Model):
@@ -96,13 +96,13 @@ class Book(models.Model):
 ```
 
 Ajoin migraatiot, joka tekee mallin mukaan tietokantamuutokset
-```
+```bash
 ./manage.py makemigrations
 ./manage.py migrate
 ```
 
 Rekisteröin tietokannan `micro bookstore/admin.py`, jotta django tunnistaa sen
-```
+```python
 from django.contrib import admin
 from . import models
 
@@ -120,7 +120,7 @@ Webbisivun teko koostui kolmesta osasta:
 - sivun ulkoasun teko html-template pohjana
 
 Määrittelin polun sivulle `micro jyrinki.com/urls.py` lisäämällä pathin books
-```
+```python
 from django.contrib import admin
 from django.urls import path
 from bookstore import views
@@ -132,7 +132,7 @@ urlpatterns = [
 ```
 
 Määrittelin kirja-näkymälle ListView:n `micro bookstore/views.py`. Django näyttää nyt pathin polussa Book-modelin kirjoja.
-```
+```python
 from django.views.generic import ListView
 from . import models
 
@@ -141,7 +141,7 @@ class BookListView(ListView):
 ```
 
 Tein hakemistpm html-sivulle (template)
-```
+```bash
 mkdir bookstore/templates
 mkdir bookstore/templates/bookstore
 ```
