@@ -33,7 +33,7 @@ MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https:
 Tehtävänanto löytyy Tero Karvisen kurssimateriaalista (Karvinen, 2022a).
 
 ### django-asennus
-Asensin django ympäristön samaan tapaan kuin edellisessä tehtävässä [pw1](pw1.html).
+Asensin django ympäristön samaan tapaan kuin edellisessä tehtävässä [pw1](pw1.md).
 
 Loin kotihakemistossani hakemiston uudelle projektille `bookstore`
 ```
@@ -147,7 +147,7 @@ mkdir bookstore/templates/bookstore
 ```
 
 Loin html-templaten `micro bookstore/templates/bookstore/book_list.html`
-```python
+```django
 <h1>My books</h1>
 {% for book in object_list %}
     <li>{{ book.author }} {{ book.name }} {{ book.pubYear }}
