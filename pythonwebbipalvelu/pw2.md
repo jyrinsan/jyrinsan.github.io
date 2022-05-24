@@ -152,8 +152,6 @@ Loin html-templaten `micro bookstore/templates/bookstore/book_list.html`
 
 {% for book in object_list %}
     &lt;li&gt;{{ book.author }} {{ book.name }} {{ book.pubYear }}
-{% empty %}
-	No books yet.
 {% endfor %}
 </pre>
 
