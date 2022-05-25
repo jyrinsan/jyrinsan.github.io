@@ -30,12 +30,10 @@ MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https:
 
 ## a) 
 
-````
 ```
-{% for book in object_list %}
-{% endfor %}
+{% liquid for book in object_list %}
+{% liquid endfor %}
 ```
-````
 
 
 
