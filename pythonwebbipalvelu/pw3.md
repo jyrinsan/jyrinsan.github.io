@@ -31,8 +31,10 @@ MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https:
 ## a) 
 
 ```
-{% liquid for book in object_list %}
+{% raw %}
+{% for book in object_list %}
 {% liquid endfor %}
+{% endraw %}
 ```
 
 
