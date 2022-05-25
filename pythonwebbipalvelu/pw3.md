@@ -33,6 +33,7 @@ MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https:
 ```
 pöö
 {% for book in object_list %}
+{% endfor %}
 pöö
 ```
 
