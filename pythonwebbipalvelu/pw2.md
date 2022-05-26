@@ -147,15 +147,14 @@ mkdir bookstore/templates/bookstore
 ```
 
 Loin html-templaten `micro bookstore/templates/bookstore/book_list.html`
-```
-<h1>My books</h1>
-{% raw %}
+```python
+{% raw %}<h1>My books</h1>
+
 {% for book in object_list %}
     <li>{{ book.author }}
 	    {{ book.name }}
 	    {{ book.pubYear }} </li>
-{% endfor %}
-{% raw %}
+{% endfor %}{% endraw %}
 ```
 
 Restarttaan kehitysserverin `./managepy runserver`

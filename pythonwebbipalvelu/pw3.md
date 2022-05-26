@@ -6,7 +6,7 @@
 &emsp;[PW5](pw5.html)
 &emsp;[PW6](pw6.html)
 
-# Harjoitus 3 - XXX
+# Harjoitus 3 - CRUD
 
 ```
 Nimi              Sanna Jyrinki
@@ -32,7 +32,164 @@ MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https:
 
 Tehtävänanto löytyy Tero Karvisen kurssimateriaalista (Karvinen, 2022a).
 
-Asensin django ympäristön, jyrinkicom projektin ja exerciseapp sovelluksen samaan tapaan kuin edellisessä tehtävässä [pw2](pw2.html).
+Toteutin webbisovelluksen, jolla käyttäjä voi kirjata treenisuorituksia (Entry). Sovelluksessa voi luoda (C) treenikirjauksia, sekä selata (R), muokata (U) ja poistaa (D) niitä. Valittavissa olevat treenit sijaitsevat toisessa taulussa Exercise, jotka on tallennettu admin-käyttöliittymän kautta. Entry taulusta on foreign key tähän Exercise tauluun. Vain Entry-tauluun tehdään webbikäyttöliittymästä tallennuksia. 
 
+Loin django ympäristön, jyrinkicom projektin ja exerciseapp sovelluksen samaan tapaan kuin edellisessä tehtävässä [pw2](pw2.html).
 
+Sovelluksen lähdekoodi löytyy [täältä](https://github.com/jyrinsan/pythonwebbipalvelu/tree/master/pw3). 
 
+### settings.py
+
+Sovelluksen asennuksen jälkeen muokkasin `jyrinkicom/jyrinkicom/settings.py` tiedostoon sovelluksen nimen kohtaan INSTALLED_APPS, jotta Django tietää sovelluksen olemassaolosta.
+
+[settings.py](https://github.com/jyrinsan/pythonwebbipalvelu/blob/master/pw3/jyrinkicom/jyrinkicom/settings.py)
+
+### model.py muokkaus
+
+Tiedostoon `jyrinkicom/exerciseapp/models.py` muokkasin sovelluksen tietokantamallin.
+
+[models.py](https://github.com/jyrinsan/pythonwebbipalvelu/blob/master/pw3/jyrinkicom/exerciseapp/models.py)
+
+```python
+from django.db import models
+
+class Entry(models.Model):
+	trainer = models.CharField(max_length=300)
+	description = models.TextField()
+	date = models.DateField();
+	duration = models.DurationField()
+	exercise = models.ForeignKey(
+		'Exercise',
+		on_delete=models.CASCADE
+	)
+
+	def __str__(self):
+		return f"{self.trainer}, {self.exercise.name}, {self.duration}"
+
+	def get_absolute_url(self):
+		return f"/entries/{self.pk}"
+
+class Exercise(models.Model):
+	name = models.CharField(max_length=300)
+
+	def __str__(self):
+		return self.name
+```
+
+### admin.py muokkaus
+
+Tiedostoon `jyrinkicom/exerciseapp/admin.py` rekisteröin models.py tiedostoon luodut mallit, jotta django tunnistaa ne
+```python
+from django.contrib import admin
+from . import models
+
+admin.site.register(models.Exercise)
+admin.site.register(models.Entry)
+```
+
+### views.py
+
+Tiedostoon `jyrinkicom/exerciseapp/views.py` määrittelin näkymät, jotka tarvitaan käyttöliittymälle CRUD-toimintoja varten.
+```python
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
+from . import models
+
+class EntryListView(ListView):
+	model = models.Entry
+
+class EntryDetailView(DetailView):
+	model = models.Entry
+
+class EntryUpdateView(UpdateView):
+	model = models.Entry
+	fields = "__all__"
+	success_url = "/entries"
+
+class EntryCreateView(CreateView):
+	model = models.Entry
+	fields = "__all__"
+	success_url = "/entries"
+
+class EntryDeleteView(DeleteView):
+	model = models.Entry
+	success_url = "/entries"
+```
+
+### muotit
+
+Hakemistoon jyrinkicom/exerciseapp/templates/exerciseapp tallensin html-muotit jokaiselle tilanteelle
+
+#### muotti kirjausten listanäkymälle
+
+```
+{% raw %}
+<h1>Exercise entries</h1>
+
+{% for entry in object_list %}
+    <p>
+    	<a href={{ entry.get_absolute_url  }}>{{ entry }}</a>
+	    <a href={{ entry.get_absolute_url  }}/update>Edit</a>
+	    <a href={{ entry.get_absolute_url  }}/delete>Delete</a>
+    </p>
+{% endfor %}
+<a href="/entries/new">Add new entry</a>
+{% endraw %}
+```
+
+#### muotti yksittäisen kirjauksen näkymälle
+
+```
+{% raw %}
+<h1>Entry</h1>
+
+<table>
+	<tbody>
+		<tr>
+			<td><b>Exercise</b></td>
+			<td>{{ object.exercise.name }}<td>
+		</tr>
+		<tr>
+			<td><b>Trainer</b></td>
+			<td>{{ object.trainer }}<td>
+		</tr>
+		<tr>
+			<td><b>Description</b></td>
+			<td>{{ object.description }}<td>
+		</tr>
+			<td><b>Duration</b></td>
+			<td>{{ object.duration }}<td>
+		</tr>
+		<tr>
+			<td><b>Date</b></td>
+			<td>{{ object.date }}<td>
+		</tr>
+	</tbody>
+</table>
+{% endraw %}
+```
+
+#### muotti lisäyksen ja päivityksen lomakkeelle
+
+```
+{% raw %}
+<h1>Entry</h1>
+
+<form method=post>{% csrf_token %}
+	<table><tbody align=left>{{ form }}</tbody></table>
+	<p><input type=submit value=Save></p>
+</form>
+{% endraw %}
+```
+
+#### muotti poiston varmistusnäkymälle
+
+```
+{% raw %}
+<h1>Confirm delete</h1>
+
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <input type="submit" value="Confirm">
+</form>
+{% endraw %}
+```
