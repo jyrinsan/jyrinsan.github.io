@@ -28,14 +28,11 @@ Karvinen, T. 2022b. Django 4 Instant Customer Database Tutorial. Luettavissa [ht
 
 MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models). Luettu 24.5.2022.
 
-## a) 
+## a) CRUD
 
-```
-{% raw %}
-{% for book in object_list %}
-{% liquid endfor %}
-{% endraw %}
-```
+Tehtävänanto löytyy Tero Karvisen kurssimateriaalista (Karvinen, 2022a).
+
+Asensin django ympäristön, jyrinkicom projektin ja exerciseapp sovelluksen samaan tapaan kuin edellisessä tehtävässä [pw2](pw2.html).
 
 
 

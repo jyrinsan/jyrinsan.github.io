@@ -147,7 +147,16 @@ mkdir bookstore/templates/bookstore
 ```
 
 Loin html-templaten `micro bookstore/templates/bookstore/book_list.html`
-<kbd><img src="pw2_images/pw2_img5.PNG" /></kbd>
+```
+<h1>My books</h1>
+{% raw %}
+{% for book in object_list %}
+    <li>{{ book.author }}
+	    {{ book.name }}
+	    {{ book.pubYear }} </li>
+{% endfor %}
+{% raw %}
+```
 
 Restarttaan kehitysserverin `./managepy runserver`
 
