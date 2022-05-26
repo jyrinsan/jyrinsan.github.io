@@ -20,13 +20,9 @@ Linux             Oracle Virtual Box 6.1, Debian 11.3
 
 ## Lähteet
 
-Django Contributors. n.a. Model field reference. Luettavissa [https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types](https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types). Luettu 24.5.2022. 
+Django Contributors. n.a. Model field reference. Luettavissa [https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types](https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types). Luettu 26.5.2022. 
 
-Karvinen, T. 2022a. Python Web Service From Idea to Production. Luettavissa [https://terokarvinen.com/2021/python-web-service-from-idea-to-production-2022/](https://terokarvinen.com/2021/python-web-service-from-idea-to-production-2022/). Luettu 23.5.2022.
-
-Karvinen, T. 2022b. Django 4 Instant Customer Database Tutorial. Luettavissa [https://terokarvinen.com/2022/django-instant-crm-tutorial/](https://terokarvinen.com/2022/django-instant-crm-tutorial/). Luettu 23.5.2022.
-
-MDN Contributors. n.a. Django Tutorial Part 3: Using models. Luettavissa [https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models). Luettu 24.5.2022.
+Karvinen, T. 2022a. Python Web Service From Idea to Production. Luettavissa [https://terokarvinen.com/2021/python-web-service-from-idea-to-production-2022/](https://terokarvinen.com/2021/python-web-service-from-idea-to-production-2022/). Luettu 26.5.2022.
 
 ## a) CRUD
 
@@ -87,7 +83,16 @@ admin.site.register(models.Exercise)
 admin.site.register(models.Entry)
 ```
 
+### Testaus
+
+Ajoin migraatiot kuten edellisessä tehtävässä ja käynnistin serverin. Testasin sovellusta admin-käyttöliittymän avulla ja lisäsin treenivaihtoehtoja ja treenikirjauksia.
+
+<kbd><img src="pw3_images/pw3_img1.PNG" /></kbd>
+<kbd><img src="pw3_images/pw3_img2.PNG" /></kbd>
+
 ### views.py
+
+Sitten rupean tekemään webbi-käyttöliittymää, jotta käyttäjän pääsevät katsomaan, lisäämään, muokkaamaan ja poistamaan treenikirjauksia käyttöliittymältä.
 
 Tiedostoon `jyrinkicom/exerciseapp/views.py` määrittelin näkymät, jotka tarvitaan käyttöliittymälle CRUD-toimintoja varten.
 ```python
@@ -119,9 +124,11 @@ class EntryDeleteView(DeleteView):
 
 Hakemistoon jyrinkicom/exerciseapp/templates/exerciseapp tallensin html-muotit jokaiselle tilanteelle
 
-#### muotti kirjausten listanäkymälle
+[muotit](https://github.com/jyrinsan/pythonwebbipalvelu/tree/master/pw3/jyrinkicom/exerciseapp/templates/exerciseapp)
 
-```
+#### entry-list.html - muotti treenikirjausten listanäkymälle
+
+```python
 {% raw %}
 <h1>Exercise entries</h1>
 
@@ -136,9 +143,9 @@ Hakemistoon jyrinkicom/exerciseapp/templates/exerciseapp tallensin html-muotit j
 {% endraw %}
 ```
 
-#### muotti yksittäisen kirjauksen näkymälle
+#### entry-detail.html - muotti yksittäisen treenikirjauksen näkymälle
 
-```
+```python
 {% raw %}
 <h1>Entry</h1>
 
@@ -168,9 +175,9 @@ Hakemistoon jyrinkicom/exerciseapp/templates/exerciseapp tallensin html-muotit j
 {% endraw %}
 ```
 
-#### muotti lisäyksen ja päivityksen lomakkeelle
+#### entry-form.html - muotti lisäyksen ja päivityksen lomakkeelle
 
-```
+```python
 {% raw %}
 <h1>Entry</h1>
 
@@ -181,9 +188,9 @@ Hakemistoon jyrinkicom/exerciseapp/templates/exerciseapp tallensin html-muotit j
 {% endraw %}
 ```
 
-#### muotti poiston varmistusnäkymälle
+#### entry-confirm-delete.html - muotti poiston varmistusnäkymälle
 
-```
+```python
 {% raw %}
 <h1>Confirm delete</h1>
 
@@ -193,3 +200,22 @@ Hakemistoon jyrinkicom/exerciseapp/templates/exerciseapp tallensin html-muotit j
 </form>
 {% endraw %}
 ```
+
+### Testaus
+
+Testasin näkymiä:
+
+Listausnäkymä
+<kbd><img src="pw3_images/pw3_img3.PNG" /></kbd>
+
+Yksittäisen tiedon näkymä
+<kbd><img src="pw3_images/pw3_img4.PNG" /></kbd>
+
+Uuden kirjauksen syöttö
+<kbd><img src="pw3_images/pw3_img5.PNG" /></kbd>
+
+Päivitys
+<kbd><img src="pw3_images/pw3_img6.PNG" /></kbd>
+
+Poiston varmistus
+<kbd><img src="pw3_images/pw3_img7.PNG" /></kbd>
