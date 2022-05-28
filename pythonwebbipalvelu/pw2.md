@@ -2,7 +2,7 @@
 &emsp;[PW1](pw1.html)
 &emsp;PW2
 &emsp;[PW3](pw3.html)
-&emsp;[PW4](pw4.html)
+&emsp;[PW4](https://github.com/jyrinsan/pythonwebbipalvelu/tree/master/pw4)
 &emsp;[PW5](pw5.html)
 &emsp;[PW6](pw6.html)
 
