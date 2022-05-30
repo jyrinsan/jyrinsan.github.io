@@ -47,7 +47,6 @@ Seuraavaksi siirsin tuotantopalvelimelle viikonloppuna nyhertäni alustavan vers
 Kirjauduin VirtualBoxissani olevalle Debianille, jossa on sovelluksen kehitysversio. Menin hakemistooni /home/sanna/miniprojekti/jyrinkicom. Ajoin käskyn
 ```
 scp -r jyrinkicom/ moomimugs/ sanna@jyrinkicom:/home/sanna/publicwsgi/jyrinkicom
-source 
 ```
 Se kopioi projektin ja sovelluksen (moominmugs) hakemistot alihakemistoineen ja sisältöineen virtuaalipalvelimelle. Terolta ottamassa kuvaruutukaappauksessa oli kopioitu myös manage.py, mutta en nähnyt siihen mitään syytä.
 
@@ -76,3 +75,10 @@ Sovellukseni osoitteessa `jyrinki.com/moominmugs` näkyy hienosti. Tuotannon tie
 <kbd><img src="pw5_images/pw5_img6.PNG" /></kbd>
 
 # f) automatisointi
+
+Tein kehityskoneeni hakemistoon `/home/sanna/miniprojekti/jyrinkicom` Makefile nimisen tiedoston, jonka sisältö on seuraava
+```
+scp -r jyrinkicom/ moomimugs/ sanna@jyrinkicom:/home/sanna/publicwsgi/jyrinkicom; ssh sanna@jyrinki.com 'source publicwsgi/env/bin/activate; ./publicwsgi/jyrinkicom/manage.py migrate; touch publicwsgi/jyrinkicom/jyrinkicom/wsgi.py'
+```
+
+En kuitenkaan vielä testannut skriptiä, sillä kysymykseksi jää, miten siitä saa poissuljettua settings.py tiedoston ylikirjoittumisen.
