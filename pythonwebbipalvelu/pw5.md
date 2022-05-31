@@ -70,7 +70,7 @@ Jotta muutokset aktivoituu, kosketin vielä wsgi.py tiedostoa `touch /home/sanna
 Kirjauduin admin-käyttöliittymälle ja nyt siellä näkyy miniprojektini model aivan oikein
 <kbd><img src="pw5_images/pw5_img5.PNG" /></kbd>
 
-Sovellukseni osoitteessa `jyrinki.com/moominmugs` näkyy hienosti. Tuotannon tietokannassa ei ole vielä yhtään dataa tallennettuna.
+Sovellukseni osoitteessa [http://jyrinki.com/moominmugs](http://jyrinki.com/moominmugs) näkyy hienosti. Tuotannon tietokannassa ei ole vielä yhtään dataa tallennettuna.
 
 <kbd><img src="pw5_images/pw5_img6.PNG" /></kbd>
 
